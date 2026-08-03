@@ -157,35 +157,34 @@ img, svg { display: block; max-width: 100% }
    HERO
    ============================================================ */
 .hero {
-  background: linear-gradient(165deg, var(--forest-dk) 0%, #3A6B4A 100%); color: var(--on-forest);
+  background: url('hero-bg.png') center/cover no-repeat; color: var(--on-forest);
   padding: var(--sp-7) 0 var(--sp-6); position: relative; overflow: hidden;
+  min-height: 88vh;
 }
-/* subtle fluted texture on the hero bg */
+/* dark overlay for text readability */
 .hero::before {
   content: "";
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0px, transparent 10px,
-    rgba(255,255,255,.018) 10px, rgba(255,255,255,.018) 11px
-  );
-  pointer-events: none;
+  background: linear-gradient(135deg, rgba(30,50,35,.82) 0%, rgba(30,50,35,.55) 50%, rgba(30,50,35,.3) 100%);
+  pointer-events: none; z-index: 0;
 }
 .hero-inner {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--sp-6); align-items: center; position: relative;
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 72vh; position: relative;
 }
-.hero-copy { max-width: 52ch }
+.hero-copy { max-width: 58ch }
 .hero h1 {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(44px, 6.5vw, 80px);
+  font-size: clamp(48px, 7vw, 88px);
   color: var(--paper); line-height: 1.02; letter-spacing: -.02em;
   margin-top: var(--sp-3);
+  text-shadow: 0 2px 30px rgba(0,0,0,.2);
 }
 .hero h1 em { font-style: italic; color: var(--brass-lt); font-weight: 300 }
 .hero-lede {
-  margin-top: var(--sp-4); font-size: 17px; font-weight: 300;
-  color: var(--on-forest); max-width: 44ch; line-height: 1.7;
+  margin-top: var(--sp-4); font-size: 18px; font-weight: 300;
+  color: rgba(255,255,255,.88); max-width: 48ch; line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(0,0,0,.15);
 }
 .hero-actions {
   display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-5);
@@ -207,28 +206,10 @@ img, svg { display: block; max-width: 100% }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line) }
 .btn-ghost:hover { background: var(--warm) }
 
-/* hero vanity illustration */
-.hero-stage { position: relative; display: flex; flex-direction: column; align-items: center }
-.hero-svg { width: 100%; max-width: 520px; height: auto; filter: drop-shadow(0 24px 48px rgba(0,0,0,.45)) }
-.hero-badge {
-  position: relative; top: auto; right: auto;
-  display: inline-flex; align-self: flex-end;
-  background: var(--brass); color: var(--forest-dk);
-  font-family: var(--sans); font-size: 11px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  padding: 6px 14px; border-radius: 999px;
-  margin-bottom: var(--sp-3);
-}
-
-@media (max-width: 820px) {
-  .hero-inner { grid-template-columns: 1fr; gap: var(--sp-5) }
-  .hero-stage { order: -1 }
-  .hero-svg { max-width: 380px; margin: 0 auto }
-  .hero-badge { top: -8px; right: 10px }
-}
 @media (max-width: 480px) {
-  .hero { padding: var(--sp-5) 0 var(--sp-5) }
-  .hero h1 { font-size: 40px }
+  .hero { padding: var(--sp-5) 0 var(--sp-5); min-height: 70vh }
+  .hero h1 { font-size: 38px }
+  .hero-inner { min-height: 55vh }
 }
 
 /* ============================================================
@@ -650,16 +631,6 @@ footer a:hover { color: var(--brass-lt) }
   transition: background-position .6s var(--ease);
 }
 
-/* ── Hero badge — float animation ── */
-.hero-badge {
-  animation: float-gentle 3.5s var(--ease) infinite;
-}
-
-/* ── Hero SVG vanity — subtle glow pulse ── */
-.hero-svg {
-  filter: drop-shadow(0 24px 48px rgba(0,0,0,.45));
-  animation: pulse-glow 4s ease-in-out infinite;
-}
 
 /* ── Section heads — elegant entrance ── */
 .sec-head h2 em {
@@ -1037,79 +1008,6 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="hero-stage reveal">
-      <div class="hero-badge" data-en="Everything included" data-es="Todo incluido">Everything included</div>
-      <!-- Hero SVG vanity illustration -->
-      <svg class="hero-svg" id="heroStage" viewBox="0 0 560 440" aria-hidden="true">
-        <defs>
-          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="12" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="14"/>
-          </filter>
-          <linearGradient id="cabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#4B6B52"/>
-            <stop offset="100%" stop-color="#3A5440"/>
-          </linearGradient>
-          <linearGradient id="topGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#F5F3EE"/>
-            <stop offset="100%" stop-color="#EAE7E0"/>
-          </linearGradient>
-        </defs>
-
-        <!-- wall bg -->
-        <rect x="0" y="0" width="560" height="380" fill="#3A6B4A" rx="6"/>
-
-        <!-- LED halo -->
-        <rect class="led-halo" id="hHalo" x="148" y="44" width="264" height="160" rx="6"
-              fill="none" stroke="#D4AD57" stroke-width="2.5" opacity=".6" filter="url(#glow)"/>
-
-        <!-- mirror -->
-        <rect class="mirror-glass" id="hMirror" x="148" y="44" width="264" height="160" rx="6"/>
-
-        <!-- float shadow -->
-        <ellipse class="float-shadow" id="hShadow" cx="280" cy="400" rx="215" ry="14"
-                 fill="#0A1A10" opacity=".6" filter="url(#shadow)"/>
-
-        <!-- countertop -->
-        <rect class="top-slab" id="hTop" x="65" y="238" width="430" height="14" rx="3" fill="url(#topGrad)"/>
-
-        <!-- basin -->
-        <rect class="basin" id="hBasin" x="190" y="242" width="180" height="7" rx="3.5" fill="#D8D4CB"/>
-
-        <!-- cabinet with fluted ribs -->
-        <rect class="cab" id="hCab" x="72" y="252" width="416" height="118" rx="4" fill="url(#cabGrad)"/>
-
-        <!-- fluted ribs (decorative lines on the cabinet front) -->
-        <g id="hFlutes" opacity=".28">
-          <!-- generated by script below -->
-        </g>
-
-        <!-- drawer pull — full width bar -->
-        <rect class="pull" id="hPull" x="160" y="307" width="240" height="4.5" rx="2.25" fill="#B8963A"/>
-
-        <!-- spout plate -->
-        <rect class="spout-plate" id="hSpoutPlate" x="265" y="220" width="30" height="10" rx="3" fill="#C4C0B6"/>
-        <!-- spout arm -->
-        <rect class="spout-arm" id="hSpoutArm" x="250" y="230" width="48" height="7" rx="3.5" fill="#C4C0B6"/>
-
-        <!-- floor line -->
-        <line x1="40" y1="380" x2="520" y2="380" stroke="rgba(216,228,211,.22)" stroke-width="1.5"/>
-
-        <!-- dimension -->
-        <g id="hDim">
-          <line class="dim-line" id="hDimLine" x1="72" y1="390" x2="488" y2="390"/>
-          <line class="dim-tick" id="hTickL" x1="72" y1="383" x2="72" y2="397"/>
-          <line class="dim-tick" id="hTickR" x1="488" y1="383" x2="488" y2="397"/>
-          <g class="dim-label" id="hDimLabel">
-            <rect x="246" y="376" width="68" height="28" rx="14"/>
-            <text x="280" y="395" text-anchor="middle" id="hDimText">60″</text>
-          </g>
-        </g>
-      </svg>
-    </div>
   </div>
 </div>
 
@@ -1624,8 +1522,6 @@ footer a:hover {
       (lang === 'es' ? ' pulgadas, acabado ' : ' in, finish ') +
       (lang === 'es' ? finish.es : finish.en));
 
-    // hero mini-stage
-    drawHero();
   }
 
   function drawFlutes(cabX, cabW) {
@@ -1649,19 +1545,6 @@ footer a:hover {
     }
   }
 
-  /* hero mini-stage stays simple (no flutes, just colour) */
-  function drawHero() {
-    var hw = Math.min(size * 5.1, 340);
-    var hx = 280 - hw / 2;
-    $('hMirror').setAttribute('x', 280 - Math.min(hw * 0.56, 200) / 2);
-    $('hMirror').setAttribute('width', Math.min(hw * 0.56, 200));
-    $('hHalo').setAttribute('x', 280 - Math.min(hw * 0.56, 200) / 2);
-    $('hHalo').setAttribute('width', Math.min(hw * 0.56, 200));
-    $('hCab') && $('hCab').setAttribute('fill', finish.cab);
-    $('hPull') && $('hPull').setAttribute('fill', finish.pull);
-    $('hShadow').setAttribute('rx', hw / 2 + 10);
-    $('hDimText').textContent = size + '\u2033';
-  }
 
   /* ── BUILD CONTROLS ── */
   function buildSizes() {
