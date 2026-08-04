@@ -15,21 +15,21 @@
    Type: DM Sans (UI) / Cormorant Garamond (editorial display)
    ============================================================ */
 :root {
-  --forest:    #3D5944;
-  --forest-dk: #28402E;
-  --forest-lt: #4B6B52;
-  --brass:     #B8963A;
-  --brass-lt:  #D4AD57;
-  --cream:     #F7F4EE;
-  --warm:      #EDE8DF;
+  --forest:    #7BA889;
+  --forest-dk: #2E5A3E;
+  --forest-lt: #92BDA0;
+  --brass:     #C6A24E;
+  --brass-lt:  #D4B76A;
+  --cream:     #FDFBF7;
+  --warm:      #F5F0E8;
   --paper:     #FFFFFF;
-  --ink:       #1A1F1B;
-  --ink-2:     #3A3F3B;
-  --muted:     #6B7268;
-  --stone:     #C2C8BC;
-  --on-forest: #D8E4D3;
-  --line:      rgba(26,31,27,.10);
-  --line-f:    rgba(216,228,211,.14);
+  --ink:       #2C2C2A;
+  --ink-2:     #4A4A46;
+  --muted:     #8A8880;
+  --stone:     #C8C4BA;
+  --on-forest: #EDF5EF;
+  --line:      rgba(44,44,42,.08);
+  --line-f:    rgba(237,245,239,.18);
 
   --sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
@@ -157,35 +157,34 @@ img, svg { display: block; max-width: 100% }
    HERO
    ============================================================ */
 .hero {
-  background: var(--forest-dk); color: var(--on-forest);
+  background: url('hero-bg.png') center/cover no-repeat; color: var(--on-forest);
   padding: var(--sp-7) 0 var(--sp-6); position: relative; overflow: hidden;
+  min-height: 88vh;
 }
-/* subtle fluted texture on the hero bg */
+/* dark overlay for text readability */
 .hero::before {
   content: "";
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0px, transparent 10px,
-    rgba(255,255,255,.018) 10px, rgba(255,255,255,.018) 11px
-  );
-  pointer-events: none;
+  background: linear-gradient(135deg, rgba(30,50,35,.82) 0%, rgba(30,50,35,.55) 50%, rgba(30,50,35,.3) 100%);
+  pointer-events: none; z-index: 0;
 }
 .hero-inner {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--sp-6); align-items: center; position: relative;
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 72vh; position: relative;
 }
-.hero-copy { max-width: 52ch }
+.hero-copy { max-width: 58ch }
 .hero h1 {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(44px, 6.5vw, 80px);
+  font-size: clamp(48px, 7vw, 88px);
   color: var(--paper); line-height: 1.02; letter-spacing: -.02em;
   margin-top: var(--sp-3);
+  text-shadow: 0 2px 30px rgba(0,0,0,.2);
 }
 .hero h1 em { font-style: italic; color: var(--brass-lt); font-weight: 300 }
 .hero-lede {
-  margin-top: var(--sp-4); font-size: 17px; font-weight: 300;
-  color: var(--on-forest); max-width: 44ch; line-height: 1.7;
+  margin-top: var(--sp-4); font-size: 18px; font-weight: 300;
+  color: rgba(255,255,255,.88); max-width: 48ch; line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(0,0,0,.15);
 }
 .hero-actions {
   display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-5);
@@ -207,26 +206,10 @@ img, svg { display: block; max-width: 100% }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line) }
 .btn-ghost:hover { background: var(--warm) }
 
-/* hero vanity illustration */
-.hero-stage { position: relative; display: flex; flex-direction: column; align-items: center }
-.hero-svg { width: 100%; max-width: 520px; height: auto; filter: drop-shadow(0 24px 48px rgba(0,0,0,.45)) }
-.hero-badge {
-  position: absolute; top: -12px; right: 0;
-  background: var(--brass); color: var(--forest-dk);
-  font-family: var(--sans); font-size: 11px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  padding: 6px 14px; border-radius: 999px;
-}
-
-@media (max-width: 820px) {
-  .hero-inner { grid-template-columns: 1fr; gap: var(--sp-5) }
-  .hero-stage { order: -1 }
-  .hero-svg { max-width: 380px; margin: 0 auto }
-  .hero-badge { top: -8px; right: 10px }
-}
 @media (max-width: 480px) {
-  .hero { padding: var(--sp-5) 0 var(--sp-5) }
-  .hero h1 { font-size: 40px }
+  .hero { padding: var(--sp-5) 0 var(--sp-5); min-height: 70vh }
+  .hero h1 { font-size: 38px }
+  .hero-inner { min-height: 55vh }
 }
 
 /* ============================================================
@@ -257,7 +240,7 @@ section { padding: var(--sp-7) 0 }
 }
 .about-photo-inner {
   width: 100%; height: 100%;
-  background: linear-gradient(145deg, var(--forest-dk) 0%, var(--forest) 100%);
+  background: linear-gradient(145deg, #3A6B4A 0%, var(--forest) 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: var(--sp-3); padding: var(--sp-5);
 }
@@ -281,7 +264,7 @@ section { padding: var(--sp-7) 0 }
 /* ============================================================
    PRODUCTS / CONFIGURATOR
    ============================================================ */
-#products { background: var(--forest-dk); color: var(--on-forest) }
+#products { background: linear-gradient(170deg, var(--forest-dk) 0%, #3A6B4A 100%); color: var(--on-forest) }
 #products .sec-head h2 { color: var(--paper) }
 #products .sec-head h2 em { color: var(--brass-lt) }
 #products .sec-head p { color: var(--on-forest); opacity: .8 }
@@ -407,16 +390,16 @@ section { padding: var(--sp-7) 0 }
 /* use the real photo as background for the main cell */
 .gal-item:nth-child(1) .gal-inner {
   min-height: 320px;
-  background: linear-gradient(135deg, #2D4535 0%, #3D5944 60%, #4B6B52 100%);
+  background: linear-gradient(135deg, #4A7A5A 0%, #6BA07A 60%, #7BA889 100%);
 }
 .gal-item:nth-child(2) .gal-inner,
 .gal-item:nth-child(3) .gal-inner {
   min-height: 220px;
-  background: linear-gradient(135deg, #28402E 0%, #3D5944 100%);
+  background: linear-gradient(135deg, #3A6B4A 0%, #6BA07A 100%);
 }
 .gal-item:nth-child(4) .gal-inner {
   min-height: 460px;
-  background: linear-gradient(180deg, #3D5944 0%, #28402E 100%);
+  background: linear-gradient(180deg, #6BA07A 0%, #3A6B4A 100%);
 }
 .gal-overlay {
   position: absolute; inset: 0; background: rgba(0,0,0,.0);
@@ -442,7 +425,7 @@ section { padding: var(--sp-7) 0 }
 /* ============================================================
    REVIEWS
    ============================================================ */
-#reviews { background: var(--forest-dk); color: var(--on-forest) }
+#reviews { background: linear-gradient(170deg, #2E5A3E 0%, #3A6B4A 100%); color: var(--on-forest) }
 .reviews-top { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-6); align-items: center; margin-bottom: var(--sp-5) }
 .score-block { text-align: center }
 .score-num { font-family: var(--sans); font-size: 84px; font-weight: 700; color: var(--paper); line-height: 1; letter-spacing: -.04em }
@@ -488,7 +471,7 @@ section { padding: var(--sp-7) 0 }
    FOOTER
    ============================================================ */
 footer {
-  background: var(--ink); color: rgba(255,255,255,.45);
+  background: #2C2C2A; color: rgba(255,255,255,.5);
   padding: var(--sp-4) 0; font-size: 13px;
 }
 .footer-inner { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; justify-content: space-between }
@@ -497,12 +480,404 @@ footer a:hover { color: var(--brass-lt) }
 .footer-logo { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: .06em; color: var(--paper); text-transform: uppercase }
 
 /* ============================================================
+   ENHANCED ANIMATIONS & MICRO-INTERACTIONS
+   ============================================================ */
+
+/* ── Keyframes ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0 }
+  100% { background-position: 200% 0 }
+}
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-8px) }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(184,150,58,.0) }
+  50%      { box-shadow: 0 0 30px rgba(184,150,58,.25) }
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0) }
+  10% { transform: translate(-2%, -2%) }
+  30% { transform: translate(2%, 2%) }
+  50% { transform: translate(-1%, 1%) }
+  70% { transform: translate(1%, -1%) }
+  90% { transform: translate(-2%, 1%) }
+}
+@keyframes slide-up-in {
+  from { opacity: 0; transform: translateY(32px); filter: blur(6px) }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0) }
+}
+@keyframes counter-fill {
+  from { width: 0 }
+  to   { width: var(--fill) }
+}
+
+/* ── Film grain overlay for hero — adds luxury texture ── */
+.hero::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  background-size: 200px;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  mix-blend-mode: overlay;
+}
+.hero-inner, .hero-copy, .hero-stage { position: relative; z-index: 1 }
+
+/* ── Buttons — Luxurious glow + shine sweep ── */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.18) 42%, rgba(255,255,255,.18) 48%, transparent 55%);
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  transition: background-position 0s;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.btn:hover::before {
+  background-position: -200% 0;
+  transition: background-position .65s var(--ease);
+}
+.btn-brass {
+  box-shadow: 0 2px 12px rgba(184,150,58,.0), 0 0 0 0 rgba(184,150,58,.0);
+  transition: background .18s, color .18s, transform .18s var(--ease), box-shadow .35s var(--ease);
+}
+.btn-brass:hover {
+  background: var(--brass-lt);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(184,150,58,.35), 0 0 60px rgba(212,173,87,.12);
+}
+.btn-brass:active {
+  transform: translateY(-1px) scale(.98);
+  box-shadow: 0 2px 10px rgba(184,150,58,.3);
+}
+.btn-outline {
+  transition: border-color .22s, color .22s, background .22s, transform .18s var(--ease), box-shadow .3s;
+}
+.btn-outline:hover {
+  border-color: var(--brass-lt);
+  color: var(--brass-lt);
+  background: rgba(212,173,87,.06);
+  box-shadow: 0 0 24px rgba(212,173,87,.08);
+  transform: translateY(-2px);
+}
+.btn-green {
+  transition: background .18s, transform .18s var(--ease), box-shadow .3s;
+}
+.btn-green:hover {
+  background: var(--forest-lt);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(75,107,82,.25);
+}
+.btn-ghost {
+  transition: background .18s, border-color .22s, transform .18s var(--ease);
+}
+.btn-ghost:hover {
+  background: var(--warm);
+  border-color: var(--stone);
+  transform: translateY(-1px);
+}
+
+/* ── Navigation — Glass frost + animated underlines ── */
+#nav {
+  background: rgba(40,64,46,.88);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+#nav.scrolled {
+  box-shadow: 0 4px 30px rgba(0,0,0,.3);
+  background: rgba(40,64,46,.95);
+}
+.nav-links a {
+  position: relative;
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 1.5px;
+  background: var(--brass-lt);
+  transition: left .28s var(--ease), right .28s var(--ease);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  left: 0; right: 0;
+}
+.nav-call {
+  position: relative;
+  overflow: hidden;
+}
+.nav-call::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.22) 42%, rgba(255,255,255,.22) 48%, transparent 55%);
+  background-size: 260% 100%;
+  background-position: 200% 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.nav-call:hover::before {
+  background-position: -200% 0;
+  transition: background-position .6s var(--ease);
+}
+
+
+/* ── Section heads — elegant entrance ── */
+.sec-head h2 em {
+  display: inline-block;
+  transition: color .3s, transform .3s var(--ease);
+}
+.sec-head:hover h2 em {
+  transform: translateX(3px);
+}
+
+/* ── About point icons — hover pulse ── */
+.about-point-icon {
+  transition: transform .25s var(--ease), box-shadow .25s;
+}
+.about-point:hover .about-point-icon {
+  transform: scale(1.12);
+  box-shadow: 0 0 16px rgba(75,107,82,.3);
+}
+
+/* ── Included strip items — glow border on hover ── */
+.incl-item {
+  transition: background .25s var(--ease);
+  position: relative;
+}
+.incl-item:hover {
+  background: rgba(255,255,255,.08);
+}
+.incl-item svg {
+  transition: transform .25s var(--ease), filter .25s;
+}
+.incl-item:hover svg {
+  transform: scale(1.1) rotate(-4deg);
+  filter: drop-shadow(0 0 8px rgba(212,173,87,.4));
+}
+
+/* ── Gallery items — zoom + overlay sweep ── */
+.gal-item {
+  transition: transform .35s var(--ease), box-shadow .35s;
+}
+.gal-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.2);
+}
+.gal-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.gal-item:hover .gal-overlay {
+  opacity: 1;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 50%);
+}
+.gal-tag {
+  transform: translateY(10px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.gal-item:hover .gal-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Review cards — glass frost + animated border ── */
+.review-card {
+  background: rgba(255,255,255,.05);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s, background .3s;
+}
+.review-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.22), 0 0 0 1px rgba(212,173,87,.2);
+  border-color: rgba(212,173,87,.35);
+  background: rgba(255,255,255,.08);
+}
+.review-card-stars {
+  display: flex; gap: 2px; margin-bottom: var(--sp-2);
+}
+.review-card-stars svg {
+  transition: transform .2s var(--ease);
+}
+.review-card:hover .review-card-stars svg {
+  animation: float-gentle 2s var(--ease) infinite;
+}
+.review-card:hover .review-card-stars svg:nth-child(2) { animation-delay: .1s }
+.review-card:hover .review-card-stars svg:nth-child(3) { animation-delay: .2s }
+.review-card:hover .review-card-stars svg:nth-child(4) { animation-delay: .3s }
+.review-card:hover .review-card-stars svg:nth-child(5) { animation-delay: .4s }
+
+/* ── Score number — animated countup styling ── */
+.score-num {
+  background: linear-gradient(135deg, var(--paper) 40%, var(--brass-lt) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Contact map placeholder — subtle lift ── */
+.map-placeholder {
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+}
+.map-placeholder:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+  border-color: var(--forest);
+}
+
+/* ── Hours table — highlight row on hover ── */
+.hours-table tr {
+  transition: background .15s;
+}
+.hours-table tr:hover {
+  background: rgba(61,89,68,.04);
+}
+
+/* ── Footer — subtle link glow ── */
+footer a {
+  transition: color .2s, text-shadow .2s;
+}
+footer a:hover {
+  color: var(--brass-lt);
+  text-shadow: 0 0 12px rgba(212,173,87,.2);
+}
+
+/* ── Enhanced scroll reveal — with stagger and blur ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(4px);
+  transition: opacity .75s var(--ease), transform .75s var(--ease), filter .75s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Staggered children reveal */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(3px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease), filter .5s var(--ease);
+}
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 80ms }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 160ms }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 320ms }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 400ms }
+.reveal-stagger.in > * {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* ── Size/Finish chips — bounce on select ── */
+.sizes button {
+  transition: background .18s, color .18s, border-color .18s, transform .2s var(--ease), box-shadow .2s;
+}
+.sizes button:hover {
+  border-color: var(--brass-lt);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+.sizes button:active {
+  transform: scale(.95);
+}
+.sizes button[aria-pressed="true"] {
+  animation: slide-up-in .3s var(--ease);
+  box-shadow: 0 4px 16px rgba(184,150,58,.3);
+}
+
+.finishes button {
+  transition: transform .2s var(--ease), box-shadow .2s;
+}
+.finishes button:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,.2);
+}
+.finishes button:active {
+  transform: scale(.94);
+}
+
+/* ── LED toggle — smooth glow transition ── */
+.led-toggle {
+  transition: border-color .18s, color .18s, background .2s, box-shadow .3s;
+}
+.led-toggle[aria-pressed="true"] {
+  border-color: rgba(212,173,87,.4);
+  background: rgba(212,173,87,.08);
+  box-shadow: 0 0 20px rgba(212,173,87,.1);
+}
+.led-dot {
+  transition: background .3s, box-shadow .3s, transform .3s var(--ease);
+}
+.led-toggle[aria-pressed="true"] .led-dot {
+  transform: scale(1.1);
+}
+
+/* ── Configurator stage — border glow ── */
+.stage-wrap {
+  transition: border-color .3s, box-shadow .3s;
+}
+.stage-wrap:hover {
+  border-color: rgba(212,173,87,.25);
+  box-shadow: 0 0 40px rgba(212,173,87,.06);
+}
+
+/* ── Lang toggle — smooth pill slide ── */
+.lang-toggle button {
+  transition: background .2s var(--ease), color .2s, transform .15s;
+}
+.lang-toggle button:active { transform: scale(.94) }
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; z-index: 200;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--forest), var(--brass-lt));
+  transition: width 60ms linear;
+  pointer-events: none;
+}
+
+/* ── Cursor glow (desktop only) ── */
+.cursor-glow {
+  position: fixed;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(212,173,87,.04) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity .3s;
+  will-change: left, top;
+}
+@media (hover: none) { .cursor-glow { display: none } }
+
+/* ============================================================
    UTILS
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important }
   html { scroll-behavior: auto }
-  .reveal { opacity: 1; transform: none }
+  .reveal, .reveal-stagger > * { opacity: 1; transform: none; filter: none }
+  .hero-badge { animation: none }
+  .hero-svg { animation: none }
+  .hero::after { animation: none }
 }
 </style>
 </head>
@@ -511,6 +886,8 @@ footer a:hover { color: var(--brass-lt) }
 <!-- ============================================================
      NAVIGATION
      ============================================================ -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 <nav id="nav">
   <div class="wrap nav-inner">
 
@@ -631,79 +1008,6 @@ footer a:hover { color: var(--brass-lt) }
       </div>
     </div>
 
-    <div class="hero-stage reveal">
-      <div class="hero-badge" data-en="Everything included" data-es="Todo incluido">Everything included</div>
-      <!-- Hero SVG vanity illustration -->
-      <svg class="hero-svg" id="heroStage" viewBox="0 0 560 440" aria-hidden="true">
-        <defs>
-          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="12" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="14"/>
-          </filter>
-          <linearGradient id="cabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#4B6B52"/>
-            <stop offset="100%" stop-color="#3A5440"/>
-          </linearGradient>
-          <linearGradient id="topGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#F5F3EE"/>
-            <stop offset="100%" stop-color="#EAE7E0"/>
-          </linearGradient>
-        </defs>
-
-        <!-- wall bg -->
-        <rect x="0" y="0" width="560" height="380" fill="#2A3E30" rx="6"/>
-
-        <!-- LED halo -->
-        <rect class="led-halo" id="hHalo" x="148" y="44" width="264" height="160" rx="6"
-              fill="none" stroke="#D4AD57" stroke-width="2.5" opacity=".6" filter="url(#glow)"/>
-
-        <!-- mirror -->
-        <rect class="mirror-glass" id="hMirror" x="148" y="44" width="264" height="160" rx="6"/>
-
-        <!-- float shadow -->
-        <ellipse class="float-shadow" id="hShadow" cx="280" cy="400" rx="215" ry="14"
-                 fill="#0A1A10" opacity=".6" filter="url(#shadow)"/>
-
-        <!-- countertop -->
-        <rect class="top-slab" id="hTop" x="65" y="238" width="430" height="14" rx="3" fill="url(#topGrad)"/>
-
-        <!-- basin -->
-        <rect class="basin" id="hBasin" x="190" y="242" width="180" height="7" rx="3.5" fill="#D8D4CB"/>
-
-        <!-- cabinet with fluted ribs -->
-        <rect class="cab" id="hCab" x="72" y="252" width="416" height="118" rx="4" fill="url(#cabGrad)"/>
-
-        <!-- fluted ribs (decorative lines on the cabinet front) -->
-        <g id="hFlutes" opacity=".28">
-          <!-- generated by script below -->
-        </g>
-
-        <!-- drawer pull — full width bar -->
-        <rect class="pull" id="hPull" x="160" y="307" width="240" height="4.5" rx="2.25" fill="#B8963A"/>
-
-        <!-- spout plate -->
-        <rect class="spout-plate" id="hSpoutPlate" x="265" y="220" width="30" height="10" rx="3" fill="#C4C0B6"/>
-        <!-- spout arm -->
-        <rect class="spout-arm" id="hSpoutArm" x="250" y="230" width="48" height="7" rx="3.5" fill="#C4C0B6"/>
-
-        <!-- floor line -->
-        <line x1="40" y1="380" x2="520" y2="380" stroke="rgba(216,228,211,.22)" stroke-width="1.5"/>
-
-        <!-- dimension -->
-        <g id="hDim">
-          <line class="dim-line" id="hDimLine" x1="72" y1="390" x2="488" y2="390"/>
-          <line class="dim-tick" id="hTickL" x1="72" y1="383" x2="72" y2="397"/>
-          <line class="dim-tick" id="hTickR" x1="488" y1="383" x2="488" y2="397"/>
-          <g class="dim-label" id="hDimLabel">
-            <rect x="246" y="376" width="68" height="28" rx="14"/>
-            <text x="280" y="395" text-anchor="middle" id="hDimText">60″</text>
-          </g>
-        </g>
-      </svg>
-    </div>
   </div>
 </div>
 
@@ -807,7 +1111,7 @@ footer a:hover { color: var(--brass-lt) }
           </defs>
 
           <!-- back wall -->
-          <rect x="0" y="0" width="1000" height="490" fill="#2D4136"/>
+          <rect x="0" y="0" width="1000" height="490" fill="#3A6B4A"/>
           <!-- wall texture flutes (static, decorative) -->
           <g opacity=".06">
             <line x1="100" y1="0" x2="100" y2="490" stroke="white" stroke-width="1"/>
@@ -821,7 +1125,7 @@ footer a:hover { color: var(--brass-lt) }
             <line x1="900" y1="0" x2="900" y2="490" stroke="white" stroke-width="1"/>
           </g>
           <!-- floor -->
-          <rect x="0" y="490" width="1000" height="70" fill="#22332A"/>
+          <rect x="0" y="490" width="1000" height="70" fill="#2E5A3E"/>
           <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(216,228,211,.25)" stroke-width="1.5"/>
 
           <!-- LED halo -->
@@ -896,7 +1200,7 @@ footer a:hover { color: var(--brass-lt) }
       </div>
 
       <!-- What's included -->
-      <div class="included-strip" style="margin-top:var(--sp-5)">
+      <div class="included-strip reveal reveal-stagger" style="margin-top:var(--sp-5)">
         <div class="incl-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
           <h4 data-en="LED defogging mirror" data-es="Espejo LED antiempañante">LED defogging mirror</h4>
@@ -932,7 +1236,7 @@ footer a:hover { color: var(--brass-lt) }
       <h2><em data-en="See them" data-es="Míralas">See them</em> <span data-en="in the room." data-es="en el espacio.">in the room.</span></h2>
       <p data-en="Photos of our vanities installed. Finishes and scale look different in person — visit our Cutler Bay showroom to see them yourself." data-es="Fotos de nuestras vanidades instaladas. Los acabados y el tamaño se ven distintos en persona — visita nuestro showroom en Cutler Bay.">Photos of our vanities installed. Finishes and scale look different in person — visit our Cutler Bay showroom to see them yourself.</p>
     </div>
-    <div class="gallery-grid reveal">
+    <div class="gallery-grid reveal reveal-stagger">
       <div class="gal-item">
         <div class="gal-inner">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(216,228,211,.4)" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -984,19 +1288,19 @@ footer a:hover { color: var(--brass-lt) }
         <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.5vw,42px);color:var(--paper);margin-top:10px" data-en="People come back for their second bathroom." data-es="Los clientes vuelven por su segundo baño.">People come back for their second bathroom.</h2>
       </div>
     </div>
-    <div class="review-cards reveal">
+    <div class="review-cards reveal reveal-stagger">
       <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true">★★★★★</div>
+        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
         <p class="review-card-text" data-en='"Best combination of price and quality I found in Miami. The delivery was fast and they carried it inside for me."' data-es='"La mejor combinación de precio y calidad que encontré en Miami. La entrega fue rápida y lo llevaron adentro."'>"Best combination of price and quality I found in Miami. The delivery was fast and they carried it inside for me."</p>
         <p class="review-card-author">— Google Review</p>
       </div>
       <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true">★★★★★</div>
+        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
         <p class="review-card-text" data-en='"I came for one vanity and ended up ordering three for a remodel. Incredible service, they know exactly what they\'re selling."' data-es='"Vine por una vanidad y terminé pidiendo tres para una remodelación. Servicio increíble, saben exactamente lo que venden."'>"I came for one vanity and ended up ordering three for a remodel. Incredible service, they know exactly what they're selling."</p>
         <p class="review-card-author">— Google Review</p>
       </div>
       <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true">★★★★★</div>
+        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#D4AD57"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
         <p class="review-card-text" data-en='"They inspected it with me when they delivered it. That level of care is rare. Already recommend them to every contractor I know."' data-es='"Lo inspeccionaron conmigo cuando lo entregaron. Ese nivel de atención es raro. Ya los recomiendo a todos los contratistas que conozco."'>"They inspected it with me when they delivered it. That level of care is rare. Already recommend them to every contractor I know."</p>
         <p class="review-card-author">— Google Review</p>
       </div>
@@ -1218,8 +1522,6 @@ footer a:hover { color: var(--brass-lt) }
       (lang === 'es' ? ' pulgadas, acabado ' : ' in, finish ') +
       (lang === 'es' ? finish.es : finish.en));
 
-    // hero mini-stage
-    drawHero();
   }
 
   function drawFlutes(cabX, cabW) {
@@ -1243,19 +1545,6 @@ footer a:hover { color: var(--brass-lt) }
     }
   }
 
-  /* hero mini-stage stays simple (no flutes, just colour) */
-  function drawHero() {
-    var hw = Math.min(size * 5.1, 340);
-    var hx = 280 - hw / 2;
-    $('hMirror').setAttribute('x', 280 - Math.min(hw * 0.56, 200) / 2);
-    $('hMirror').setAttribute('width', Math.min(hw * 0.56, 200));
-    $('hHalo').setAttribute('x', 280 - Math.min(hw * 0.56, 200) / 2);
-    $('hHalo').setAttribute('width', Math.min(hw * 0.56, 200));
-    $('hCab') && $('hCab').setAttribute('fill', finish.cab);
-    $('hPull') && $('hPull').setAttribute('fill', finish.pull);
-    $('hShadow').setAttribute('rx', hw / 2 + 10);
-    $('hDimText').textContent = size + '\u2033';
-  }
 
   /* ── BUILD CONTROLS ── */
   function buildSizes() {
@@ -1342,17 +1631,63 @@ footer a:hover { color: var(--brass-lt) }
     });
   }, { passive: true });
 
-  /* ── SCROLL REVEAL ── */
-  var reveals = qsa('.reveal');
+  /* ── SCROLL REVEAL (enhanced with stagger support) ── */
+  var reveals = qsa('.reveal, .reveal-stagger');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: .08, rootMargin: '0px 0px -60px 0px' });
     reveals.forEach(function(el){ io.observe(el); });
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ── SCROLL PROGRESS BAR ── */
+  var progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  /* ── CURSOR GLOW (desktop only) ── */
+  var cursorGlow = document.getElementById('cursorGlow');
+  if (window.matchMedia('(hover: hover)').matches && cursorGlow) {
+    var glowX = 0, glowY = 0, currentX = 0, currentY = 0;
+    document.addEventListener('mousemove', function(e) {
+      glowX = e.clientX; glowY = e.clientY;
+    }, { passive: true });
+    function animateGlow() {
+      currentX += (glowX - currentX) * 0.08;
+      currentY += (glowY - currentY) * 0.08;
+      cursorGlow.style.left = currentX + 'px';
+      cursorGlow.style.top = currentY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+    document.addEventListener('mouseenter', function() { cursorGlow.style.opacity = '1'; });
+    document.addEventListener('mouseleave', function() { cursorGlow.style.opacity = '0'; });
+  }
+
+  /* ── SMOOTH COUNT-UP for score number ── */
+  var scoreEl = qs('.score-num');
+  if (scoreEl) {
+    var scored = false;
+    var scoreObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !scored) {
+        scored = true;
+        var target = 5.0, current = 0, step = 0.1;
+        var interval = setInterval(function() {
+          current = Math.min(current + step, target);
+          scoreEl.textContent = current.toFixed(1);
+          if (current >= target) clearInterval(interval);
+        }, 40);
+        scoreObs.unobserve(scoreEl);
+      }
+    }, { threshold: .5 });
+    scoreObs.observe(scoreEl);
   }
 
   /* ── INIT ── */
