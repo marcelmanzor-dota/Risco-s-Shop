@@ -272,7 +272,7 @@ section { padding: var(--sp-7) 0 }
 
 /* SVG stage */
 .stage-wrap {
-  background: rgba(0,0,0,.22); border-radius: 12px; overflow: hidden;
+  background: rgba(0,0,0,.45); border-radius: 12px; overflow: hidden;
   border: 1px solid var(--line-f); padding: var(--sp-4) var(--sp-4) var(--sp-3);
 }
 .stage-svg-el { width: 100%; height: auto; display: block }
@@ -1097,8 +1097,8 @@ footer a:hover {
         <svg class="stage-svg-el" id="stage" viewBox="0 0 1000 560"
              aria-label="Interactive diagram of a floating bathroom vanity">
           <defs>
-            <filter id="sglow" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="13" result="b"/>
+            <filter id="sglow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="18" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
             <filter id="ssoft" x="-60%" y="-60%" width="220%" height="220%">
@@ -1111,7 +1111,7 @@ footer a:hover {
           </defs>
 
           <!-- back wall -->
-          <rect x="0" y="0" width="1000" height="490" fill="#3A6B4A"/>
+          <rect x="0" y="0" width="1000" height="490" fill="#162B1E"/>
           <!-- wall texture flutes (static, decorative) -->
           <g opacity=".06">
             <line x1="100" y1="0" x2="100" y2="490" stroke="white" stroke-width="1"/>
@@ -1125,12 +1125,14 @@ footer a:hover {
             <line x1="900" y1="0" x2="900" y2="490" stroke="white" stroke-width="1"/>
           </g>
           <!-- floor -->
-          <rect x="0" y="490" width="1000" height="70" fill="#2E5A3E"/>
+          <rect x="0" y="490" width="1000" height="70" fill="#122418"/>
           <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(216,228,211,.25)" stroke-width="1.5"/>
 
           <!-- LED halo -->
           <rect class="led-halo" id="sHalo" x="372" y="68" width="256" height="188" rx="7"
-                fill="none" stroke="#D4AD57" stroke-width="2.5" opacity=".6" filter="url(#sglow)"/>
+                fill="none" stroke="#E8C55A" stroke-width="3.5" opacity=".85" filter="url(#sglow)"/>
+          <rect class="led-halo" x="372" y="68" width="256" height="188" rx="7"
+                fill="none" stroke="#E8C55A" stroke-width="1" opacity=".3" filter="url(#ssoft)"/>
 
           <!-- mirror -->
           <rect class="mirror-glass" id="sMirror" x="372" y="68" width="256" height="188" rx="7"/>
