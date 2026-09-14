@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Risco's Shop — Floating Bathroom Vanities | Cutler Bay, Miami</title>
-<meta name="description" content="Direct-import floating bathroom vanities in 32, 40, 60, 72 and 82 inches. LED defogging mirror, wall faucet, drain and mounting kit included. Showroom in Cutler Bay, Miami. Florida delivery.">
+<meta name="description" content="Direct-import floating bathroom vanities in 20, 24, 30, 36, 48 and 60 inches (single or double sink). LED defogging mirror, wall faucet, drain and mounting kit included. Showroom in Cutler Bay, Miami. Florida delivery.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -235,19 +235,21 @@ section { padding: var(--sp-7) 0 }
   display: grid; grid-template-columns: 1fr 1.05fr; gap: var(--sp-6); align-items: center;
 }
 .about-photo {
-  background: var(--forest-dk); border-radius: 6px; overflow: hidden;
+  background: var(--forest-dk) url('images/showroom.jpg') center 58%/cover no-repeat;
+  border-radius: 6px; overflow: hidden;
   aspect-ratio: 4/3; position: relative;
 }
 .about-photo-inner {
   width: 100%; height: 100%;
-  background: linear-gradient(145deg, #3A6B4A 0%, var(--forest) 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: var(--sp-3); padding: var(--sp-5);
+  background: linear-gradient(0deg, rgba(15,26,18,.92) 0%, rgba(15,26,18,.55) 32%, rgba(15,26,18,0) 62%);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  gap: var(--sp-2); padding: var(--sp-5);
 }
-.about-photo-inner svg { opacity: .35 }
 .about-photo-label {
-  font-family: var(--serif); font-size: 22px; font-weight: 300; font-style: italic;
-  color: var(--on-forest); text-align: center; opacity: .7;
+  font-family: var(--serif); font-size: 21px; font-weight: 300; font-style: italic;
+  line-height: 1.4;
+  color: #fff; text-align: center; opacity: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,.55), 0 1px 2px rgba(0,0,0,.6);
 }
 .about-points { display: grid; gap: var(--sp-4); margin-top: var(--sp-5) }
 .about-point { display: grid; grid-template-columns: 28px 1fr; gap: var(--sp-3); align-items: start }
@@ -386,28 +388,43 @@ section { padding: var(--sp-7) 0 }
 }
 .gal-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 }
 .gal-item:nth-child(4) { grid-column: 3 / 4; grid-row: 1 / 3 }
+.gal-item:nth-child(5) { grid-column: 1 / 4; grid-row: 3 }
 .gal-inner {
   width: 100%; height: 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: var(--sp-5); gap: var(--sp-2); min-height: 240px;
+  background-size: cover; background-position: center;
 }
 .gal-label {
   font-family: var(--serif); font-style: italic; font-weight: 300;
   font-size: 18px; color: var(--on-forest); text-align: center; opacity: .7;
 }
-/* use the real photo as background for the main cell */
+/* real photos as background for each cell */
 .gal-item:nth-child(1) .gal-inner {
   min-height: 320px;
-  background: linear-gradient(135deg, #4A7A5A 0%, #6BA07A 60%, #7BA889 100%);
+  background-image: url('images/gallery-double-vanity.jpg');
 }
-.gal-item:nth-child(2) .gal-inner,
+.gal-item:nth-child(2) .gal-inner {
+  min-height: 220px;
+  background-image: url('images/gallery-white-single.jpg');
+}
 .gal-item:nth-child(3) .gal-inner {
   min-height: 220px;
-  background: linear-gradient(135deg, #3A6B4A 0%, #6BA07A 100%);
+  background-image: url('images/gallery-showroom-consult.jpg');
 }
 .gal-item:nth-child(4) .gal-inner {
   min-height: 460px;
-  background: linear-gradient(180deg, #6BA07A 0%, #3A6B4A 100%);
+  background-image: url('images/gallery-double-angle.jpg');
+}
+.gal-item:nth-child(5) .gal-inner {
+  min-height: 260px;
+  background-image: url('images/gallery-faucet-nickel.jpg');
+}
+.gal-item .gal-label {
+  align-self: flex-end; margin-top: auto;
+  background: rgba(15,26,18,.72); padding: 5px 12px; border-radius: 999px;
+  opacity: 1; font-style: normal; font-size: 13px; font-weight: 500;
+  font-family: var(--sans);
 }
 .gal-overlay {
   position: absolute; inset: 0; background: rgba(0,0,0,.0);
@@ -428,6 +445,7 @@ section { padding: var(--sp-7) 0 }
   .gallery-grid { grid-template-columns: 1fr 1fr; }
   .gal-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 }
   .gal-item:nth-child(4) { grid-column: 1 / 3; grid-row: auto }
+  .gal-item:nth-child(5) { grid-column: 1 / 3; grid-row: auto }
 }
 
 /* ============================================================
@@ -1009,7 +1027,7 @@ footer a:hover {
     <div class="hero-copy reveal">
       <p class="eyebrow on-forest" data-en="Direct importer · Cutler Bay, Miami" data-es="Importador directo · Cutler Bay, Miami">Direct importer · Cutler Bay, Miami</p>
       <h1><span data-en="Vanities that" data-es="Vanidades que">Vanities that</span> <em data-en="elevate." data-es="elevan.">elevate.</em></h1>
-      <p class="hero-lede" data-en="Wall-mounted floating vanities from 32 to 82 inches. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves." data-es="Vanidades flotantes de 32 a 82 pulgadas. El espejo LED antiempañante, el grifo de pared, el desagüe y los herrajes vienen incluidos — y nosotros mismos hacemos la entrega en Florida.">Wall-mounted floating vanities from 32 to 82 inches. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves.</p>
+      <p class="hero-lede" data-en="Wall-mounted floating vanities from 20 to 60 inches, single or double sink. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves." data-es="Vanidades flotantes de 20 a 60 pulgadas, sencillas o dobles. El espejo LED antiempañante, el grifo de pared, el desagüe y los herrajes vienen incluidos — y nosotros mismos hacemos la entrega en Florida.">Wall-mounted floating vanities from 20 to 60 inches, single or double sink. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves.</p>
       <div class="hero-actions">
         <a class="btn btn-brass" href="#products" data-en="Explore vanities" data-es="Ver vanidades">Explore vanities</a>
         <a class="btn btn-outline" href="tel:+17867100750" data-en="Call showroom" data-es="Llamar al showroom">Call showroom</a>
@@ -1074,13 +1092,6 @@ footer a:hover {
 
       <div class="about-photo">
         <div class="about-photo-inner">
-          <!-- Stylised showroom placeholder until real photos are available -->
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" aria-hidden="true">
-            <rect x="2" y="7" width="20" height="14" rx="2"/>
-            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-            <line x1="12" y1="12" x2="12" y2="16"/>
-            <line x1="10" y1="14" x2="14" y2="14"/>
-          </svg>
           <p class="about-photo-label" data-en="Cutler Bay Showroom<br>10755 SW 190th St, Suite 69" data-es="Showroom Cutler Bay<br>10755 SW 190th St, Suite 69">Cutler Bay Showroom<br>10755 SW 190th St, Suite 69</p>
         </div>
       </div>
@@ -1177,8 +1188,9 @@ footer a:hover {
           <!-- countertop -->
           <rect class="top-slab" id="sTop" x="274" y="306" width="452" height="17" rx="4" fill="#F2EFE8"/>
 
-          <!-- basin -->
+          <!-- basin(s): single basin, or two for double-sink 60in -->
           <rect class="basin" id="sBasin" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8"/>
+          <rect class="basin" id="sBasin2" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8" style="display:none"/>
 
           <!-- cabinet body -->
           <rect class="cab" id="sCab" x="282" y="323" width="436" height="120" rx="5" fill="url(#sCabGrad)"/>
@@ -1211,6 +1223,10 @@ footer a:hover {
           <div class="ctl">
             <span class="ctl-label" id="lblSize" data-en="Choose a width" data-es="Elige un ancho">Choose a width</span>
             <div class="sizes" role="group" aria-labelledby="lblSize" id="sizes"></div>
+          </div>
+          <div class="ctl" id="mountCtl">
+            <span class="ctl-label" id="lblMount" data-en="Sink configuration" data-es="Configuración del lavabo">Sink configuration</span>
+            <div class="sizes" role="group" aria-labelledby="lblMount" id="mounts"></div>
           </div>
           <div class="ctl">
             <span class="ctl-label" id="lblFin" data-en="Cabinet finish" data-es="Acabado del mueble">Cabinet finish</span>
@@ -1266,8 +1282,7 @@ footer a:hover {
     <div class="gallery-grid reveal reveal-stagger">
       <div class="gal-item">
         <div class="gal-inner">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(216,228,211,.4)" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="gal-label" data-en="Forest Green · 60 in double" data-es="Verde bosque · 60 in doble">Forest Green · 60 in double</span>
+          <span class="gal-label" data-en="60 in · Double vanity" data-es="60 in · Vanidad doble">60 in · Double vanity</span>
         </div>
         <div class="gal-overlay">
           <span class="gal-tag" data-en="Most popular" data-es="Más popular">Most popular</span>
@@ -1275,27 +1290,29 @@ footer a:hover {
       </div>
       <div class="gal-item">
         <div class="gal-inner">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(216,228,211,.4)" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="gal-label" data-en="White · 40 in" data-es="Blanco · 40 in">White · 40 in</span>
+          <span class="gal-label" data-en="White · Single vanity" data-es="Blanco · Vanidad sencilla">White · Single vanity</span>
         </div>
         <div class="gal-overlay"><span class="gal-tag" data-en="View" data-es="Ver">View</span></div>
       </div>
       <div class="gal-item">
         <div class="gal-inner">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(216,228,211,.4)" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="gal-label" data-en="Charcoal · 72 in double" data-es="Carbón · 72 in doble">Charcoal · 72 in double</span>
+          <span class="gal-label" data-en="In the showroom" data-es="En el showroom">In the showroom</span>
         </div>
         <div class="gal-overlay"><span class="gal-tag" data-en="View" data-es="Ver">View</span></div>
       </div>
       <div class="gal-item">
         <div class="gal-inner">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(216,228,211,.4)" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="gal-label" data-en="Wood · 48 in" data-es="Madera · 48 in">Wood · 48 in</span>
+          <span class="gal-label" data-en="Double vanity · Angle" data-es="Vanidad doble · Ángulo">Double vanity · Angle</span>
+        </div>
+        <div class="gal-overlay"><span class="gal-tag" data-en="View" data-es="Ver">View</span></div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-inner">
+          <span class="gal-label" data-en="Brushed nickel faucet" data-es="Grifo níquel cepillado">Brushed nickel faucet</span>
         </div>
         <div class="gal-overlay"><span class="gal-tag" data-en="View" data-es="Ver">View</span></div>
       </div>
     </div>
-    <p style="margin-top:var(--sp-3);font-size:13px;color:var(--muted);font-style:italic" data-en="Gallery photos coming soon — visit the showroom to see all finishes in person." data-es="Fotos de galería próximamente — visita el showroom para ver todos los acabados en persona.">Gallery photos coming soon — visit the showroom to see all finishes in person.</p>
   </div>
 </section>
 
@@ -1425,14 +1442,10 @@ footer a:hover {
   'use strict';
 
   /* ── DATA ── */
-  var SIZES = [32, 40, 60, 72, 82];
+  var SIZES = [20, 24, 30, 36, 48, 60];
   var FINISHES = [
-    { id:'forest',    en:'Forest Green', es:'Verde Bosque', cab:'#4B6B52', pull:'#B8963A', grad:['#4B6B52','#3A5440'] },
     { id:'white',     en:'White',        es:'Blanco',       cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
-    { id:'black',     en:'Matte Black',  es:'Negro mate',   cab:'#1E1E1C', pull:'#5A5A56', grad:['#262624','#1A1A18'] },
-    { id:'grey',      en:'Grey',         es:'Gris',         cab:'#8B918D', pull:'#5F6562', grad:['#8B918D','#717874'] },
-    { id:'wood',      en:'White Oak',    es:'Roble',        cab:'#C9A97A', pull:'#A07A42', grad:['#C9A97A','#B09065'] },
-    { id:'navy',      en:'Deep Navy',    es:'Azul marino',  cab:'#2B3A4E', pull:'#8899AA', grad:['#2B3A4E','#1F2C3C'] }
+    { id:'wood',      en:'White Oak',    es:'Roble',        cab:'#C9A97A', pull:'#A07A42', grad:['#C9A97A','#B09065'] }
   ];
   var HOURS = [
     { en:'Monday',    es:'Lunes',      t:'9:00 AM – 6:00 PM' },
@@ -1440,12 +1453,13 @@ footer a:hover {
     { en:'Wednesday', es:'Miércoles',  t:'9:00 AM – 6:00 PM' },
     { en:'Thursday',  es:'Jueves',     t:'9:00 AM – 6:00 PM' },
     { en:'Friday',    es:'Viernes',    t:'9:00 AM – 6:00 PM' },
-    { en:'Saturday',  es:'Sábado',     t:'10:00 AM – 5:00 PM' },
-    { en:'Sunday',    es:'Domingo',    t:'9:00 AM – 12:00 PM' }
+    { en:'Saturday',  es:'Sábado',     t:'9:00 AM – 5:00 PM' },
+    { en:'Sunday',    es:'Domingo',    t:'10:00 AM – 2:00 PM' }
   ];
 
   var lang   = 'en';
   var size   = 60;
+  var mount  = 'double';   // 'single' | 'double' — only relevant when size === 60
   var finish = FINISHES[0];
   var ledOn  = true;
 
@@ -1460,7 +1474,7 @@ footer a:hover {
       var v = el.getAttribute('data-' + lang);
       if (v !== null) el.innerHTML = v;
     });
-    buildSizes(); buildFinishes(); buildHours();
+    buildSizes(); buildMounts(); buildFinishes(); buildHours();
     syncLed();
   }
 
@@ -1495,11 +1509,24 @@ footer a:hover {
     top.setAttribute('x', x - 8);
     top.setAttribute('width', w + 16);
 
-    // basin (34% of cabinet width, centred)
-    var bw = Math.min(w * 0.34, 190);
-    var basin = $('sBasin');
-    basin.setAttribute('x', CENTER - bw / 2);
-    basin.setAttribute('width', bw);
+    // basin(s): single centred basin, or two symmetrical basins for 60in double
+    var isDouble = (size === 60 && mount === 'double');
+    var basin  = $('sBasin');
+    var basin2 = $('sBasin2');
+    if (isDouble) {
+      var bw2 = Math.min(w * 0.22, 130);
+      var offset = w * 0.24;
+      basin.setAttribute('x', CENTER - offset - bw2 / 2);
+      basin.setAttribute('width', bw2);
+      basin2.style.display = '';
+      basin2.setAttribute('x', CENTER + offset - bw2 / 2);
+      basin2.setAttribute('width', bw2);
+    } else {
+      var bw = Math.min(w * 0.34, 190);
+      basin.setAttribute('x', CENTER - bw / 2);
+      basin.setAttribute('width', bw);
+      basin2.style.display = 'none';
+    }
 
     // pulls: two symmetrical bars, gap from edge and from centre
     var gap = 28, mid = 38;
@@ -1531,7 +1558,7 @@ footer a:hover {
     $('sDimLine').setAttribute('x2', x + w);
     $('sTickL').setAttribute('transform', 'translate(' + (x - 282) + ',0)');
     $('sTickR').setAttribute('transform', 'translate(' + ((x + w) - 718) + ',0)');
-    $('sDimText').textContent = size + '\u2033';
+    $('sDimText').textContent = size + '\u2033' + (isDouble ? 'D' : (size === 60 ? 'S' : ''));
 
     // dim label centred
     var lbx = CENTER - 40;
@@ -1546,7 +1573,9 @@ footer a:hover {
     // accessibility label
     $('stage').setAttribute('aria-label',
       (lang === 'es' ? 'Vanidad flotante de ' : 'Floating vanity, ') + size +
-      (lang === 'es' ? ' pulgadas, acabado ' : ' in, finish ') +
+      (lang === 'es' ? ' pulgadas' : ' in') +
+      (isDouble ? (lang === 'es' ? ', doble lavabo' : ', double sink') : '') +
+      (lang === 'es' ? ', acabado ' : ', finish ') +
       (lang === 'es' ? finish.es : finish.en));
 
   }
@@ -1581,7 +1610,26 @@ footer a:hover {
       b.type = 'button';
       b.textContent = s + '\u2033';
       b.setAttribute('aria-pressed', String(s === size));
-      b.addEventListener('click', function(){ size = s; buildSizes(); draw(); });
+      b.addEventListener('click', function(){ size = s; buildSizes(); buildMounts(); draw(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildMounts() {
+    var ctl = $('mountCtl'), host = $('mounts');
+    if (size !== 60) { ctl.style.display = 'none'; return; }
+    ctl.style.display = 'grid';
+    host.innerHTML = '';
+    var opts = [
+      { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
+      { id:'double',  en:'Double (60D)', es:'Doble (60D)' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === mount));
+      b.addEventListener('click', function(){ mount = o.id; buildMounts(); draw(); });
       host.appendChild(b);
     });
   }
