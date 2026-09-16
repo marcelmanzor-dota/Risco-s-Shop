@@ -325,34 +325,49 @@ section { padding: var(--sp-7) 0 }
 #products .sec-head p { color: var(--on-forest); opacity: .8 }
 #products .eyebrow { color: var(--brass-lt) }
 
-/* Real-photo stage */
+/* SVG stage (illustrative diagram — not a real product photo, no pricing) */
 .stage-wrap {
   background: rgba(0,0,0,.45); border-radius: 12px; overflow: hidden;
   border: 1px solid var(--line-f); padding: var(--sp-4) var(--sp-4) var(--sp-3);
 }
-.stage-photo-frame {
-  position: relative; border-radius: 8px; overflow: hidden;
-  aspect-ratio: 4/3; background: #0f2a24;
+.stage-svg-el { width: 100%; height: auto; display: block }
+.cab, .top-slab, .basin, .pull, .mirror-glass, .spout-arm, .spout-plate, .leg {
+  transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), fill .3s var(--ease);
 }
-.stage-photo {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  opacity: 0; transition: opacity .35s var(--ease);
+.mirror-off .mirror-glass { fill: #0A211E; stroke: rgba(196,208,196,.3) }
+.led-halo { transition: opacity .5s var(--ease), x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), r .5s var(--ease), cx .5s var(--ease), cy .5s var(--ease) }
+.mirror-off .led-halo { opacity: 0 }
+@keyframes led-pulse {
+  0%, 100% { opacity: 1 }
+  50% { opacity: .82 }
 }
-.stage-photo.loaded { opacity: 1 }
-.stage-oos-badge {
-  position: absolute; top: 12px; right: 12px;
-  background: rgba(20,20,18,.85); color: var(--paper);
-  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 999px;
+.halo-pulse { animation: led-pulse 3s ease-in-out infinite }
+.mirror-off .halo-pulse { animation: none }
+.mirror-glass { fill: #0f2a24; stroke: var(--brass-lt); stroke-width: 2; transition: fill .5s var(--ease), stroke .3s }
+.stage-wrap:not(.mirror-off) .mirror-glass,
+:not(.mirror-off) > .mirror-glass { fill: #122E25 }
+.float-shadow { transition: cx .5s var(--ease), cy .5s var(--ease), rx .5s var(--ease), ry .5s var(--ease) }
+.dim-line { stroke: var(--brass-lt); stroke-width: 1.5; transition: x1 .5s var(--ease), x2 .5s var(--ease) }
+.dim-tick { stroke: var(--brass-lt); stroke-width: 1.5; transition: transform .5s var(--ease) }
+.dim-label text { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--forest-dk) }
+.dim-label rect { fill: var(--brass-lt) }
+.flute { transition: x .5s var(--ease), opacity .3s }
+.legs-group { opacity: 0; transition: opacity .35s var(--ease) }
+
+/* LED toggle */
+.led-toggle {
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--on-forest);
+  background: transparent; border: 1.5px solid var(--line-f); border-radius: 999px;
+  padding: 9px 18px; cursor: pointer; min-height: 42px;
+  display: inline-flex; align-items: center; gap: 9px;
+  transition: border-color .18s, color .18s;
 }
-.stage-meta {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: var(--sp-3); margin-top: var(--sp-3); flex-wrap: wrap;
+.led-toggle:hover { border-color: var(--brass-lt) }
+.led-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--brass-lt);
+  box-shadow: 0 0 10px var(--brass-lt); transition: .3s;
 }
-.stage-dim { display: block; font-family: var(--sans); font-size: 19px; font-weight: 700; color: var(--paper) }
-.stage-spec { display: block; margin-top: 3px; font-size: 13px; color: var(--on-forest); opacity: .75; font-weight: 300 }
-.stage-price { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--brass-lt); white-space: nowrap }
-.stage-price sup { font-size: 13px; font-weight: 500; opacity: .7 }
+.led-toggle[aria-pressed="false"] .led-dot { background: var(--muted); box-shadow: none }
 
 /* controls */
 .configurator { display: flex; flex-direction: column; gap: var(--sp-4); margin-top: var(--sp-4) }
@@ -399,6 +414,24 @@ section { padding: var(--sp-7) 0 }
 .stage-caption {
   margin-top: var(--sp-3); font-size: 13px; color: var(--on-forest);
   opacity: .55; font-weight: 300; font-style: italic;
+}
+
+/* group sub-headings inside the merged configurator (Vanity / Mirror / Faucet / ...) */
+.ctl-group-label {
+  font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--paper); opacity: .5;
+  margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--line-f);
+}
+.configurator > .ctl-group-label:first-child { margin-top: 0; padding-top: 0; border-top: none }
+
+/* small text labels drawn inside the stage SVG (toilet/drain side panel) */
+.stage-fixture-label {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  fill: rgba(216,228,211,.7);
+}
+.stage-fixture-title {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; fill: var(--brass-lt);
 }
 
 /* what's included strip */
@@ -1076,6 +1109,263 @@ footer a:hover {
 </div>
 
 <!-- ============================================================
+     PRODUCTS / CONFIGURATOR (VANITY) — illustrative diagram, not a real
+     product photo. Purely for comparing sizes/finishes/mount styles side
+     by side; not tied to real SKUs or live pricing.
+     ============================================================ -->
+<section id="products">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-en="Try it yourself" data-es="Pruébalo tú mismo">Try it yourself</p>
+      <h2><span data-en="See it before" data-es="Míralo antes">See it before</span> <em data-en="you order." data-es="de pedirlo.">you order.</em></h2>
+      <p data-en="One diagram, every piece — vanity, mirror, faucet, drain, and toilet — so you can compare combinations together. This is a general diagram for comparison only, not a photo of a specific product, and it does not show real prices." data-es="Un solo diagrama con todo — vanidad, espejo, grifo, desagüe e inodoro — para comparar combinaciones juntas. Este es un diagrama general solo para comparar, no es la foto de un producto específico ni muestra precios reales.">One diagram, every piece — vanity, mirror, faucet, drain, and toilet — so you can compare combinations together. This is a general diagram for comparison only, not a photo of a specific product, and it does not show real prices.</p>
+    </div>
+
+    <div class="reveal">
+      <!-- Stage -->
+      <div class="stage-wrap">
+        <svg class="stage-svg-el" id="stage" viewBox="0 0 1300 560"
+             aria-label="Interactive diagram of a floating bathroom vanity with mirror, faucet, drain, and toilet">
+          <defs>
+            <filter id="sglow" x="-120%" y="-120%" width="340%" height="340%">
+              <feGaussianBlur stdDeviation="28" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="ssoft" x="-150%" y="-150%" width="400%" height="400%">
+              <feGaussianBlur stdDeviation="40"/>
+            </filter>
+            <filter id="sbloom" x="-200%" y="-200%" width="500%" height="500%">
+              <feGaussianBlur stdDeviation="65"/>
+            </filter>
+            <radialGradient id="ledAmbient" cx="50%" cy="30%" r="55%">
+              <stop offset="0%" stop-color="#F5DFA0" stop-opacity=".35"/>
+              <stop offset="40%" stop-color="#E8C55A" stop-opacity=".12"/>
+              <stop offset="100%" stop-color="#E8C55A" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="sCabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#4B6B52" id="cabGradTop"/>
+              <stop offset="100%" stop-color="#3A5440" id="cabGradBot"/>
+            </linearGradient>
+          </defs>
+
+          <!-- back wall (main vanity area) -->
+          <rect x="0" y="0" width="1000" height="490" fill="#162B1E"/>
+          <!-- wall texture flutes (static, decorative) -->
+          <g opacity=".06">
+            <line x1="100" y1="0" x2="100" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="200" y1="0" x2="200" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="300" y1="0" x2="300" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="400" y1="0" x2="400" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="500" y1="0" x2="500" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="600" y1="0" x2="600" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="700" y1="0" x2="700" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="800" y1="0" x2="800" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="900" y1="0" x2="900" y2="490" stroke="white" stroke-width="1"/>
+          </g>
+          <!-- floor -->
+          <rect x="0" y="490" width="1000" height="70" fill="#122418"/>
+          <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(216,228,211,.25)" stroke-width="1.5"/>
+
+          <!-- side fixtures panel (toilet + shower drain) -->
+          <rect x="1000" y="0" width="300" height="490" fill="#13251A"/>
+          <rect x="1000" y="490" width="300" height="70" fill="#0f1f15"/>
+          <line x1="1000" y1="0" x2="1000" y2="560" stroke="rgba(216,228,211,.15)" stroke-width="1"/>
+
+          <!-- LED ambient light cast on wall -->
+          <rect class="led-halo" x="0" y="0" width="1000" height="490" fill="url(#ledAmbient)"/>
+
+          <!-- mirror: circular group -->
+          <g id="mCircGroup">
+            <circle class="led-halo" id="mCircBloom" cx="500" cy="162" r="0" fill="#E8C55A" opacity=".12" filter="url(#sbloom)"/>
+            <circle class="led-halo" id="mCircGlow" cx="500" cy="162" r="0" fill="none" stroke="#F5DFA0" stroke-width="6" opacity=".5" filter="url(#ssoft)"/>
+            <circle class="led-halo halo-pulse" id="mCircHalo" cx="500" cy="162" r="0" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
+            <circle class="led-halo" id="mCircInner" cx="500" cy="162" r="0" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
+            <circle class="mirror-glass" id="mCircGlass" cx="500" cy="162" r="0"/>
+            <circle id="mCircFrame" cx="500" cy="162" r="0" fill="none" stroke="#B8963A" stroke-width="2.5"/>
+          </g>
+
+          <!-- mirror: rectangular group -->
+          <g id="mRectGroup" style="display:none">
+            <rect class="led-halo" id="mRectBloom" x="500" y="162" width="0" height="0" rx="10" fill="#E8C55A" opacity=".12" filter="url(#sbloom)"/>
+            <rect class="led-halo" id="mRectGlow" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#F5DFA0" stroke-width="6" opacity=".5" filter="url(#ssoft)"/>
+            <rect class="led-halo halo-pulse" id="mRectHalo" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
+            <rect class="led-halo" id="mRectInner" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
+            <rect class="mirror-glass" id="mRectGlass" x="500" y="162" width="0" height="0" rx="8"/>
+            <rect id="mRectFrame" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#B8963A" stroke-width="2.5"/>
+          </g>
+
+          <!-- faucet (style + finish selectable) -->
+          <rect class="spout-plate" id="sSpoutPlate" x="484" y="282" width="32" height="11" rx="3.5" fill="#C0BDB4"/>
+          <rect class="spout-arm"   id="sSpoutArm"   x="466" y="293" width="52" height="8"  rx="4"   fill="#C0BDB4"/>
+
+          <!-- float / floor-contact shadow -->
+          <ellipse class="float-shadow" id="sShadow" cx="500" cy="455" rx="240" ry="14"
+                   fill="#050D08" opacity=".6" filter="url(#ssoft)"/>
+
+          <!-- countertop -->
+          <rect class="top-slab" id="sTop" x="274" y="306" width="452" height="17" rx="4" fill="#F2EFE8"/>
+
+          <!-- basin(s): single basin, or two for double-sink 60in -->
+          <rect class="basin" id="sBasin" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8"/>
+          <rect class="basin" id="sBasin2" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8" style="display:none"/>
+
+          <!-- cabinet body -->
+          <rect class="cab" id="sCab" x="282" y="323" width="436" height="120" rx="5" fill="url(#sCabGrad)"/>
+
+          <!-- cabinet fluted ribs — controlled by JS -->
+          <g id="sFlutes"></g>
+
+          <!-- legs (shown only when "Legs" mount style is selected) -->
+          <g class="legs-group" id="sLegs">
+            <rect class="leg" id="sLegL" x="300" y="443" width="10" height="47" rx="2" fill="#2C4A34"/>
+            <rect class="leg" id="sLegR" x="690" y="443" width="10" height="47" rx="2" fill="#2C4A34"/>
+          </g>
+
+          <!-- drawer pulls (two, symmetrical) -->
+          <rect class="pull" id="sPullA" x="310" y="375" width="172" height="5" rx="2.5" fill="#B8963A" opacity=".9"/>
+          <rect class="pull" id="sPullB" x="518" y="375" width="172" height="5" rx="2.5" fill="#B8963A" opacity=".9"/>
+
+          <!-- dim -->
+          <g id="sDim">
+            <line class="dim-line" id="sDimLine" x1="282" y1="476" x2="718" y2="476"/>
+            <line class="dim-tick" id="sTickL" x1="282" y1="468" x2="282" y2="484"/>
+            <line class="dim-tick" id="sTickR" x1="718" y1="468" x2="718" y2="484"/>
+            <g class="dim-label" id="sDimLabel">
+              <rect x="460" y="462" width="80" height="30" rx="15"/>
+              <text x="500" y="483" text-anchor="middle" id="sDimText">60″</text>
+            </g>
+          </g>
+
+          <!-- toilet (side panel, illustrative) -->
+          <text x="1150" y="42" text-anchor="middle" class="stage-fixture-title" data-en="Toilet" data-es="Inodoro">Toilet</text>
+          <g id="sToilet">
+            <rect id="sToiletTank" x="1110" y="60" width="80" height="46" rx="8" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <rect id="sToiletFlush" x="1143" y="66" width="14" height="5" rx="2.5" fill="rgba(0,0,0,.2)"/>
+            <ellipse id="sToiletBowl" cx="1150" cy="150" rx="50" ry="42" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <ellipse id="sToiletSeat" cx="1150" cy="108" rx="52" ry="9" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+            <g id="sToiletSmartPanel" style="display:none">
+              <rect x="1195" y="70" width="15" height="40" rx="4" fill="#B8963A"/>
+              <circle cx="1202.5" cy="81" r="2" fill="#0f2a24"/>
+              <circle cx="1202.5" cy="90" r="2" fill="#0f2a24"/>
+              <circle cx="1202.5" cy="99" r="2" fill="#0f2a24"/>
+            </g>
+          </g>
+          <text id="sToiletLabel" x="1150" y="215" text-anchor="middle" class="stage-fixture-label">Elongated, Seamless</text>
+
+          <!-- shower drain (side panel, illustrative) -->
+          <text x="1150" y="330" text-anchor="middle" class="stage-fixture-title" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</text>
+          <g id="sDrainIcon">
+            <rect id="sDrainBody" x="1100" y="368" width="100" height="16" rx="4" fill="#C0C0C8"/>
+            <line id="sDrainSlot1" x1="1112" y1="376" x2="1188" y2="376" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-dasharray="3 5"/>
+          </g>
+          <text id="sDrainLabel" x="1150" y="418" text-anchor="middle" class="stage-fixture-label">24″ · Nickel</text>
+        </svg>
+
+        <p class="stage-caption" data-en="Diagram updates as you select. For comparison only — not a specific product photo or price." data-es="El diagrama se actualiza al seleccionar. Solo para comparar — no es la foto ni el precio de un producto específico.">Diagram updates as you select. For comparison only — not a specific product photo or price.</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="configurator">
+        <div class="ctl-group-label" data-en="Vanity" data-es="Vanidad">Vanity</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblSize" data-en="Choose a width" data-es="Elige un ancho">Choose a width</span>
+            <div class="sizes" role="group" aria-labelledby="lblSize" id="sizes"></div>
+          </div>
+          <div class="ctl" id="mountCtl">
+            <span class="ctl-label" id="lblMount" data-en="Sink configuration" data-es="Configuración del lavabo">Sink configuration</span>
+            <div class="sizes" role="group" aria-labelledby="lblMount" id="mounts"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFin" data-en="Cabinet finish" data-es="Acabado del mueble">Cabinet finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblFin" id="finishes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFoot" data-en="Mount style" data-es="Estilo de montaje">Mount style</span>
+            <div class="sizes" role="group" aria-labelledby="lblFoot" id="feet"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" data-en="Mirror light" data-es="Luz del espejo">Mirror light</span>
+            <button type="button" class="led-toggle" id="ledBtn" aria-pressed="true">
+              <span class="led-dot" aria-hidden="true"></span>
+              <span id="ledLabel" data-en="LED on" data-es="LED encendido">LED on</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Mirror" data-es="Espejo">Mirror</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblMirShape" data-en="Shape" data-es="Forma">Shape</span>
+            <div class="sizes" role="group" aria-labelledby="lblMirShape" id="mirrorShapes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblMirSize" data-en="Size" data-es="Tamaño">Size</span>
+            <div class="sizes" role="group" aria-labelledby="lblMirSize" id="mirrorSizes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Faucet" data-es="Grifo">Faucet</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblFaucetStyle" data-en="Style" data-es="Estilo">Style</span>
+            <div class="sizes" role="group" aria-labelledby="lblFaucetStyle" id="faucetStyles"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFaucetFin" data-en="Finish" data-es="Acabado">Finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblFaucetFin" id="faucetFinishes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblDrainFin" data-en="Finish" data-es="Acabado">Finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblDrainFin" id="drainFinishes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblDrainSize" data-en="Length" data-es="Largo">Length</span>
+            <div class="sizes" role="group" aria-labelledby="lblDrainSize" id="drainSizes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Toilet" data-es="Inodoro">Toilet</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblToilet" data-en="Model" data-es="Modelo">Model</span>
+            <div class="sizes" role="group" aria-labelledby="lblToilet" id="toiletModels"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What's included -->
+      <div class="included-strip reveal reveal-stagger" style="margin-top:var(--sp-5)">
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+          <h4 data-en="LED defogging mirror" data-es="Espejo LED antiempañante">LED defogging mirror</h4>
+          <p data-en="Backlit. Stays clear after a hot shower." data-es="Retroiluminado. Sin empañarse tras la ducha.">Backlit. Stays clear after a hot shower.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h8a4 4 0 0 1 0 8H5V8z"/><line x1="5" y1="6" x2="5" y2="10"/><line x1="17" y1="16" x2="17" y2="20"/></svg>
+          <h4 data-en="Wall-mounted faucet" data-es="Grifo de pared">Wall-mounted faucet</h4>
+          <p data-en="Mounts above the basin, keeping the counter clean." data-es="Se instala en la pared, dejando la encimera despejada.">Mounts above the basin, keeping the counter clean.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>
+          <h4 data-en="Drain" data-es="Desagüe">Drain</h4>
+          <p data-en="Finish-matched. No extra trip to the hardware store." data-es="A juego con el acabado. Sin viajes extra a la ferretería.">Finish-matched. No extra trip to the hardware store.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4l6 6-9 9H5v-6z"/><path d="M12 6l6 6"/></svg>
+          <h4 data-en="Full mounting kit" data-es="Kit de instalación">Full mounting kit</h4>
+          <p data-en="Rail and all hardware to hang it level, in the box." data-es="Riel y herrajes para colgarla nivelada, en la caja.">Rail and all hardware to hang it level, in the box.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      PRODUCT GRID — VANITIES (ascending price)
      ============================================================ -->
 <section id="catalog" style="padding-top:var(--sp-6)">
@@ -1224,13 +1514,57 @@ footer a:hover {
     <div class="product-grid reveal reveal-stagger">
       <div class="product-card">
         <div class="product-photo">
-          <img src="images/toilet-one-piece-white.jpg" alt="One-Piece Toilet — Glossy White" loading="lazy">
+          <img src="images/toilet-a010.jpg" alt="One-Piece Toilet — Elongated, Seamless" loading="lazy">
         </div>
         <div class="product-info">
-          <span class="product-name" data-en="One-Piece Toilet — Glossy White" data-es="Inodoro de una pieza — Blanco brillante">One-Piece Toilet — Glossy White</span>
-          <span class="product-spec" data-en="27.15&quot; L x 14.75&quot; W x 29.15&quot; H · 10&quot; rough-in (12&quot; available on request)" data-es="27.15&quot; L x 14.75&quot; A x 29.15&quot; Alt · Salida a 10&quot; (12&quot; disponible bajo pedido)">27.15&quot; L x 14.75&quot; W x 29.15&quot; H · 10&quot; rough-in (12&quot; available on request)</span>
-          <span class="product-desc" data-en="Upgrade your bathroom with this modern one-piece toilet, designed for style, functionality, and water efficiency. The seamless structure eliminates visible joints between tank and bowl for a clean, minimalist look. Built from high-density glazed ceramic with a fully skirted trapway for easier cleaning. Dual-flush system offers 1.1 gallons (light) or 1.6 gallons (full) per use, with a soft-close seat and square bowl shape." data-es="Moderniza tu baño con este inodoro de una pieza, diseñado para el estilo, la funcionalidad y la eficiencia del agua. La estructura sin uniones visibles entre el tanque y la taza crea un look limpio y minimalista. Fabricado en cerámica esmaltada de alta densidad con trampa completamente cubierta para facilitar la limpieza. El sistema de doble descarga ofrece 1.1 o 1.6 galones por uso, con asiento de cierre suave y forma de taza cuadrada.">Upgrade your bathroom with this modern one-piece toilet, designed for style, functionality, and water efficiency. The seamless structure eliminates visible joints between tank and bowl for a clean, minimalist look. Built from high-density glazed ceramic with a fully skirted trapway for easier cleaning. Dual-flush system offers 1.1 gallons (light) or 1.6 gallons (full) per use, with a soft-close seat and square bowl shape.</span>
-          <span class="product-price">$199<sup> USD</sup></span>
+          <span class="product-name" data-en="One-Piece Toilet — Elongated, Seamless" data-es="Inodoro de una pieza — Alargado, sin uniones">One-Piece Toilet — Elongated, Seamless</span>
+          <span class="product-spec" data-en="One-piece · Soft-close seat · Push-button flush" data-es="Una pieza · Asiento de cierre suave · Botón de descarga">One-piece · Soft-close seat · Push-button flush</span>
+          <span class="product-desc" data-en="A clean, elongated one-piece toilet in glossy white with a soft-close seat and a low-profile push-button flush. The seamless structure leaves no gap between tank and bowl, for an easy-to-clean, minimalist look." data-es="Un inodoro de una pieza alargado y elegante en blanco brillante, con asiento de cierre suave y botón de descarga de perfil bajo. Su estructura sin uniones no deja espacio entre el tanque y la taza, para un look minimalista y fácil de limpiar.">A clean, elongated one-piece toilet in glossy white with a soft-close seat and a low-profile push-button flush. The seamless structure leaves no gap between tank and bowl, for an easy-to-clean, minimalist look.</span>
+          <span class="product-price">$200<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/toilet-a04.jpg" alt="One-Piece Toilet — Compact" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="One-Piece Toilet — Compact" data-es="Inodoro de una pieza — Compacto">One-Piece Toilet — Compact</span>
+          <span class="product-spec" data-en="One-piece · Soft-close seat · Push-button flush" data-es="Una pieza · Asiento de cierre suave · Botón de descarga">One-piece · Soft-close seat · Push-button flush</span>
+          <span class="product-desc" data-en="A compact one-piece toilet in glossy white with a soft-close seat and a low-profile push-button flush — a space-saving choice for smaller bathrooms or a secondary powder room." data-es="Un inodoro de una pieza compacto en blanco brillante, con asiento de cierre suave y botón de descarga de perfil bajo — ideal para baños más pequeños o un medio baño secundario.">A compact one-piece toilet in glossy white with a soft-close seat and a low-profile push-button flush — a space-saving choice for smaller bathrooms or a secondary powder room.</span>
+          <span class="product-price">$200<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/toilet-a09.jpg" alt="One-Piece Toilet — Sculptural, Side Flush" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="One-Piece Toilet — Sculptural, Side Flush" data-es="Inodoro de una pieza — Escultural, descarga lateral">One-Piece Toilet — Sculptural, Side Flush</span>
+          <span class="product-spec" data-en="One-piece · Soft-close seat · Side push-button flush" data-es="Una pieza · Asiento de cierre suave · Descarga lateral">One-piece · Soft-close seat · Side push-button flush</span>
+          <span class="product-desc" data-en="A sculptural one-piece toilet in glossy white with clean, rounded lines, a soft-close seat, and a side push-button flush for an understated, modern profile." data-es="Un inodoro de una pieza escultural en blanco brillante, de líneas limpias y redondeadas, con asiento de cierre suave y botón de descarga lateral, para un perfil moderno y discreto.">A sculptural one-piece toilet in glossy white with clean, rounded lines, a soft-close seat, and a side push-button flush for an understated, modern profile.</span>
+          <span class="product-price">$200<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/toilet-a03.jpg" alt="One-Piece Toilet — Rounded, Side Flush" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="One-Piece Toilet — Rounded, Side Flush" data-es="Inodoro de una pieza — Redondeado, descarga lateral">One-Piece Toilet — Rounded, Side Flush</span>
+          <span class="product-spec" data-en="One-piece · Soft-close seat · Side push-button flush" data-es="Una pieza · Asiento de cierre suave · Descarga lateral">One-piece · Soft-close seat · Side push-button flush</span>
+          <span class="product-desc" data-en="A rounded, sculptural one-piece toilet in glossy white with soft, clean lines, a soft-close seat, and a side push-button flush." data-es="Un inodoro de una pieza redondeado y escultural en blanco brillante, de líneas suaves y limpias, con asiento de cierre suave y botón de descarga lateral.">A rounded, sculptural one-piece toilet in glossy white with soft, clean lines, a soft-close seat, and a side push-button flush.</span>
+          <span class="product-price">$200<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/toilet-smart.jpg" alt="Smart Toilet — Heated Seat &amp; Bidet" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Smart Toilet — Heated Seat &amp; Bidet" data-es="Inodoro inteligente — Asiento calefactado y bidé">Smart Toilet — Heated Seat &amp; Bidet</span>
+          <span class="product-spec" data-en="One-piece · Heated seat · Built-in bidet wash" data-es="Una pieza · Asiento calefactado · Bidé incorporado">One-piece · Heated seat · Built-in bidet wash</span>
+          <span class="product-desc" data-en="A fully integrated smart toilet with a heated, soft-close seat, built-in bidet wash functions, and simple side-panel controls. A premium upgrade for a primary bath." data-es="Un inodoro inteligente totalmente integrado, con asiento calefactado de cierre suave, funciones de bidé incorporadas y controles laterales sencillos. Una mejora premium para un baño principal.">A fully integrated smart toilet with a heated, soft-close seat, built-in bidet wash functions, and simple side-panel controls. A premium upgrade for a primary bath.</span>
+          <span class="product-price">$550<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1268,83 +1602,186 @@ footer a:hover {
       </div>
     </div>
 
+    <div class="catalog-divider reveal">
+      <span data-en="Faucets" data-es="Grifos">Faucets</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-standard-gold.jpg" alt="Single-Handle Faucet — Brushed Gold" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Single-Handle Faucet — Brushed Gold" data-es="Grifo monomando — Oro cepillado">Single-Handle Faucet — Brushed Gold</span>
+          <span class="product-spec" data-en="Single-handle · Brushed gold finish" data-es="Monomando · Acabado en oro cepillado">Single-handle · Brushed gold finish</span>
+          <span class="product-desc" data-en="A clean, squared-off single-handle faucet in a warm brushed gold finish. Straight lines and a low profile pair easily with any of our vanity finishes for a subtle warm accent." data-es="Un grifo monomando de líneas rectas y perfil bajo, en un cálido acabado en oro cepillado. Combina fácilmente con cualquiera de los acabados de nuestras vanidades para un toque cálido y sutil.">A clean, squared-off single-handle faucet in a warm brushed gold finish. Straight lines and a low profile pair easily with any of our vanity finishes for a subtle warm accent.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-standard-nickel.jpg" alt="Single-Handle Faucet — Brushed Nickel" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Single-Handle Faucet — Brushed Nickel" data-es="Grifo monomando — Níquel cepillado">Single-Handle Faucet — Brushed Nickel</span>
+          <span class="product-spec" data-en="Single-handle · Brushed nickel finish" data-es="Monomando · Acabado en níquel cepillado">Single-handle · Brushed nickel finish</span>
+          <span class="product-desc" data-en="The same squared-off, single-handle silhouette in a cool brushed nickel finish. A versatile, understated choice that works with white, wood, or black hardware." data-es="La misma silueta monomando de líneas rectas, en un fresco acabado en níquel cepillado. Una opción versátil y discreta que combina con herrajes blancos, de madera o negros.">The same squared-off, single-handle silhouette in a cool brushed nickel finish. A versatile, understated choice that works with white, wood, or black hardware.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-standard-black.jpg" alt="Single-Handle Faucet — Matte Black" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Single-Handle Faucet — Matte Black" data-es="Grifo monomando — Negro mate">Single-Handle Faucet — Matte Black</span>
+          <span class="product-spec" data-en="Single-handle · Matte black finish" data-es="Monomando · Acabado negro mate">Single-handle · Matte black finish</span>
+          <span class="product-desc" data-en="Our squared-off single-handle faucet in a deep matte black finish, for a bold contrast against light countertops and cabinetry." data-es="Nuestro grifo monomando de líneas rectas en un profundo acabado negro mate, para un contraste audaz con encimeras y gabinetes claros.">Our squared-off single-handle faucet in a deep matte black finish, for a bold contrast against light countertops and cabinetry.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-waterfall-gold.jpg" alt="Waterfall Faucet — Brushed Gold" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Waterfall Faucet — Brushed Gold" data-es="Grifo cascada — Oro cepillado">Waterfall Faucet — Brushed Gold</span>
+          <span class="product-spec" data-en="Waterfall spout · Brushed gold finish" data-es="Caño tipo cascada · Acabado en oro cepillado">Waterfall spout · Brushed gold finish</span>
+          <span class="product-desc" data-en="A wide, flat waterfall spout in warm brushed gold, with a sleek curved handle. A statement piece that pairs beautifully with our White Oak and wood-finish vanities." data-es="Un amplio grifo tipo cascada en cálido oro cepillado, con una elegante manija curva. Una pieza statement que combina hermosamente con nuestras vanidades en Roble y acabados de madera.">A wide, flat waterfall spout in warm brushed gold, with a sleek curved handle. A statement piece that pairs beautifully with our White Oak and wood-finish vanities.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-waterfall-chrome.jpg" alt="Waterfall Faucet — Chrome" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Waterfall Faucet — Chrome" data-es="Grifo cascada — Cromo">Waterfall Faucet — Chrome</span>
+          <span class="product-spec" data-en="Waterfall spout · Polished chrome finish" data-es="Caño tipo cascada · Acabado en cromo pulido">Waterfall spout · Polished chrome finish</span>
+          <span class="product-desc" data-en="The same wide waterfall spout in a bright polished chrome finish — a timeless, versatile match for nearly any vanity color." data-es="El mismo grifo tipo cascada en un brillante acabado cromado — una combinación atemporal y versátil para casi cualquier color de vanidad.">The same wide waterfall spout in a bright polished chrome finish — a timeless, versatile match for nearly any vanity color.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/faucet-waterfall-black.jpg" alt="Waterfall Faucet — Matte Black" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Waterfall Faucet — Matte Black" data-es="Grifo cascada — Negro mate">Waterfall Faucet — Matte Black</span>
+          <span class="product-spec" data-en="Waterfall spout · Matte black finish" data-es="Caño tipo cascada · Acabado negro mate">Waterfall spout · Matte black finish</span>
+          <span class="product-desc" data-en="Our waterfall-spout faucet in a deep matte black finish, for a dramatic, modern look against white or light-toned counters." data-es="Nuestro grifo tipo cascada en un profundo acabado negro mate, para un look dramático y moderno sobre encimeras blancas o de tonos claros.">Our waterfall-spout faucet in a deep matte black finish, for a dramatic, modern look against white or light-toned counters.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Shower Drains" data-es="Desagües de ducha">Shower Drains</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-nickel.jpg" alt="Linear Shower Drain — Brushed Nickel, 12&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Nickel, 12&quot;" data-es="Desagüe lineal de ducha — Níquel cepillado, 12&quot;">Linear Shower Drain — Brushed Nickel, 12"</span>
+          <span class="product-spec" data-en="12&quot; long · Brushed nickel finish" data-es="12&quot; de largo · Acabado en níquel cepillado">12" long · Brushed nickel finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en níquel cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$50<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-nickel.jpg" alt="Linear Shower Drain — Brushed Nickel, 24&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Nickel, 24&quot;" data-es="Desagüe lineal de ducha — Níquel cepillado, 24&quot;">Linear Shower Drain — Brushed Nickel, 24"</span>
+          <span class="product-spec" data-en="24&quot; long · Brushed nickel finish" data-es="24&quot; de largo · Acabado en níquel cepillado">24" long · Brushed nickel finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en níquel cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-nickel.jpg" alt="Linear Shower Drain — Brushed Nickel, 32&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Nickel, 32&quot;" data-es="Desagüe lineal de ducha — Níquel cepillado, 32&quot;">Linear Shower Drain — Brushed Nickel, 32"</span>
+          <span class="product-spec" data-en="32&quot; long · Brushed nickel finish" data-es="32&quot; de largo · Acabado en níquel cepillado">32" long · Brushed nickel finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en níquel cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed nickel, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$70<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-black.jpg" alt="Linear Shower Drain — Matte Black, 12&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Matte Black, 12&quot;" data-es="Desagüe lineal de ducha — Negro mate, 12&quot;">Linear Shower Drain — Matte Black, 12"</span>
+          <span class="product-spec" data-en="12&quot; long · Matte black finish" data-es="12&quot; de largo · Acabado negro mate">12" long · Matte black finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en negro mate, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$50<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-black.jpg" alt="Linear Shower Drain — Matte Black, 24&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Matte Black, 24&quot;" data-es="Desagüe lineal de ducha — Negro mate, 24&quot;">Linear Shower Drain — Matte Black, 24"</span>
+          <span class="product-spec" data-en="24&quot; long · Matte black finish" data-es="24&quot; de largo · Acabado negro mate">24" long · Matte black finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en negro mate, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-black.jpg" alt="Linear Shower Drain — Matte Black, 32&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Matte Black, 32&quot;" data-es="Desagüe lineal de ducha — Negro mate, 32&quot;">Linear Shower Drain — Matte Black, 32"</span>
+          <span class="product-spec" data-en="32&quot; long · Matte black finish" data-es="32&quot; de largo · Acabado negro mate">32" long · Matte black finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en negro mate, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in matte black, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$70<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-gold.jpg" alt="Linear Shower Drain — Brushed Gold, 12&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Gold, 12&quot;" data-es="Desagüe lineal de ducha — Oro cepillado, 12&quot;">Linear Shower Drain — Brushed Gold, 12"</span>
+          <span class="product-spec" data-en="12&quot; long · Brushed gold finish" data-es="12&quot; de largo · Acabado en oro cepillado">12" long · Brushed gold finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en oro cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$50<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-gold.jpg" alt="Linear Shower Drain — Brushed Gold, 24&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Gold, 24&quot;" data-es="Desagüe lineal de ducha — Oro cepillado, 24&quot;">Linear Shower Drain — Brushed Gold, 24"</span>
+          <span class="product-spec" data-en="24&quot; long · Brushed gold finish" data-es="24&quot; de largo · Acabado en oro cepillado">24" long · Brushed gold finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en oro cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$60<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/drain-linear-gold.jpg" alt="Linear Shower Drain — Brushed Gold, 32&quot;" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Linear Shower Drain — Brushed Gold, 32&quot;" data-es="Desagüe lineal de ducha — Oro cepillado, 32&quot;">Linear Shower Drain — Brushed Gold, 32"</span>
+          <span class="product-spec" data-en="32&quot; long · Brushed gold finish" data-es="32&quot; de largo · Acabado en oro cepillado">32" long · Brushed gold finish</span>
+          <span class="product-desc" data-en="A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile." data-es="Un desagüe lineal de ducha de perfil bajo en oro cepillado, con canasta colectora de pelo removible y patas niveladoras ajustables para una instalación limpia y nivelada bajo cualquier baldosa.">A low-profile linear shower drain in brushed gold, with a removable hair strainer basket and adjustable leveling feet for a clean, level install under any tile.</span>
+          <span class="product-price">$70<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
     <p style="margin-top:var(--sp-3);font-size:13px;color:var(--muted);font-style:italic" data-en="Prices reflect current in-store pricing and may change without notice." data-es="Los precios reflejan el precio actual en tienda y pueden cambiar sin previo aviso.">Prices reflect current in-store pricing and may change without notice.</p>
   </div>
 </section>
-
-<!-- ============================================================
-     PRODUCTS / CONFIGURATOR
-     ============================================================ -->
-<section id="products">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow" data-en="Try it yourself" data-es="Pruébalo tú mismo">Try it yourself</p>
-      <h2><span data-en="See it before" data-es="Míralo antes">See it before</span> <em data-en="you order." data-es="de pedirlo.">you order.</em></h2>
-      <p data-en="Every vanity ships with the LED backlit mirror, wall-mounted faucet, drain, and full mounting kit. Choose the width and finish that works for your space — the photo below is the real product." data-es="Cada vanidad incluye el espejo LED, el grifo de pared, el desagüe y el kit de instalación. Elige el ancho y el acabado que mejor se adapte a tu espacio — la foto de abajo es del producto real.">Every vanity ships with the LED backlit mirror, wall-mounted faucet, drain, and full mounting kit. Choose the width and finish that works for your space — the photo below is the real product.</p>
-    </div>
-
-    <div class="reveal">
-      <!-- Stage -->
-      <div class="stage-wrap">
-        <div class="stage-photo-frame">
-          <img class="stage-photo" id="stagePhoto" src="" alt="">
-          <span class="stage-oos-badge" id="stageOos" data-en="Out of stock" data-es="Agotado" hidden>Out of stock</span>
-        </div>
-        <div class="stage-meta">
-          <div>
-            <span class="stage-dim" id="stageDim">60″</span>
-            <span class="stage-spec" id="stageSpec">Four drawers, two doors · Double sink</span>
-          </div>
-          <span class="stage-price" id="stagePrice">$750<sup> USD</sup></span>
-        </div>
-        <p class="stage-caption" data-en="Real product photo — updates as you select. Every size ships with the mirror and hardware shown." data-es="Foto real del producto — se actualiza al seleccionar. Todos los tamaños incluyen el espejo y los herrajes mostrados.">Real product photo — updates as you select. Every size ships with the mirror and hardware shown.</p>
-      </div>
-
-      <!-- Controls -->
-      <div class="configurator">
-        <div class="ctl-row">
-          <div class="ctl">
-            <span class="ctl-label" id="lblSize" data-en="Choose a width" data-es="Elige un ancho">Choose a width</span>
-            <div class="sizes" role="group" aria-labelledby="lblSize" id="sizes"></div>
-          </div>
-          <div class="ctl" id="mountCtl">
-            <span class="ctl-label" id="lblMount" data-en="Sink configuration" data-es="Configuración del lavabo">Sink configuration</span>
-            <div class="sizes" role="group" aria-labelledby="lblMount" id="mounts"></div>
-          </div>
-          <div class="ctl">
-            <span class="ctl-label" id="lblFin" data-en="Cabinet finish" data-es="Acabado del mueble">Cabinet finish</span>
-            <div class="finishes" role="group" aria-labelledby="lblFin" id="finishes"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- What's included -->
-      <div class="included-strip reveal reveal-stagger" style="margin-top:var(--sp-5)">
-        <div class="incl-item">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
-          <h4 data-en="LED defogging mirror" data-es="Espejo LED antiempañante">LED defogging mirror</h4>
-          <p data-en="Backlit. Stays clear after a hot shower." data-es="Retroiluminado. Sin empañarse tras la ducha.">Backlit. Stays clear after a hot shower.</p>
-        </div>
-        <div class="incl-item">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h8a4 4 0 0 1 0 8H5V8z"/><line x1="5" y1="6" x2="5" y2="10"/><line x1="17" y1="16" x2="17" y2="20"/></svg>
-          <h4 data-en="Wall-mounted faucet" data-es="Grifo de pared">Wall-mounted faucet</h4>
-          <p data-en="Mounts above the basin, keeping the counter clean." data-es="Se instala en la pared, dejando la encimera despejada.">Mounts above the basin, keeping the counter clean.</p>
-        </div>
-        <div class="incl-item">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>
-          <h4 data-en="Drain" data-es="Desagüe">Drain</h4>
-          <p data-en="Finish-matched. No extra trip to the hardware store." data-es="A juego con el acabado. Sin viajes extra a la ferretería.">Finish-matched. No extra trip to the hardware store.</p>
-        </div>
-        <div class="incl-item">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4l6 6-9 9H5v-6z"/><path d="M12 6l6 6"/></svg>
-          <h4 data-en="Full mounting kit" data-es="Kit de instalación">Full mounting kit</h4>
-          <p data-en="Rail and all hardware to hang it level, in the box." data-es="Riel y herrajes para colgarla nivelada, en la caja.">Rail and all hardware to hang it level, in the box.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 </main>
 
@@ -1374,13 +1811,65 @@ footer a:hover {
   /* ── DATA ── */
   var SIZES = [24, 30, 36, 48, 60];
   var FINISHES = [
-    { id:'white', en:'White',     es:'Blanco' },
-    { id:'wood',  en:'White Oak', es:'Roble' }
+    { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
+    { id:'wood',  en:'White Oak', es:'Roble',   cab:'#C9A97A', pull:'#A07A42', grad:['#C9A97A','#B09065'] }
   ];
-  var lang   = 'en';
-  var size   = 60;
-  var mount  = 'double';   // 'single' | 'double' — only relevant when size === 60
-  var finish = FINISHES[0];
+  var lang      = 'en';
+  var size      = 60;
+  var mount     = 'double';    // 'single' | 'double' — only relevant when size === 60
+  var finish    = FINISHES[0];
+  var footStyle = 'floating';  // 'floating' | 'legs' — illustrative only
+  var ledOn     = true;
+
+  var MIRROR_SIZES = {
+    circular:    [24, 30, 36],
+    rectangular: [24, 30, 36, 40, 48, 60]
+  };
+  var mirrorShape = 'circular';
+  var mirrorSize  = 30;
+
+  var FAUCET_STYLES = [
+    { id:'standard',  en:'Single-Handle', es:'Monomando' },
+    { id:'waterfall', en:'Waterfall',     es:'Cascada' }
+  ];
+  var FAUCET_FINISHES = {
+    standard:  [
+      { id:'gold',   en:'Gold',   es:'Oro',    hex:'#C9A227' },
+      { id:'nickel', en:'Nickel', es:'Níquel', hex:'#C0C0C8' },
+      { id:'black',  en:'Black',  es:'Negro',  hex:'#2b2b2b' }
+    ],
+    waterfall: [
+      { id:'gold',   en:'Gold',   es:'Oro',   hex:'#C9A227' },
+      { id:'chrome', en:'Chrome', es:'Cromo', hex:'#D8D8DC' },
+      { id:'black',  en:'Black',  es:'Negro', hex:'#2b2b2b' }
+    ]
+  };
+  var faucetStyle  = 'standard';
+  var faucetFinish = 'gold';
+
+  var DRAIN_FINISHES = [
+    { id:'nickel', en:'Nickel', es:'Níquel', hex:'#C0C0C8' },
+    { id:'black',  en:'Black',  es:'Negro',  hex:'#2b2b2b' },
+    { id:'gold',   en:'Gold',   es:'Oro',    hex:'#C9A227' }
+  ];
+  var DRAIN_SIZES = [12, 24, 32];
+  var drainFinish = 'nickel';
+  var drainSize   = 24;
+
+  var TOILET_MODELS = [
+    { id:'a010',  en:'Elongated',  es:'Alargado',   labelEn:'Elongated, Seamless',        labelEs:'Alargado, sin uniones',
+      tankW:68, tankH:30, bowlRx:58, bowlRy:46, flush:'top',  smart:false },
+    { id:'a04',   en:'Compact',    es:'Compacto',   labelEn:'Compact',                    labelEs:'Compacto',
+      tankW:60, tankH:38, bowlRx:40, bowlRy:32, flush:'top',  smart:false },
+    { id:'a09',   en:'Sculptural', es:'Escultural', labelEn:'Sculptural, Side Flush',     labelEs:'Escultural, descarga lateral',
+      tankW:78, tankH:42, bowlRx:52, bowlRy:42, flush:'side', smart:false },
+    { id:'a03',   en:'Rounded',    es:'Redondeado', labelEn:'Rounded, Side Flush',        labelEs:'Redondeado, descarga lateral',
+      tankW:72, tankH:40, bowlRx:50, bowlRy:44, flush:'side', smart:false },
+    { id:'smart', en:'Smart',      es:'Inteligente',labelEn:'Smart Toilet',               labelEs:'Inodoro inteligente',
+      tankW:82, tankH:46, bowlRx:54, bowlRy:44, flush:'none', smart:true  }
+  ];
+  var toiletModel = 'a010';
+  var TOILET_TANK_Y = 60, TOILET_CX = 1150, TOILET_SEAT_CY = 108, TOILET_BOWL_CY = 150;
 
   var $ = function(id){ return document.getElementById(id); };
   var qs = function(sel){ return document.querySelector(sel); };
@@ -1393,8 +1882,12 @@ footer a:hover {
       var v = el.getAttribute('data-' + lang);
       if (v !== null) el.innerHTML = v;
     });
-    buildSizes(); buildMounts(); buildFinishes();
-    updateStage();
+    buildSizes(); buildMounts(); buildFinishes(); buildFeet();
+    draw(); syncLed();
+    buildMirrorShapes(); buildMirrorSizes(); drawMirror();
+    buildFaucetStyles(); buildFaucetFinishes(); drawFaucet();
+    buildDrainFinishes(); buildDrainSizes(); drawDrain();
+    buildToiletModels(); drawToilet();
   }
 
   qsa('.lang-toggle button').forEach(function(b) {
@@ -1405,61 +1898,127 @@ footer a:hover {
     });
   });
 
-  /* ── REAL PRODUCT CATALOG (matches products.html — same photos, prices, specs) ── */
-  var CATALOG = {
-    '24-white':        { img:'vanity-24-white.jpg',              price:290, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '24-wood':         { img:'vanity-24-wood.jpg',                price:310, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '30-white':        { img:'vanity-30-white.jpg',              price:345, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '30-wood':         { img:'vanity-30-wood.jpg',                price:365, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '36-white':        { img:'vanity-36-white.jpg',              price:415, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '36-wood':         { img:'vanity-36-wood.jpg',                price:435, specEn:'Two drawers',                       specEs:'Dos gavetas' },
-    '48-white':        { img:'vanity-48-white.jpg',              price:550, specEn:'Four drawers',                      specEs:'Cuatro gavetas' },
-    '48-wood':         { img:'vanity-48-wood.jpg',                price:570, specEn:'Two drawers, two doors',           specEs:'Dos gavetas, dos puertas' },
-    '60-white-single': { img:'vanity-60-single-white.jpg',       price:725, specEn:'Four drawers · Single sink',        specEs:'Cuatro gavetas · Lavabo sencillo' },
-    '60-white-double': { img:'vanity-60-double-glossy-white.jpg', price:750, specEn:'Four drawers, two doors · Double sink', specEs:'Cuatro gavetas, dos puertas · Lavabo doble' },
-    '60-wood-double':  { img:'vanity-60-wood-oos.jpg',            price:765, specEn:'Four drawers · Double sink',        specEs:'Cuatro gavetas · Lavabo doble', oos:true }
-  };
+  /* ── SVG CONSTANTS (vanity) ── */
+  var CENTER = 500, PPI = 7.25;   // svg units per inch  (1000px wide, 60in → 435px)
+  var CAB_Y  = 323, CAB_H = 120;
+  var FLOOR_Y = 490;
+  var LEG_W = 10, LEG_INSET = 20;
 
-  function catalogKey() {
-    if (size === 60) return '60-' + finish.id + '-' + mount;
-    return size + '-' + finish.id;
-  }
+  /* ── DRAW VANITY (cabinet / countertop / basin / legs / dim) ── */
+  function draw() {
+    var w = size * PPI;
+    var x = CENTER - w / 2;
 
-  /* ── UPDATE STAGE (real product photo + live specs) ── */
-  function updateStage() {
-    var entry = CATALOG[catalogKey()];
-    if (!entry) return; // shouldn't happen — buildMounts() keeps selections valid
+    var cab = $('sCab');
+    cab.setAttribute('x', x);
+    cab.setAttribute('width', w);
+
+    var gt = $('cabGradTop'), gb = $('cabGradBot');
+    if (gt && gb) { gt.setAttribute('stop-color', finish.grad[0]); gb.setAttribute('stop-color', finish.grad[1]); }
+
+    var top = $('sTop');
+    top.setAttribute('x', x - 8);
+    top.setAttribute('width', w + 16);
 
     var isDouble = (size === 60 && mount === 'double');
-    var finLabel = lang === 'es' ? finish.es : finish.en;
-
-    var img = $('stagePhoto');
-    if (img.getAttribute('src') !== 'images/' + entry.img) {
-      img.classList.remove('loaded');
-      img.onload = function () { img.classList.add('loaded'); };
-      img.src = 'images/' + entry.img;
+    var basin  = $('sBasin');
+    var basin2 = $('sBasin2');
+    if (isDouble) {
+      var bw2 = Math.min(w * 0.22, 130);
+      var offset = w * 0.24;
+      basin.setAttribute('x', CENTER - offset - bw2 / 2);
+      basin.setAttribute('width', bw2);
+      basin2.style.display = '';
+      basin2.setAttribute('x', CENTER + offset - bw2 / 2);
+      basin2.setAttribute('width', bw2);
+    } else {
+      var bw = Math.min(w * 0.34, 190);
+      basin.setAttribute('x', CENTER - bw / 2);
+      basin.setAttribute('width', bw);
+      basin2.style.display = 'none';
     }
-    img.alt = (lang === 'es' ? 'Vanidad flotante de ' : 'Floating vanity, ') + size +
-      (lang === 'es' ? ' pulgadas, acabado ' : ' in, finish ') + finLabel +
-      (isDouble ? (lang === 'es' ? ', doble lavabo' : ', double sink') : '');
 
-    $('stageDim').textContent = size + '″' + (isDouble ? 'D' : (size === 60 ? 'S' : '')) + ' × 18″';
-    $('stageSpec').textContent = lang === 'es' ? entry.specEs : entry.specEn;
-    $('stagePrice').innerHTML = '$' + entry.price + '<sup> USD</sup>';
+    var gap = 28, mid = 38;
+    var pw = Math.max((w - gap * 2 - mid) / 2, 28);
+    $('sPullA').setAttribute('x', x + gap);
+    $('sPullA').setAttribute('width', pw);
+    $('sPullB').setAttribute('x', x + w - gap - pw);
+    $('sPullB').setAttribute('width', pw);
 
-    var oosBadge = $('stageOos');
-    oosBadge.hidden = !entry.oos;
+    var legH = FLOOR_Y - (CAB_Y + CAB_H);
+    var legL = $('sLegL'), legR = $('sLegR');
+    legL.setAttribute('x', x + LEG_INSET);
+    legL.setAttribute('y', CAB_Y + CAB_H);
+    legL.setAttribute('height', legH);
+    legR.setAttribute('x', x + w - LEG_INSET - LEG_W);
+    legR.setAttribute('y', CAB_Y + CAB_H);
+    legR.setAttribute('height', legH);
+    $('sLegs').style.opacity = (footStyle === 'legs') ? '1' : '0';
+
+    var shadow = $('sShadow');
+    if (footStyle === 'legs') {
+      shadow.setAttribute('cy', FLOOR_Y - 3);
+      shadow.setAttribute('rx', Math.max(w / 2 - 6, 40));
+      shadow.setAttribute('ry', 5);
+    } else {
+      shadow.setAttribute('cy', 455);
+      shadow.setAttribute('rx', w / 2 + 16);
+      shadow.setAttribute('ry', 14);
+    }
+
+    $('sDimLine').setAttribute('x1', x);
+    $('sDimLine').setAttribute('x2', x + w);
+    $('sTickL').setAttribute('transform', 'translate(' + (x - 282) + ',0)');
+    $('sTickR').setAttribute('transform', 'translate(' + ((x + w) - 718) + ',0)');
+    $('sDimText').textContent = size + '\u2033' + (isDouble ? 'D' : (size === 60 ? 'S' : ''));
+
+    var lbx = CENTER - 40;
+    var lbRect = $('sDimLabel').querySelector('rect');
+    var lbText = $('sDimLabel').querySelector('text');
+    if (lbRect) lbRect.setAttribute('x', lbx);
+    if (lbText) lbText.setAttribute('x', CENTER);
+
+    drawFlutes(x, w);
+
+    $('stage').setAttribute('aria-label',
+      (lang === 'es' ? 'Vanidad flotante de ' : 'Floating vanity, ') + size +
+      (lang === 'es' ? ' pulgadas' : ' in') +
+      (isDouble ? (lang === 'es' ? ', doble lavabo' : ', double sink') : '') +
+      (lang === 'es' ? ', acabado ' : ', finish ') +
+      (lang === 'es' ? finish.es : finish.en) +
+      (footStyle === 'legs' ? (lang === 'es' ? ', con patas' : ', on legs') : ''));
   }
 
-  /* ── BUILD CONTROLS ── */
+  function drawFlutes(cabX, cabW) {
+    var g = $('sFlutes');
+    g.innerHTML = '';
+    var pitch = 9.5;
+    var numRibs = Math.floor(cabW / pitch);
+    var startX = cabX + (cabW - numRibs * pitch) / 2 + pitch / 2;
+    for (var i = 0; i < numRibs; i++) {
+      var rx = startX + i * pitch;
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', rx); line.setAttribute('x2', rx);
+      line.setAttribute('y1', CAB_Y); line.setAttribute('y2', CAB_Y + CAB_H);
+      line.setAttribute('stroke', 'rgba(0,0,0,.22)'); line.setAttribute('stroke-width', '2.5');
+      g.appendChild(line);
+      var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line2.setAttribute('x1', rx + 1.5); line2.setAttribute('x2', rx + 1.5);
+      line2.setAttribute('y1', CAB_Y); line2.setAttribute('y2', CAB_Y + CAB_H);
+      line2.setAttribute('stroke', 'rgba(255,255,255,.09)'); line2.setAttribute('stroke-width', '1');
+      g.appendChild(line2);
+    }
+  }
+
+  /* ── BUILD VANITY CONTROLS ── */
   function buildSizes() {
     var host = $('sizes'); host.innerHTML = '';
     SIZES.forEach(function(s) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.textContent = s + '″';
+      b.textContent = s + '\u2033';
       b.setAttribute('aria-pressed', String(s === size));
-      b.addEventListener('click', function(){ size = s; buildSizes(); buildMounts(); updateStage(); });
+      b.addEventListener('click', function(){ size = s; buildSizes(); buildMounts(); draw(); });
       host.appendChild(b);
     });
   }
@@ -1468,8 +2027,6 @@ footer a:hover {
     var ctl = $('mountCtl'), host = $('mounts');
     if (size !== 60) { ctl.style.display = 'none'; return; }
     ctl.style.display = 'grid';
-    // The 60in White Oak vanity only ships as a double sink — no single-sink wood photo/SKU exists
-    if (finish.id === 'wood' && mount === 'single') { mount = 'double'; }
     host.innerHTML = '';
     var opts = [
       { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
@@ -1479,30 +2036,263 @@ footer a:hover {
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = lang === 'es' ? o.es : o.en;
-      var isDisabled = (o.id === 'single' && finish.id === 'wood');
-      b.disabled = isDisabled;
-      if (isDisabled) b.title = lang === 'es' ? 'Solo disponible en Blanco' : 'Only available in White';
       b.setAttribute('aria-pressed', String(o.id === mount));
-      b.addEventListener('click', function(){
-        if (isDisabled) return;
-        mount = o.id; buildMounts(); updateStage();
-      });
+      b.addEventListener('click', function(){ mount = o.id; buildMounts(); draw(); });
       host.appendChild(b);
     });
   }
 
   function buildFinishes() {
     var host = $('finishes'); host.innerHTML = '';
-    var swatch = { white:'#EDEDEA', wood:'#C9A97A' };
     FINISHES.forEach(function(f) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.style.background = swatch[f.id];
+      b.style.background = f.cab;
       var lbl = lang === 'es' ? f.es : f.en;
       b.setAttribute('aria-label', lbl);
       b.setAttribute('aria-pressed', String(f.id === finish.id));
       b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
-      b.addEventListener('click', function(){ finish = f; buildFinishes(); buildMounts(); updateStage(); });
+      b.addEventListener('click', function(){ finish = f; buildFinishes(); draw(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildFeet() {
+    var host = $('feet'); host.innerHTML = '';
+    var opts = [
+      { id:'floating', en:'Floating', es:'Flotante' },
+      { id:'legs',     en:'Legs',     es:'Patas' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === footStyle));
+      b.addEventListener('click', function(){ footStyle = o.id; buildFeet(); draw(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── LED TOGGLE (mirror) ── */
+  function syncLed() {
+    var btn = $('ledBtn');
+    btn.setAttribute('aria-pressed', String(ledOn));
+    $('ledLabel').textContent = ledOn
+      ? (lang === 'es' ? 'LED encendido' : 'LED on')
+      : (lang === 'es' ? 'LED apagado'   : 'LED off');
+    $('stage').classList.toggle('mirror-off', !ledOn);
+  }
+  $('ledBtn').addEventListener('click', function(){ ledOn = !ledOn; syncLed(); });
+
+  /* ── MIRROR (independent of vanity width — shape + size selectable) ── */
+  var MCX = 500, MCY = 162, MPPI = 5.4;
+  var MIRROR_RECT_H_IN = 30; // rectangular mirrors are always 30in tall
+
+  function drawMirror() {
+    var isCirc = mirrorShape === 'circular';
+    $('mCircGroup').style.display = isCirc ? '' : 'none';
+    $('mRectGroup').style.display = isCirc ? 'none' : '';
+
+    if (isCirc) {
+      var r = (mirrorSize * MPPI) / 2;
+      ['mCircBloom','mCircGlow','mCircHalo','mCircInner','mCircGlass'].forEach(function(id){
+        $(id).setAttribute('cx', MCX); $(id).setAttribute('cy', MCY); $(id).setAttribute('r', r);
+      });
+      $('mCircFrame').setAttribute('cx', MCX);
+      $('mCircFrame').setAttribute('cy', MCY);
+      $('mCircFrame').setAttribute('r', r + 2);
+    } else {
+      var w = mirrorSize * MPPI;
+      var h = MIRROR_RECT_H_IN * MPPI;
+      var x = MCX - w / 2, y = MCY - h / 2;
+      ['mRectBloom','mRectGlow','mRectHalo','mRectInner','mRectGlass'].forEach(function(id){
+        var el = $(id);
+        el.setAttribute('x', x); el.setAttribute('y', y);
+        el.setAttribute('width', w); el.setAttribute('height', h);
+      });
+      $('mRectFrame').setAttribute('x', x - 2);
+      $('mRectFrame').setAttribute('y', y - 2);
+      $('mRectFrame').setAttribute('width', w + 4);
+      $('mRectFrame').setAttribute('height', h + 4);
+    }
+  }
+
+  function buildMirrorShapes() {
+    var host = $('mirrorShapes'); host.innerHTML = '';
+    var opts = [
+      { id:'circular',    en:'Circular',    es:'Circular' },
+      { id:'rectangular', en:'Rectangular', es:'Rectangular' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === mirrorShape));
+      b.addEventListener('click', function(){
+        mirrorShape = o.id;
+        var validSizes = MIRROR_SIZES[mirrorShape];
+        if (validSizes.indexOf(mirrorSize) === -1) { mirrorSize = validSizes[Math.floor(validSizes.length / 2)]; }
+        buildMirrorShapes(); buildMirrorSizes(); drawMirror();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildMirrorSizes() {
+    var host = $('mirrorSizes'); host.innerHTML = '';
+    MIRROR_SIZES[mirrorShape].forEach(function(s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s + '\u2033';
+      b.setAttribute('aria-pressed', String(s === mirrorSize));
+      b.addEventListener('click', function(){ mirrorSize = s; buildMirrorSizes(); drawMirror(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── FAUCET (style + finish selectable) ── */
+  function drawFaucet() {
+    var isWf = faucetStyle === 'waterfall';
+    var plate = $('sSpoutPlate'), arm = $('sSpoutArm');
+    var finObj = FAUCET_FINISHES[faucetStyle].filter(function(f){ return f.id === faucetFinish; })[0] || FAUCET_FINISHES[faucetStyle][0];
+    var hex = finObj.hex;
+    if (isWf) {
+      plate.setAttribute('x', 470); plate.setAttribute('y', 282); plate.setAttribute('width', 60); plate.setAttribute('height', 10); plate.setAttribute('rx', 3);
+      arm.setAttribute('x', 462); arm.setAttribute('y', 296); arm.setAttribute('width', 76); arm.setAttribute('height', 12); arm.setAttribute('rx', 3);
+    } else {
+      plate.setAttribute('x', 484); plate.setAttribute('y', 282); plate.setAttribute('width', 32); plate.setAttribute('height', 11); plate.setAttribute('rx', 3.5);
+      arm.setAttribute('x', 466); arm.setAttribute('y', 293); arm.setAttribute('width', 52); arm.setAttribute('height', 8); arm.setAttribute('rx', 4);
+    }
+    plate.setAttribute('fill', hex);
+    arm.setAttribute('fill', hex);
+  }
+
+  function buildFaucetStyles() {
+    var host = $('faucetStyles'); host.innerHTML = '';
+    FAUCET_STYLES.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === faucetStyle));
+      b.addEventListener('click', function(){
+        faucetStyle = o.id;
+        var validFinishes = FAUCET_FINISHES[faucetStyle].map(function(f){ return f.id; });
+        if (validFinishes.indexOf(faucetFinish) === -1) { faucetFinish = validFinishes[0]; }
+        buildFaucetStyles(); buildFaucetFinishes(); drawFaucet();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildFaucetFinishes() {
+    var host = $('faucetFinishes'); host.innerHTML = '';
+    FAUCET_FINISHES[faucetStyle].forEach(function(f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = f.hex;
+      var lbl = lang === 'es' ? f.es : f.en;
+      b.setAttribute('aria-label', lbl);
+      b.setAttribute('aria-pressed', String(f.id === faucetFinish));
+      b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
+      b.addEventListener('click', function(){ faucetFinish = f.id; buildFaucetFinishes(); drawFaucet(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── SHOWER DRAIN (finish + length, illustrated in the side panel) ── */
+  function drawDrain() {
+    var body = $('sDrainBody');
+    var w = 60 + (drainSize - 12) * (140 - 60) / (32 - 12);
+    var x = 1150 - w / 2;
+    var finObj = DRAIN_FINISHES.filter(function(f){ return f.id === drainFinish; })[0] || DRAIN_FINISHES[0];
+    body.setAttribute('x', x);
+    body.setAttribute('width', w);
+    body.setAttribute('fill', finObj.hex);
+    var slot = $('sDrainSlot1');
+    slot.setAttribute('x1', x + 12);
+    slot.setAttribute('x2', x + w - 12);
+    var finLabel = lang === 'es' ? finObj.es : finObj.en;
+    $('sDrainLabel').textContent = drainSize + '\u2033 \u00b7 ' + finLabel;
+  }
+
+  function buildDrainFinishes() {
+    var host = $('drainFinishes'); host.innerHTML = '';
+    DRAIN_FINISHES.forEach(function(f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = f.hex;
+      var lbl = lang === 'es' ? f.es : f.en;
+      b.setAttribute('aria-label', lbl);
+      b.setAttribute('aria-pressed', String(f.id === drainFinish));
+      b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
+      b.addEventListener('click', function(){ drainFinish = f.id; buildDrainFinishes(); drawDrain(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildDrainSizes() {
+    var host = $('drainSizes'); host.innerHTML = '';
+    DRAIN_SIZES.forEach(function(s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s + '\u2033';
+      b.setAttribute('aria-pressed', String(s === drainSize));
+      b.addEventListener('click', function(){ drainSize = s; buildDrainSizes(); drawDrain(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── TOILET (model selector, illustrated in the side panel — shape actually changes per model) ── */
+  function drawToilet() {
+    var m = TOILET_MODELS.filter(function(t){ return t.id === toiletModel; })[0] || TOILET_MODELS[0];
+
+    var tank = $('sToiletTank');
+    tank.setAttribute('x', TOILET_CX - m.tankW / 2);
+    tank.setAttribute('y', TOILET_TANK_Y);
+    tank.setAttribute('width', m.tankW);
+    tank.setAttribute('height', m.tankH);
+
+    var bowl = $('sToiletBowl');
+    bowl.setAttribute('cx', TOILET_CX);
+    bowl.setAttribute('cy', TOILET_BOWL_CY);
+    bowl.setAttribute('rx', m.bowlRx);
+    bowl.setAttribute('ry', m.bowlRy);
+
+    var seat = $('sToiletSeat');
+    seat.setAttribute('rx', m.bowlRx + 2);
+    seat.setAttribute('stroke', m.smart ? '#B8963A' : 'rgba(0,0,0,.2)');
+
+    var flush = $('sToiletFlush');
+    if (m.flush === 'top') {
+      flush.style.display = '';
+      flush.setAttribute('x', TOILET_CX - 7);
+      flush.setAttribute('y', TOILET_TANK_Y + 6);
+      flush.setAttribute('width', 14);
+      flush.setAttribute('height', 5);
+    } else if (m.flush === 'side') {
+      flush.style.display = '';
+      flush.setAttribute('x', TOILET_CX + m.tankW / 2 - 6);
+      flush.setAttribute('y', TOILET_TANK_Y + m.tankH / 2 - 8);
+      flush.setAttribute('width', 5);
+      flush.setAttribute('height', 16);
+    } else {
+      flush.style.display = 'none';
+    }
+
+    $('sToiletSmartPanel').style.display = m.smart ? '' : 'none';
+    var label = $('sToiletLabel');
+    label.setAttribute('y', TOILET_BOWL_CY + m.bowlRy + 18);
+    label.textContent = lang === 'es' ? m.labelEs : m.labelEn;
+  }
+
+  function buildToiletModels() {
+    var host = $('toiletModels'); host.innerHTML = '';
+    TOILET_MODELS.forEach(function(m) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? m.es : m.en;
+      b.setAttribute('aria-pressed', String(m.id === toiletModel));
+      b.addEventListener('click', function(){ toiletModel = m.id; buildToiletModels(); drawToilet(); });
       host.appendChild(b);
     });
   }
@@ -1600,7 +2390,6 @@ footer a:hover {
   /* ── INIT ── */
   $('yr') && ($('yr').textContent = String(new Date().getFullYear()));
   applyLang();
-  updateStage();
 
 })();
 
