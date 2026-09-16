@@ -983,6 +983,10 @@ footer a:hover {
   background: linear-gradient(150deg, #EDEDEA 0%, #D8D8D4 100%);
 }
 .product-photo.finish-wood { background: linear-gradient(150deg, #E1C49B 0%, #C9A97A 100%) }
+.product-photo.photo-pending { box-shadow: inset 0 0 0 1px var(--line); }
+.product-photo.photo-pending::after {
+  content: ''; position: absolute; inset: 6px; border: 1px dashed rgba(44,44,42,.28); border-radius: 4px; pointer-events: none;
+}
 .product-photo img { width: 100%; height: 100%; object-fit: cover; display: block }
 .product-photo svg { opacity: .45; width: 46px; height: 46px }
 .product-photo-note {
@@ -1366,10 +1370,13 @@ footer a:hover {
 </section>
 
 <!-- ============================================================
-     PRODUCT GRID — VANITIES (ascending price)
+     PRODUCT GRID — VANITIES (grouped by product line)
      ============================================================ -->
 <section id="catalog" style="padding-top:var(--sp-6)">
   <div class="wrap">
+    <div class="catalog-divider reveal">
+      <span data-en="Floating Vanity — White" data-es="Vanidad Flotante — Blanco">Floating Vanity — White</span>
+    </div>
     <div class="product-grid reveal reveal-stagger">
       <div class="product-card">
         <div class="product-photo">
@@ -1380,17 +1387,6 @@ footer a:hover {
           <span class="product-spec" data-en="24&quot; x 18&quot; · Two drawers" data-es="24&quot; x 18&quot; · Dos gavetas">24&quot; x 18&quot; · Two drawers</span>
           <span class="product-desc" data-en="Elegant floating vanity designed for modern bathrooms. Sleek white PVC construction offers a contemporary aesthetic that maximizes floor space. Two spacious drawers provide ample storage for toiletries and bathroom essentials while maintaining a clean, minimalist appearance. The durable PVC resists moisture and humidity, and the wall-mounted installation makes cleaning underneath effortless. Perfect for small to medium-sized bathrooms." data-es="Elegante vanidad flotante diseñada para baños modernos. La construcción en PVC blanco ofrece una estética contemporánea que maximiza el espacio del piso. Dos gavetas amplias brindan almacenamiento para artículos de baño manteniendo una apariencia limpia y minimalista. El PVC resiste la humedad y el montaje en pared facilita la limpieza debajo. Ideal para baños pequeños o medianos.">Elegant floating vanity designed for modern bathrooms. Sleek white PVC construction offers a contemporary aesthetic that maximizes floor space. Two spacious drawers provide ample storage for toiletries and bathroom essentials while maintaining a clean, minimalist appearance. The durable PVC resists moisture and humidity, and the wall-mounted installation makes cleaning underneath effortless. Perfect for small to medium-sized bathrooms.</span>
           <span class="product-price">$290<sup> USD</sup></span>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-photo finish-wood">
-          <img src="images/vanity-24-wood.jpg" alt="24&quot; Floating Vanity — White Oak" loading="lazy">
-        </div>
-        <div class="product-info">
-          <span class="product-name" data-en="24&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 24&quot; — Roble">24&quot; Floating Vanity — White Oak</span>
-          <span class="product-spec" data-en="24&quot; x 18&quot; · Two drawers" data-es="24&quot; x 18&quot; · Dos gavetas">24&quot; x 18&quot; · Two drawers</span>
-          <span class="product-desc" data-en="Modern bathroom elegance in a compact footprint. Crafted from durable PVC with a warm wood finish, this vanity complements both contemporary and traditional décor. Two spacious drawers keep the countertop organized and clutter-free. The floating design creates an airy, open feel and provides easy access for cleaning underneath — perfect for maximizing space in smaller bathrooms." data-es="Elegancia moderna en un formato compacto. Fabricada en PVC con un cálido acabado en madera, esta vanidad combina con decoración contemporánea y tradicional. Dos gavetas amplias mantienen la superficie organizada y sin desorden. El diseño flotante crea una sensación abierta y facilita la limpieza debajo — ideal para maximizar el espacio en baños pequeños.">Modern bathroom elegance in a compact footprint. Crafted from durable PVC with a warm wood finish, this vanity complements both contemporary and traditional décor. Two spacious drawers keep the countertop organized and clutter-free. The floating design creates an airy, open feel and provides easy access for cleaning underneath — perfect for maximizing space in smaller bathrooms.</span>
-          <span class="product-price">$310<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1405,17 +1401,6 @@ footer a:hover {
         </div>
       </div>
       <div class="product-card">
-        <div class="product-photo finish-wood">
-          <img src="images/vanity-30-wood.jpg" alt="30&quot; Floating Vanity — White Oak" loading="lazy">
-        </div>
-        <div class="product-info">
-          <span class="product-name" data-en="30&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 30&quot; — Roble">30&quot; Floating Vanity — White Oak</span>
-          <span class="product-spec" data-en="30&quot; x 18&quot; · Two drawers" data-es="30&quot; x 18&quot; · Dos gavetas">30&quot; x 18&quot; · Two drawers</span>
-          <span class="product-desc" data-en="The perfect blend of modern style and practical storage. A warm wood-finish PVC construction resists moisture and daily wear. Two spacious drawers provide ample space for bathroom essentials while keeping the countertop clutter-free. The sleek wall-mounted design creates an open, airy feel — easy to install and built with durable, long-lasting materials." data-es="La combinación perfecta de estilo moderno y almacenamiento práctico. El acabado en madera sobre PVC resiste la humedad y el uso diario. Dos gavetas amplias ofrecen espacio para artículos de baño manteniendo la superficie despejada. El diseño flotante de pared crea una sensación abierta — fácil de instalar y de materiales duraderos.">The perfect blend of modern style and practical storage. A warm wood-finish PVC construction resists moisture and daily wear. Two spacious drawers provide ample space for bathroom essentials while keeping the countertop clutter-free. The sleek wall-mounted design creates an open, airy feel — easy to install and built with durable, long-lasting materials.</span>
-          <span class="product-price">$365<sup> USD</sup></span>
-        </div>
-      </div>
-      <div class="product-card">
         <div class="product-photo">
           <img src="images/vanity-36-white.jpg" alt="36&quot; Floating Vanity — White" loading="lazy">
         </div>
@@ -1427,17 +1412,6 @@ footer a:hover {
         </div>
       </div>
       <div class="product-card">
-        <div class="product-photo finish-wood">
-          <img src="images/vanity-36-wood.jpg" alt="36&quot; Floating Vanity — White Oak" loading="lazy">
-        </div>
-        <div class="product-info">
-          <span class="product-name" data-en="36&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 36&quot; — Roble">36&quot; Floating Vanity — White Oak</span>
-          <span class="product-spec" data-en="36&quot; x 18&quot; · Two drawers" data-es="36&quot; x 18&quot; · Dos gavetas">36&quot; x 18&quot; · Two drawers</span>
-          <span class="product-desc" data-en="Sleek and modern floating vanity designed to maximize bathroom space while adding contemporary style. A warm wood-tone PVC finish resists moisture and daily wear. Two spacious drawers provide convenient storage, keeping countertops clutter-free. Perfect for small to medium-sized spaces seeking a sophisticated storage solution with clean lines." data-es="Vanidad flotante moderna que maximiza el espacio del baño añadiendo estilo contemporáneo. El acabado en tono madera sobre PVC resiste la humedad y el uso diario. Dos gavetas amplias ofrecen almacenamiento manteniendo la superficie despejada. Ideal para espacios pequeños o medianos que buscan una solución de almacenamiento sofisticada.">Sleek and modern floating vanity designed to maximize bathroom space while adding contemporary style. A warm wood-tone PVC finish resists moisture and daily wear. Two spacious drawers provide convenient storage, keeping countertops clutter-free. Perfect for small to medium-sized spaces seeking a sophisticated storage solution with clean lines.</span>
-          <span class="product-price">$435<sup> USD</sup></span>
-        </div>
-      </div>
-      <div class="product-card">
         <div class="product-photo">
           <img src="images/vanity-48-white.jpg" alt="48&quot; Floating Vanity — White" loading="lazy">
         </div>
@@ -1446,17 +1420,6 @@ footer a:hover {
           <span class="product-spec" data-en="48&quot; x 18&quot; · Four drawers" data-es="48&quot; x 18&quot; · Cuatro gavetas">48&quot; x 18&quot; · Four drawers</span>
           <span class="product-desc" data-en="Sleek floating vanity built to make a statement in larger bathrooms. Durable white PVC construction resists moisture and daily wear. Four spacious drawers keep towels and toiletries organized while maintaining a clean, clutter-free countertop. The wall-mounted design creates an open, airy feel and makes floor cleaning effortless — perfect for primary baths and busy family bathrooms." data-es="Vanidad flotante que destaca en baños más grandes. La construcción en PVC blanco resiste la humedad y el uso diario. Cuatro gavetas amplias organizan toallas y artículos de baño manteniendo la superficie despejada. El diseño de pared crea una sensación abierta y facilita la limpieza del piso — ideal para baños principales y familiares.">Sleek floating vanity built to make a statement in larger bathrooms. Durable white PVC construction resists moisture and daily wear. Four spacious drawers keep towels and toiletries organized while maintaining a clean, clutter-free countertop. The wall-mounted design creates an open, airy feel and makes floor cleaning effortless — perfect for primary baths and busy family bathrooms.</span>
           <span class="product-price">$550<sup> USD</sup></span>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-photo finish-wood">
-          <img src="images/vanity-48-wood.jpg" alt="48&quot; Floating Vanity — White Oak" loading="lazy">
-        </div>
-        <div class="product-info">
-          <span class="product-name" data-en="48&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 48&quot; — Roble">48&quot; Floating Vanity — White Oak</span>
-          <span class="product-spec" data-en="48&quot; x 18&quot; · Two drawers, two doors" data-es="48&quot; x 18&quot; · Dos gavetas, dos puertas">48&quot; x 18&quot; · Two drawers, two doors</span>
-          <span class="product-desc" data-en="Create a modern bathroom focal point with this floating vanity. Crafted from durable PVC in a warm wood tone, it combines style with practicality. Two spacious drawers keep daily essentials organized and accessible, while two cabinet doors hide away larger items and plumbing. The floating design opens up the floor, making even compact spaces feel larger and easier to clean." data-es="Crea un punto focal moderno en el baño con esta vanidad flotante. Fabricada en PVC con un cálido tono madera, combina estilo y practicidad. Dos gavetas mantienen los artículos diarios organizados, mientras dos puertas de gabinete ocultan objetos más grandes y la plomería. El diseño flotante abre el piso, haciendo que los espacios compactos se sientan más amplios.">Create a modern bathroom focal point with this floating vanity. Crafted from durable PVC in a warm wood tone, it combines style with practicality. Two spacious drawers keep daily essentials organized and accessible, while two cabinet doors hide away larger items and plumbing. The floating design opens up the floor, making even compact spaces feel larger and easier to clean.</span>
-          <span class="product-price">$570<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1483,15 +1446,54 @@ footer a:hover {
           <span class="product-price">$745<sup> USD</sup></span>
         </div>
       </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Floating Vanity — White Oak" data-es="Vanidad Flotante — Roble">Floating Vanity — White Oak</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
       <div class="product-card">
-        <div class="product-photo">
-          <img src="images/vanity-60-double-glossy-white.jpg" alt="60&quot; Floating Vanity — Glossy White, Double Sink" loading="lazy">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-24-wood.jpg" alt="24&quot; Floating Vanity — White Oak" loading="lazy">
         </div>
         <div class="product-info">
-          <span class="product-name" data-en="60&quot; Floating Vanity — Glossy White, Double Sink" data-es="Vanidad flotante 60&quot; — Blanco brillante, lavabo doble">60&quot; Floating Vanity — Glossy White, Double Sink</span>
-          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo doble">60&quot; x 18&quot; · Four drawers, two doors · Double sink</span>
-          <span class="product-desc" data-en="Elevate your bathroom with this sophisticated 60&quot; floating vanity, engineered for modern spaces that demand both style and functionality. The dual-sink configuration accommodates multiple users simultaneously, while the glossy white PVC delivers exceptional water resistance and durability. The floating design creates an open, airy aesthetic that visually expands smaller bathrooms and simplifies cleaning underneath." data-es="Eleva tu baño con esta sofisticada vanidad flotante de 60&quot;, diseñada para espacios modernos que exigen estilo y funcionalidad. La configuración de doble lavabo permite el uso simultáneo de varias personas, mientras el PVC blanco brillante ofrece excelente resistencia al agua y durabilidad. El diseño flotante crea una estética abierta que amplía visualmente baños pequeños.">Elevate your bathroom with this sophisticated 60&quot; floating vanity, engineered for modern spaces that demand both style and functionality. The dual-sink configuration accommodates multiple users simultaneously, while the glossy white PVC delivers exceptional water resistance and durability. The floating design creates an open, airy aesthetic that visually expands smaller bathrooms and simplifies cleaning underneath.</span>
-          <span class="product-price">$750<sup> USD</sup></span>
+          <span class="product-name" data-en="24&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 24&quot; — Roble">24&quot; Floating Vanity — White Oak</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two drawers" data-es="24&quot; x 18&quot; · Dos gavetas">24&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="Modern bathroom elegance in a compact footprint. Crafted from durable PVC with a warm wood finish, this vanity complements both contemporary and traditional décor. Two spacious drawers keep the countertop organized and clutter-free. The floating design creates an airy, open feel and provides easy access for cleaning underneath — perfect for maximizing space in smaller bathrooms." data-es="Elegancia moderna en un formato compacto. Fabricada en PVC con un cálido acabado en madera, esta vanidad combina con decoración contemporánea y tradicional. Dos gavetas amplias mantienen la superficie organizada y sin desorden. El diseño flotante crea una sensación abierta y facilita la limpieza debajo — ideal para maximizar el espacio en baños pequeños.">Modern bathroom elegance in a compact footprint. Crafted from durable PVC with a warm wood finish, this vanity complements both contemporary and traditional décor. Two spacious drawers keep the countertop organized and clutter-free. The floating design creates an airy, open feel and provides easy access for cleaning underneath — perfect for maximizing space in smaller bathrooms.</span>
+          <span class="product-price">$310<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-30-wood.jpg" alt="30&quot; Floating Vanity — White Oak" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 30&quot; — Roble">30&quot; Floating Vanity — White Oak</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two drawers" data-es="30&quot; x 18&quot; · Dos gavetas">30&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="The perfect blend of modern style and practical storage. A warm wood-finish PVC construction resists moisture and daily wear. Two spacious drawers provide ample space for bathroom essentials while keeping the countertop clutter-free. The sleek wall-mounted design creates an open, airy feel — easy to install and built with durable, long-lasting materials." data-es="La combinación perfecta de estilo moderno y almacenamiento práctico. El acabado en madera sobre PVC resiste la humedad y el uso diario. Dos gavetas amplias ofrecen espacio para artículos de baño manteniendo la superficie despejada. El diseño flotante de pared crea una sensación abierta — fácil de instalar y de materiales duraderos.">The perfect blend of modern style and practical storage. A warm wood-finish PVC construction resists moisture and daily wear. Two spacious drawers provide ample space for bathroom essentials while keeping the countertop clutter-free. The sleek wall-mounted design creates an open, airy feel — easy to install and built with durable, long-lasting materials.</span>
+          <span class="product-price">$365<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-36-wood.jpg" alt="36&quot; Floating Vanity — White Oak" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 36&quot; — Roble">36&quot; Floating Vanity — White Oak</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · Two drawers" data-es="36&quot; x 18&quot; · Dos gavetas">36&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="Sleek and modern floating vanity designed to maximize bathroom space while adding contemporary style. A warm wood-tone PVC finish resists moisture and daily wear. Two spacious drawers provide convenient storage, keeping countertops clutter-free. Perfect for small to medium-sized spaces seeking a sophisticated storage solution with clean lines." data-es="Vanidad flotante moderna que maximiza el espacio del baño añadiendo estilo contemporáneo. El acabado en tono madera sobre PVC resiste la humedad y el uso diario. Dos gavetas amplias ofrecen almacenamiento manteniendo la superficie despejada. Ideal para espacios pequeños o medianos que buscan una solución de almacenamiento sofisticada.">Sleek and modern floating vanity designed to maximize bathroom space while adding contemporary style. A warm wood-tone PVC finish resists moisture and daily wear. Two spacious drawers provide convenient storage, keeping countertops clutter-free. Perfect for small to medium-sized spaces seeking a sophisticated storage solution with clean lines.</span>
+          <span class="product-price">$435<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-48-wood.jpg" alt="48&quot; Floating Vanity — White Oak" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Floating Vanity — White Oak" data-es="Vanidad flotante 48&quot; — Roble">48&quot; Floating Vanity — White Oak</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Two drawers, two doors" data-es="48&quot; x 18&quot; · Dos gavetas, dos puertas">48&quot; x 18&quot; · Two drawers, two doors</span>
+          <span class="product-desc" data-en="Create a modern bathroom focal point with this floating vanity. Crafted from durable PVC in a warm wood tone, it combines style with practicality. Two spacious drawers keep daily essentials organized and accessible, while two cabinet doors hide away larger items and plumbing. The floating design opens up the floor, making even compact spaces feel larger and easier to clean." data-es="Crea un punto focal moderno en el baño con esta vanidad flotante. Fabricada en PVC con un cálido tono madera, combina estilo y practicidad. Dos gavetas mantienen los artículos diarios organizados, mientras dos puertas de gabinete ocultan objetos más grandes y la plomería. El diseño flotante abre el piso, haciendo que los espacios compactos se sientan más amplios.">Create a modern bathroom focal point with this floating vanity. Crafted from durable PVC in a warm wood tone, it combines style with practicality. Two spacious drawers keep daily essentials organized and accessible, while two cabinet doors hide away larger items and plumbing. The floating design opens up the floor, making even compact spaces feel larger and easier to clean.</span>
+          <span class="product-price">$570<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1508,6 +1510,373 @@ footer a:hover {
       </div>
     </div>
 
+    <div class="catalog-divider reveal">
+      <span data-en="Floating Vanity — White, Door Front" data-es="Vanidad Flotante — Blanco, Puertas">Floating Vanity — White, Door Front</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv01-24-white.jpg" alt="24&quot; Floating Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="24&quot; Floating Vanity — White, Door Front" data-es="Vanidad flotante 24&quot; — Blanco, puertas">24&quot; Floating Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two doors" data-es="24&quot; x 18&quot; · Dos puertas">24&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="Elegant floating vanity with a clean, door-fronted profile. Sleek white PVC construction resists moisture and humidity, and the two-door cabinet opens to a full, uninterrupted interior — ideal for towels, cleaning supplies, and larger bathroom essentials that don&rsquo;t fit neatly in a drawer. Wall-mounted installation keeps the floor open and makes cleaning underneath effortless. Perfect for a compact bathroom that still wants real storage." data-es="Elegante vanidad flotante con un perfil limpio de puertas. La construcción en PVC blanco resiste la humedad, y el gabinete de dos puertas se abre a un interior completo y sin divisiones — ideal para toallas, artículos de limpieza y objetos de baño más grandes que no caben bien en una gaveta. La instalación en pared deja el piso libre y facilita la limpieza debajo. Perfecta para un baño compacto que aún así quiere almacenamiento real.">Elegant floating vanity with a clean, door-fronted profile. Sleek white PVC construction resists moisture and humidity, and the two-door cabinet opens to a full, uninterrupted interior — ideal for towels, cleaning supplies, and larger bathroom essentials that don&rsquo;t fit neatly in a drawer. Wall-mounted installation keeps the floor open and makes cleaning underneath effortless. Perfect for a compact bathroom that still wants real storage.</span>
+          <span class="product-price">$220<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Floating Vanity — White, Door Front" data-es="Vanidad flotante 30&quot; — Blanco, puertas">30&quot; Floating Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two doors" data-es="30&quot; x 18&quot; · Dos puertas">30&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="Same door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. White PVC construction resists moisture and daily wear, and the two-door cabinet opens to a full interior for towels and bathroom essentials. Wall-mounted for an open, airy feel and easy floor cleaning underneath." data-es="El mismo diseño de puertas que nuestro modelo de 24&quot;, en un tamaño un poco mayor para más superficie y almacenamiento. La construcción en PVC blanco resiste la humedad y el uso diario, y el gabinete de dos puertas se abre a un interior completo para toallas y artículos de baño. Montaje en pared para una sensación abierta y fácil limpieza del piso debajo.">Same door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. White PVC construction resists moisture and daily wear, and the two-door cabinet opens to a full interior for towels and bathroom essentials. Wall-mounted for an open, airy feel and easy floor cleaning underneath.</span>
+          <span class="product-price">$295<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv01-36-white.jpg" alt="36&quot; Floating Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Floating Vanity — White, Door Front" data-es="Vanidad flotante 36&quot; — Blanco, puertas">36&quot; Floating Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · One door, two drawers" data-es="36&quot; x 18&quot; · Una puerta, dos gavetas">36&quot; x 18&quot; · One door, two drawers</span>
+          <span class="product-desc" data-en="A floating vanity that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. White PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open and the bathroom feeling larger." data-es="Una vanidad flotante que combina una puerta de gabinete de altura completa con dos gavetas laterales — espacio para toallas y artículos más grandes detrás de la puerta, y gavetas de acceso rápido para lo cotidiano. La construcción en PVC blanco resiste la humedad. El diseño de pared deja el piso libre y hace que el baño se sienta más amplio.">A floating vanity that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. White PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open and the bathroom feeling larger.</span>
+          <span class="product-price">$350<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv01-48-white.jpg" alt="48&quot; Floating Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Floating Vanity — White, Door Front" data-es="Vanidad flotante 48&quot; — Blanco, puertas">48&quot; Floating Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Four drawers, two doors" data-es="48&quot; x 18&quot; · Cuatro gavetas, dos puertas">48&quot; x 18&quot; · Four drawers, two doors</span>
+          <span class="product-desc" data-en="A wider floating vanity built for a busier bathroom. Two drawers flank a central two-door cabinet, giving quick-access storage on both sides plus a full interior for towels and larger essentials. Durable white PVC resists moisture and daily wear. Wall-mounted for an open, airy feel and effortless cleaning underneath." data-es="Una vanidad flotante más ancha, pensada para un baño con más uso. Dos gavetas flanquean un gabinete central de dos puertas, brindando almacenamiento de acceso rápido a ambos lados además de un interior completo para toallas y artículos más grandes. El PVC blanco resiste la humedad y el uso diario. Montaje en pared para una sensación abierta y limpieza sin esfuerzo debajo.">A wider floating vanity built for a busier bathroom. Two drawers flank a central two-door cabinet, giving quick-access storage on both sides plus a full interior for towels and larger essentials. Durable white PVC resists moisture and daily wear. Wall-mounted for an open, airy feel and effortless cleaning underneath.</span>
+          <span class="product-price">$550<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv01-60s-white.jpg" alt="60&quot; Floating Vanity — White, Door Front, Single Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White, Door Front, Single Sink" data-es="Vanidad flotante 60&quot; — Blanco, puertas, lavabo sencillo">60&quot; Floating Vanity — White, Door Front, Single Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Single sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo sencillo">60&quot; x 18&quot; · Four drawers, two doors · Single sink</span>
+          <span class="product-desc" data-en="Our largest single-sink floating vanity, with two drawers on each side of a central two-door cabinet for serious storage without a double-sink footprint. White PVC construction resists moisture and humidity. Wall-mounted design maximizes floor space — ideal for a primary bath that wants scale without going double-sink." data-es="Nuestra vanidad flotante de lavabo sencillo más grande, con dos gavetas a cada lado de un gabinete central de dos puertas para un almacenamiento serio sin el formato de lavabo doble. La construcción en PVC blanco resiste la humedad. El diseño de pared maximiza el espacio del piso — ideal para un baño principal que busca escala sin llegar al lavabo doble.">Our largest single-sink floating vanity, with two drawers on each side of a central two-door cabinet for serious storage without a double-sink footprint. White PVC construction resists moisture and humidity. Wall-mounted design maximizes floor space — ideal for a primary bath that wants scale without going double-sink.</span>
+          <span class="product-price">$750<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv01-60d-white.jpg" alt="60&quot; Floating Vanity — White, Door Front, Double Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White, Door Front, Double Sink" data-es="Vanidad flotante 60&quot; — Blanco, puertas, lavabo doble">60&quot; Floating Vanity — White, Door Front, Double Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo doble">60&quot; x 18&quot; · Four drawers, two doors · Double sink</span>
+          <span class="product-desc" data-en="Our largest floating vanity, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. White PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath." data-es="Nuestra vanidad flotante más grande, con dos lavabos completos y amplio almacenamiento — dos gavetas a cada lado más un gabinete central de dos puertas con repisas internas para toallas y artículos de baño. La construcción en PVC blanco resiste la humedad. El diseño de pared deja el piso libre — pensada para un baño principal compartido.">Our largest floating vanity, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. White PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath.</span>
+          <span class="product-price">$800<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Freestanding Vanity — White, Door Front" data-es="Vanidad con Patas — Blanco, Puertas">Freestanding Vanity — White, Door Front</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fe01-24-white.jpg" alt="24&quot; Freestanding Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="24&quot; Freestanding Vanity — White, Door Front" data-es="Vanidad con patas 24&quot; — Blanco, puertas">24&quot; Freestanding Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two doors" data-es="24&quot; x 18&quot; · Dos puertas">24&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="A freestanding vanity with a clean, door-fronted profile, standing on its own sturdy legs rather than mounting to the wall. Sleek white PVC construction resists moisture and humidity, and the two-door cabinet opens to a full, uninterrupted interior for towels and larger bathroom essentials. No wall-anchoring required — sets up quickly on any wall type. A great fit for a compact bathroom that still wants real storage." data-es="Una vanidad con patas y un perfil limpio de puertas, apoyada sobre sus propias patas robustas en lugar de montarse en la pared. La construcción en PVC blanco resiste la humedad, y el gabinete de dos puertas se abre a un interior completo para toallas y artículos de baño más grandes. No requiere anclaje a la pared — se instala rápido sobre cualquier tipo de pared. Ideal para un baño compacto que aún así quiere almacenamiento real.">A freestanding vanity with a clean, door-fronted profile, standing on its own sturdy legs rather than mounting to the wall. Sleek white PVC construction resists moisture and humidity, and the two-door cabinet opens to a full, uninterrupted interior for towels and larger bathroom essentials. No wall-anchoring required — sets up quickly on any wall type. A great fit for a compact bathroom that still wants real storage.</span>
+          <span class="product-price">$300<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Freestanding Vanity — White, Door Front" data-es="Vanidad con patas 30&quot; — Blanco, puertas">30&quot; Freestanding Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two doors" data-es="30&quot; x 18&quot; · Dos puertas">30&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="Same door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. White PVC construction resists moisture and daily wear, and the two-door cabinet opens to a full interior for towels and bathroom essentials. Stands on its own legs for a solid, freestanding footprint that works with any wall." data-es="El mismo diseño de puertas que nuestro modelo de 24&quot;, en un tamaño un poco mayor para más superficie y almacenamiento. La construcción en PVC blanco resiste la humedad y el uso diario, y el gabinete de dos puertas se abre a un interior completo para toallas y artículos de baño. Se apoya sobre sus propias patas, con una base sólida e independiente que funciona con cualquier pared.">Same door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. White PVC construction resists moisture and daily wear, and the two-door cabinet opens to a full interior for towels and bathroom essentials. Stands on its own legs for a solid, freestanding footprint that works with any wall.</span>
+          <span class="product-price">$350<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fe01-36-white.jpg" alt="36&quot; Freestanding Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Freestanding Vanity — White, Door Front" data-es="Vanidad con patas 36&quot; — Blanco, puertas">36&quot; Freestanding Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · One door, two drawers" data-es="36&quot; x 18&quot; · Una puerta, dos gavetas">36&quot; x 18&quot; · One door, two drawers</span>
+          <span class="product-desc" data-en="A freestanding vanity that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. White PVC construction resists moisture and humidity. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look." data-es="Una vanidad con patas que combina una puerta de gabinete de altura completa con dos gavetas laterales — espacio para toallas y artículos más grandes detrás de la puerta, y gavetas de acceso rápido para lo cotidiano. La construcción en PVC blanco resiste la humedad. Sus patas robustas eliminan la necesidad de herrajes de pared y le dan un aspecto clásico y asentado.">A freestanding vanity that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. White PVC construction resists moisture and humidity. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look.</span>
+          <span class="product-price">$440<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fe01-48-white.jpg" alt="48&quot; Freestanding Vanity — White, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Freestanding Vanity — White, Door Front" data-es="Vanidad con patas 48&quot; — Blanco, puertas">48&quot; Freestanding Vanity — White, Door Front</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Two drawers, two doors" data-es="48&quot; x 18&quot; · Dos gavetas, dos puertas">48&quot; x 18&quot; · Two drawers, two doors</span>
+          <span class="product-desc" data-en="A wider freestanding vanity built for a busier bathroom. Two side drawers give quick-access storage next to a two-door cabinet with a full interior for towels and larger essentials. Durable white PVC resists moisture and daily wear. Freestanding on its own legs — sets up without anchoring into wall studs." data-es="Una vanidad con patas más ancha, pensada para un baño con más uso. Dos gavetas laterales ofrecen almacenamiento de acceso rápido junto a un gabinete de dos puertas con un interior completo para toallas y artículos más grandes. El PVC blanco resiste la humedad y el uso diario. Se sostiene sobre sus propias patas — se instala sin anclarse a los montantes de la pared.">A wider freestanding vanity built for a busier bathroom. Two side drawers give quick-access storage next to a two-door cabinet with a full interior for towels and larger essentials. Durable white PVC resists moisture and daily wear. Freestanding on its own legs — sets up without anchoring into wall studs.</span>
+          <span class="product-price">$650<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fe01-60s-white.jpg" alt="60&quot; Freestanding Vanity — White, Door Front, Single Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Freestanding Vanity — White, Door Front, Single Sink" data-es="Vanidad con patas 60&quot; — Blanco, puertas, lavabo sencillo">60&quot; Freestanding Vanity — White, Door Front, Single Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Single sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo sencillo">60&quot; x 18&quot; · Four drawers, two doors · Single sink</span>
+          <span class="product-desc" data-en="Our largest single-sink freestanding vanity, with two drawers on each side of a central two-door cabinet for serious storage without a double-sink footprint. White PVC construction resists moisture and humidity. Stands solidly on its own legs — ideal for a primary bath that wants scale without going double-sink." data-es="Nuestra vanidad con patas de lavabo sencillo más grande, con dos gavetas a cada lado de un gabinete central de dos puertas para un almacenamiento serio sin el formato de lavabo doble. La construcción en PVC blanco resiste la humedad. Se apoya firmemente sobre sus propias patas — ideal para un baño principal que busca escala sin llegar al lavabo doble.">Our largest single-sink freestanding vanity, with two drawers on each side of a central two-door cabinet for serious storage without a double-sink footprint. White PVC construction resists moisture and humidity. Stands solidly on its own legs — ideal for a primary bath that wants scale without going double-sink.</span>
+          <span class="product-price">$800<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fe01-60d-white.jpg" alt="60&quot; Freestanding Vanity — White, Door Front, Double Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Freestanding Vanity — White, Door Front, Double Sink" data-es="Vanidad con patas 60&quot; — Blanco, puertas, lavabo doble">60&quot; Freestanding Vanity — White, Door Front, Double Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo doble">60&quot; x 18&quot; · Four drawers, two doors · Double sink</span>
+          <span class="product-desc" data-en="Our largest freestanding vanity, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. White PVC construction resists moisture and humidity. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath." data-es="Nuestra vanidad con patas más grande, con dos lavabos completos y amplio almacenamiento — dos gavetas a cada lado más un gabinete central de dos puertas con repisas internas para toallas y artículos de baño. La construcción en PVC blanco resiste la humedad. Sus patas robustas le dan una postura clásica y asentada — pensada para un baño principal compartido.">Our largest freestanding vanity, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. White PVC construction resists moisture and humidity. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath.</span>
+          <span class="product-price">$850<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Floating Vanity — White Oak, Contour Basin" data-es="Vanidad Flotante — Roble, Lavabo Contorneado">Floating Vanity — White Oak, Contour Basin</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fv02-24-wood.jpg" alt="24&quot; Floating Vanity — White Oak, Contour Basin" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="24&quot; Floating Vanity — White Oak, Contour Basin" data-es="Vanidad flotante 24&quot; — Roble, lavabo contorneado">24&quot; Floating Vanity — White Oak, Contour Basin</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two drawers" data-es="24&quot; x 18&quot; · Dos gavetas">24&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="A floating vanity in a warm White Oak finish, with a contoured integrated basin for a softer, more sculptural look. Two spacious drawers keep bathroom essentials organized and out of sight. Durable PVC construction resists moisture and humidity, and the wall-mounted design keeps the floor open for easy cleaning underneath." data-es="Una vanidad flotante en un cálido acabado Roble, con un lavabo integrado y contorneado que le da un aspecto más suave y escultural. Dos gavetas amplias mantienen los artículos de baño organizados y fuera de vista. La construcción en PVC resiste la humedad, y el diseño de pared deja el piso libre para una limpieza fácil debajo.">A floating vanity in a warm White Oak finish, with a contoured integrated basin for a softer, more sculptural look. Two spacious drawers keep bathroom essentials organized and out of sight. Durable PVC construction resists moisture and humidity, and the wall-mounted design keeps the floor open for easy cleaning underneath.</span>
+          <span class="product-price">$310<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Floating Vanity — White Oak, Contour Basin" data-es="Vanidad flotante 30&quot; — Roble, lavabo contorneado">30&quot; Floating Vanity — White Oak, Contour Basin</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two drawers" data-es="30&quot; x 18&quot; · Dos gavetas">30&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="Same warm White Oak finish and contoured basin as our 24&quot; model, scaled up for a bit more counter and storage room. Two spacious drawers keep the countertop clutter-free. Wall-mounted for an open, airy feel and effortless cleaning underneath." data-es="El mismo cálido acabado Roble y lavabo contorneado que nuestro modelo de 24&quot;, en un tamaño un poco mayor para más superficie y almacenamiento. Dos gavetas amplias mantienen la superficie libre de desorden. Montaje en pared para una sensación abierta y limpieza sin esfuerzo debajo.">Same warm White Oak finish and contoured basin as our 24&quot; model, scaled up for a bit more counter and storage room. Two spacious drawers keep the countertop clutter-free. Wall-mounted for an open, airy feel and effortless cleaning underneath.</span>
+          <span class="product-price">$365<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Floating Vanity — White Oak, Contour Basin" data-es="Vanidad flotante 36&quot; — Roble, lavabo contorneado">36&quot; Floating Vanity — White Oak, Contour Basin</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · Two drawers" data-es="36&quot; x 18&quot; · Dos gavetas">36&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="A floating vanity that pairs a warm White Oak finish with a contoured integrated basin for a softer, more sculptural look. Two generous drawers keep everyday essentials organized. Durable PVC construction resists moisture and daily wear, and the wall-mounted design keeps the floor open and the bathroom feeling larger." data-es="Una vanidad flotante que combina un cálido acabado Roble con un lavabo integrado y contorneado para un aspecto más suave y escultural. Dos gavetas amplias mantienen organizado lo cotidiano. La construcción en PVC resiste la humedad y el uso diario, y el diseño de pared deja el piso libre y hace que el baño se sienta más amplio.">A floating vanity that pairs a warm White Oak finish with a contoured integrated basin for a softer, more sculptural look. Two generous drawers keep everyday essentials organized. Durable PVC construction resists moisture and daily wear, and the wall-mounted design keeps the floor open and the bathroom feeling larger.</span>
+          <span class="product-price">$435<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fv02-48-wood.jpg" alt="48&quot; Floating Vanity — White Oak, Contour Basin" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Floating Vanity — White Oak, Contour Basin" data-es="Vanidad flotante 48&quot; — Roble, lavabo contorneado">48&quot; Floating Vanity — White Oak, Contour Basin</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Two drawers" data-es="48&quot; x 18&quot; · Dos gavetas">48&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="A wider floating vanity in warm White Oak, with the same contoured integrated basin and clean, handleless drawer fronts. Two generous drawers offer plenty of room for towels and toiletries. Wall-mounted design keeps the floor open — built for a bathroom that wants a bit more scale without losing the streamlined look." data-es="Una vanidad flotante más ancha en cálido Roble, con el mismo lavabo integrado y contorneado y gavetas de frente limpio, sin manijas. Dos gavetas amplias ofrecen espacio de sobra para toallas y artículos de baño. El diseño de pared deja el piso libre — pensada para un baño que busca un poco más de escala sin perder la línea depurada.">A wider floating vanity in warm White Oak, with the same contoured integrated basin and clean, handleless drawer fronts. Two generous drawers offer plenty of room for towels and toiletries. Wall-mounted design keeps the floor open — built for a bathroom that wants a bit more scale without losing the streamlined look.</span>
+          <span class="product-price">$570<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fv02-60s-wood.jpg" alt="60&quot; Floating Vanity — White Oak, Contour Basin, Single Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White Oak, Contour Basin, Single Sink" data-es="Vanidad flotante 60&quot; — Roble, lavabo contorneado, lavabo sencillo">60&quot; Floating Vanity — White Oak, Contour Basin, Single Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Two doors, two drawers · Single sink" data-es="60&quot; x 18&quot; · Dos puertas, dos gavetas · Lavabo sencillo">60&quot; x 18&quot; · Two doors, two drawers · Single sink</span>
+          <span class="product-desc" data-en="Our largest single-sink floating vanity in warm White Oak, with a door on each end flanking two central drawers — full-height storage on the sides, quick-access drawers in the middle. Contoured integrated basin and durable PVC construction that resists moisture and humidity. Wall-mounted for an open, airy feel." data-es="Nuestra vanidad flotante de lavabo sencillo más grande en cálido Roble, con una puerta en cada extremo flanqueando dos gavetas centrales — almacenamiento de altura completa a los lados y gavetas de acceso rápido en el medio. Lavabo integrado y contorneado, con una construcción en PVC que resiste la humedad. Montaje en pared para una sensación abierta.">Our largest single-sink floating vanity in warm White Oak, with a door on each end flanking two central drawers — full-height storage on the sides, quick-access drawers in the middle. Contoured integrated basin and durable PVC construction that resists moisture and humidity. Wall-mounted for an open, airy feel.</span>
+          <span class="product-price">$745<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fv02-60d-wood.jpg" alt="60&quot; Floating Vanity — White Oak, Contour Basin, Double Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White Oak, Contour Basin, Double Sink" data-es="Vanidad flotante 60&quot; — Roble, lavabo contorneado, lavabo doble">60&quot; Floating Vanity — White Oak, Contour Basin, Double Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas · Lavabo doble">60&quot; x 18&quot; · Four drawers · Double sink</span>
+          <span class="product-desc" data-en="Our largest floating vanity in warm White Oak, with two full basins and four generous drawers for serious storage. Durable PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath." data-es="Nuestra vanidad flotante más grande en cálido Roble, con dos lavabos completos y cuatro gavetas amplias para un almacenamiento serio. La construcción en PVC resiste la humedad. El diseño de pared deja el piso libre — pensada para un baño principal compartido.">Our largest floating vanity in warm White Oak, with two full basins and four generous drawers for serious storage. Durable PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath.</span>
+          <span class="product-price">$765<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con Patas — Roble, Puertas">Freestanding Vanity — White Oak, Door Front</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fe02-24-wood.jpg" alt="24&quot; Freestanding Vanity — White Oak, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="24&quot; Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con patas 24&quot; — Roble, puertas">24&quot; Freestanding Vanity — White Oak, Door Front</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two doors" data-es="24&quot; x 18&quot; · Dos puertas">24&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="A freestanding vanity in a warm White Oak finish, standing on its own sturdy legs rather than mounting to the wall. The two-door cabinet opens to a full, uninterrupted interior for towels and larger bathroom essentials. Durable PVC construction resists moisture and humidity — no wall-anchoring required, sets up on any wall type." data-es="Una vanidad con patas en un cálido acabado Roble, apoyada sobre sus propias patas robustas en lugar de montarse en la pared. El gabinete de dos puertas se abre a un interior completo para toallas y artículos de baño más grandes. La construcción en PVC resiste la humedad — no requiere anclaje a la pared, se instala sobre cualquier tipo de pared.">A freestanding vanity in a warm White Oak finish, standing on its own sturdy legs rather than mounting to the wall. The two-door cabinet opens to a full, uninterrupted interior for towels and larger bathroom essentials. Durable PVC construction resists moisture and humidity — no wall-anchoring required, sets up on any wall type.</span>
+          <span class="product-price">$315<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con patas 30&quot; — Roble, puertas">30&quot; Freestanding Vanity — White Oak, Door Front</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two doors" data-es="30&quot; x 18&quot; · Dos puertas">30&quot; x 18&quot; · Two doors</span>
+          <span class="product-desc" data-en="Same warm White Oak finish and door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. Two-door cabinet opens to a full interior for towels and bathroom essentials. Stands on its own legs for a solid, freestanding footprint that works with any wall." data-es="El mismo cálido acabado Roble y diseño de puertas que nuestro modelo de 24&quot;, en un tamaño un poco mayor para más superficie y almacenamiento. El gabinete de dos puertas se abre a un interior completo para toallas y artículos de baño. Se apoya sobre sus propias patas, con una base sólida e independiente que funciona con cualquier pared.">Same warm White Oak finish and door-fronted design as our 24&quot; model, scaled up for a bit more counter and storage room. Two-door cabinet opens to a full interior for towels and bathroom essentials. Stands on its own legs for a solid, freestanding footprint that works with any wall.</span>
+          <span class="product-price">$400<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fe02-36-wood.jpg" alt="36&quot; Freestanding Vanity — White Oak, Door Front" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con patas 36&quot; — Roble, puertas">36&quot; Freestanding Vanity — White Oak, Door Front</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · One door, two drawers" data-es="36&quot; x 18&quot; · Una puerta, dos gavetas">36&quot; x 18&quot; · One door, two drawers</span>
+          <span class="product-desc" data-en="A freestanding vanity in warm White Oak that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look." data-es="Una vanidad con patas en cálido Roble que combina una puerta de gabinete de altura completa con dos gavetas laterales — espacio para toallas y artículos más grandes detrás de la puerta, y gavetas de acceso rápido para lo cotidiano. Sus patas robustas eliminan la necesidad de herrajes de pared y le dan un aspecto clásico y asentado.">A freestanding vanity in warm White Oak that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look.</span>
+          <span class="product-price">$460<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con patas 48&quot; — Roble, puertas">48&quot; Freestanding Vanity — White Oak, Door Front</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Two doors, two drawers" data-es="48&quot; x 18&quot; · Dos puertas, dos gavetas">48&quot; x 18&quot; · Two doors, two drawers</span>
+          <span class="product-desc" data-en="A wider freestanding vanity in warm White Oak, built for a busier bathroom. Doors on each end flank two central drawers, giving full-height storage on the sides and quick-access drawers in the middle. Durable PVC construction resists moisture and daily wear. Freestanding on its own legs — sets up without anchoring into wall studs." data-es="Una vanidad con patas más ancha en cálido Roble, pensada para un baño con más uso. Puertas en cada extremo flanquean dos gavetas centrales, dando almacenamiento de altura completa a los lados y gavetas de acceso rápido en el medio. La construcción en PVC resiste la humedad y el uso diario. Se sostiene sobre sus propias patas — se instala sin anclarse a los montantes de la pared.">A wider freestanding vanity in warm White Oak, built for a busier bathroom. Doors on each end flank two central drawers, giving full-height storage on the sides and quick-access drawers in the middle. Durable PVC construction resists moisture and daily wear. Freestanding on its own legs — sets up without anchoring into wall studs.</span>
+          <span class="product-price">$660<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fe02-60s-wood.jpg" alt="60&quot; Freestanding Vanity — White Oak, Door Front, Single Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Freestanding Vanity — White Oak, Door Front, Single Sink" data-es="Vanidad con patas 60&quot; — Roble, puertas, lavabo sencillo">60&quot; Freestanding Vanity — White Oak, Door Front, Single Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Two doors, two drawers · Single sink" data-es="60&quot; x 18&quot; · Dos puertas, dos gavetas · Lavabo sencillo">60&quot; x 18&quot; · Two doors, two drawers · Single sink</span>
+          <span class="product-desc" data-en="Our largest single-sink freestanding vanity in warm White Oak, with a door on each end flanking two central drawers for serious storage without a double-sink footprint. Stands solidly on its own legs — ideal for a primary bath that wants scale without going double-sink." data-es="Nuestra vanidad con patas de lavabo sencillo más grande en cálido Roble, con una puerta en cada extremo flanqueando dos gavetas centrales para un almacenamiento serio sin el formato de lavabo doble. Se apoya firmemente sobre sus propias patas — ideal para un baño principal que busca escala sin llegar al lavabo doble.">Our largest single-sink freestanding vanity in warm White Oak, with a door on each end flanking two central drawers for serious storage without a double-sink footprint. Stands solidly on its own legs — ideal for a primary bath that wants scale without going double-sink.</span>
+          <span class="product-price">$905<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo finish-wood">
+          <img src="images/vanity-fe02-60d-wood.jpg" alt="60&quot; Freestanding Vanity — White Oak, Door Front, Double Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Freestanding Vanity — White Oak, Door Front, Double Sink" data-es="Vanidad con patas 60&quot; — Roble, puertas, lavabo doble">60&quot; Freestanding Vanity — White Oak, Door Front, Double Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo doble">60&quot; x 18&quot; · Four drawers, two doors · Double sink</span>
+          <span class="product-desc" data-en="Our largest freestanding vanity in warm White Oak, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath." data-es="Nuestra vanidad con patas más grande en cálido Roble, con dos lavabos completos y amplio almacenamiento — dos gavetas a cada lado más un gabinete central de dos puertas con repisas internas para toallas y artículos de baño. Sus patas robustas le dan una postura clásica y asentada — pensada para un baño principal compartido.">Our largest freestanding vanity in warm White Oak, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath.</span>
+          <span class="product-price">$960<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal">
+      <span data-en="Floating Vanity — White, Scalloped Drawer" data-es="Vanidad Flotante — Blanco, Gaveta Festoneada">Floating Vanity — White, Scalloped Drawer</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv03-24-white.jpg" alt="24&quot; Floating Vanity — White, Scalloped Drawer" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="24&quot; Floating Vanity — White, Scalloped Drawer" data-es="Vanidad flotante 24&quot; — Blanco, gaveta festoneada">24&quot; Floating Vanity — White, Scalloped Drawer</span>
+          <span class="product-spec" data-en="24&quot; x 18&quot; · Two drawers" data-es="24&quot; x 18&quot; · Dos gavetas">24&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="A floating vanity in glossy white, with a distinctive scalloped cutout on each drawer front in place of a handle for a clean, hardware-free look. Two spacious drawers keep bathroom essentials organized and out of sight. Durable PVC construction resists moisture and humidity, and the wall-mounted design keeps the floor open for easy cleaning underneath." data-es="Una vanidad flotante en blanco brillante, con un distintivo corte festoneado en cada frente de gaveta en lugar de una manija, para un look limpio y sin herrajes. Dos gavetas amplias mantienen los artículos de baño organizados y fuera de vista. La construcción en PVC resiste la humedad, y el diseño de pared deja el piso libre para una limpieza fácil debajo.">A floating vanity in glossy white, with a distinctive scalloped cutout on each drawer front in place of a handle for a clean, hardware-free look. Two spacious drawers keep bathroom essentials organized and out of sight. Durable PVC construction resists moisture and humidity, and the wall-mounted design keeps the floor open for easy cleaning underneath.</span>
+          <span class="product-price">$290<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="30&quot; Floating Vanity — White, Scalloped Drawer" data-es="Vanidad flotante 30&quot; — Blanco, gaveta festoneada">30&quot; Floating Vanity — White, Scalloped Drawer</span>
+          <span class="product-spec" data-en="30&quot; x 18&quot; · Two drawers" data-es="30&quot; x 18&quot; · Dos gavetas">30&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="Same glossy white finish and scalloped drawer fronts as our 24&quot; model, scaled up for a bit more counter and storage room. Two spacious drawers keep the countertop clutter-free. Wall-mounted for an open, airy feel and effortless cleaning underneath." data-es="El mismo acabado blanco brillante y frentes de gaveta festoneados que nuestro modelo de 24&quot;, en un tamaño un poco mayor para más superficie y almacenamiento. Dos gavetas amplias mantienen la superficie libre de desorden. Montaje en pared para una sensación abierta y limpieza sin esfuerzo debajo.">Same glossy white finish and scalloped drawer fronts as our 24&quot; model, scaled up for a bit more counter and storage room. Two spacious drawers keep the countertop clutter-free. Wall-mounted for an open, airy feel and effortless cleaning underneath.</span>
+          <span class="product-price">$345<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo photo-pending">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+          <span class="product-photo-note" data-en="Photo coming soon" data-es="Foto pr&oacute;ximamente">Photo coming soon</span>
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="36&quot; Floating Vanity — White, Scalloped Drawer" data-es="Vanidad flotante 36&quot; — Blanco, gaveta festoneada">36&quot; Floating Vanity — White, Scalloped Drawer</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · Two drawers" data-es="36&quot; x 18&quot; · Dos gavetas">36&quot; x 18&quot; · Two drawers</span>
+          <span class="product-desc" data-en="A floating vanity in glossy white with the same scalloped, hardware-free drawer fronts. Two generous drawers keep everyday essentials organized and easy to reach. Durable PVC construction resists moisture and daily wear, and the wall-mounted design keeps the floor open and the bathroom feeling larger." data-es="Una vanidad flotante en blanco brillante con los mismos frentes de gaveta festoneados y sin herrajes. Dos gavetas amplias mantienen organizado y a la mano lo cotidiano. La construcción en PVC resiste la humedad y el uso diario, y el diseño de pared deja el piso libre y hace que el baño se sienta más amplio.">A floating vanity in glossy white with the same scalloped, hardware-free drawer fronts. Two generous drawers keep everyday essentials organized and easy to reach. Durable PVC construction resists moisture and daily wear, and the wall-mounted design keeps the floor open and the bathroom feeling larger.</span>
+          <span class="product-price">$415<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv03-48-white.jpg" alt="48&quot; Floating Vanity — White, Scalloped Drawer" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="48&quot; Floating Vanity — White, Scalloped Drawer" data-es="Vanidad flotante 48&quot; — Blanco, gaveta festoneada">48&quot; Floating Vanity — White, Scalloped Drawer</span>
+          <span class="product-spec" data-en="48&quot; x 18&quot; · Four drawers" data-es="48&quot; x 18&quot; · Cuatro gavetas">48&quot; x 18&quot; · Four drawers</span>
+          <span class="product-desc" data-en="A wider floating vanity in glossy white, with four scalloped, hardware-free drawers for serious everyday storage. Durable PVC construction resists moisture and daily wear. Wall-mounted design keeps the floor open — built for a bathroom that wants a bit more scale without losing the clean, streamlined look." data-es="Una vanidad flotante más ancha en blanco brillante, con cuatro gavetas festoneadas y sin herrajes para un almacenamiento serio del día a día. La construcción en PVC resiste la humedad y el uso diario. El diseño de pared deja el piso libre — pensada para un baño que busca un poco más de escala sin perder la línea limpia y depurada.">A wider floating vanity in glossy white, with four scalloped, hardware-free drawers for serious everyday storage. Durable PVC construction resists moisture and daily wear. Wall-mounted design keeps the floor open — built for a bathroom that wants a bit more scale without losing the clean, streamlined look.</span>
+          <span class="product-price">$550<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv03-60s-white.jpg" alt="60&quot; Floating Vanity — White, Scalloped Drawer, Single Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White, Scalloped Drawer, Single Sink" data-es="Vanidad flotante 60&quot; — Blanco, gaveta festoneada, lavabo sencillo">60&quot; Floating Vanity — White, Scalloped Drawer, Single Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers · Single sink" data-es="60&quot; x 18&quot; · Cuatro gavetas · Lavabo sencillo">60&quot; x 18&quot; · Four drawers · Single sink</span>
+          <span class="product-desc" data-en="Our largest single-sink floating vanity in glossy white, with four spacious, scalloped drawers for generous storage without a double-sink footprint. Durable PVC construction resists moisture and humidity. Wall-mounted design maximizes floor space — ideal for a primary bath that wants scale without going double-sink." data-es="Nuestra vanidad flotante de lavabo sencillo más grande en blanco brillante, con cuatro gavetas amplias y festoneadas para un almacenamiento generoso sin el formato de lavabo doble. La construcción en PVC resiste la humedad. El diseño de pared maximiza el espacio del piso — ideal para un baño principal que busca escala sin llegar al lavabo doble.">Our largest single-sink floating vanity in glossy white, with four spacious, scalloped drawers for generous storage without a double-sink footprint. Durable PVC construction resists moisture and humidity. Wall-mounted design maximizes floor space — ideal for a primary bath that wants scale without going double-sink.</span>
+          <span class="product-price">$725<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-fv03-60d-white.jpg" alt="60&quot; Floating Vanity — White, Scalloped Drawer, Double Sink" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="60&quot; Floating Vanity — White, Scalloped Drawer, Double Sink" data-es="Vanidad flotante 60&quot; — Blanco, gaveta festoneada, lavabo doble">60&quot; Floating Vanity — White, Scalloped Drawer, Double Sink</span>
+          <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas · Lavabo doble">60&quot; x 18&quot; · Four drawers · Double sink</span>
+          <span class="product-desc" data-en="Our largest floating vanity in glossy white, with two full basins and four generous, scalloped drawers for serious storage. Durable PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath." data-es="Nuestra vanidad flotante más grande en blanco brillante, con dos lavabos completos y cuatro gavetas amplias y festoneadas para un almacenamiento serio. La construcción en PVC resiste la humedad. El diseño de pared deja el piso libre — pensada para un baño principal compartido.">Our largest floating vanity in glossy white, with two full basins and four generous, scalloped drawers for serious storage. Durable PVC construction resists moisture and humidity. Wall-mounted design keeps the floor open — built for a shared primary bath.</span>
+          <span class="product-price">$745<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
     <div class="catalog-divider reveal">
       <span data-en="Toilets &amp; Bathtubs" data-es="Inodoros y Bañeras">Toilets &amp; Bathtubs</span>
     </div>
