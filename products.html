@@ -331,9 +331,11 @@ section { padding: var(--sp-7) 0 }
   border: 1px solid var(--line-f); padding: var(--sp-4) var(--sp-4) var(--sp-3);
 }
 .stage-svg-el { width: 100%; height: auto; display: block }
-.cab, .top-slab, .basin, .pull, .mirror-glass, .spout-arm, .spout-plate, .leg {
+.mirror-glass, .spout-arm, .spout-plate {
   transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), fill .3s var(--ease);
 }
+#sSpoutTip { transition: fill .3s var(--ease) }
+.vanity-photo-bg, .vanity-photo { transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease) }
 .mirror-off .mirror-glass { fill: #1A140D; stroke: rgba(199,195,190,.3) }
 .led-halo { transition: opacity .5s var(--ease), x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), r .5s var(--ease), cx .5s var(--ease), cy .5s var(--ease) }
 .mirror-off .led-halo { opacity: 0 }
@@ -351,8 +353,6 @@ section { padding: var(--sp-7) 0 }
 .dim-tick { stroke: var(--brass-lt); stroke-width: 1.5; transition: transform .5s var(--ease) }
 .dim-label text { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--forest-dk) }
 .dim-label rect { fill: var(--brass-lt) }
-.flute { transition: x .5s var(--ease), opacity .3s }
-.legs-group { opacity: 0; transition: opacity .35s var(--ease) }
 
 /* LED toggle */
 .led-toggle {
@@ -1124,7 +1124,7 @@ footer a:hover {
     <div class="sec-head reveal">
       <p class="eyebrow" data-en="Try it yourself" data-es="Pruébalo tú mismo">Try it yourself</p>
       <h2><span data-en="See it before" data-es="Míralo antes">See it before</span> <em data-en="you order." data-es="de pedirlo.">you order.</em></h2>
-      <p data-en="One diagram, every piece — vanity, mirror, faucet, drain, and toilet — so you can compare combinations together. This is a general diagram for comparison only, not a photo of a specific product, and it does not show real prices." data-es="Un solo diagrama con todo — vanidad, espejo, grifo, desagüe e inodoro — para comparar combinaciones juntas. Este es un diagrama general solo para comparar, no es la foto de un producto específico ni muestra precios reales.">One diagram, every piece — vanity, mirror, faucet, drain, and toilet — so you can compare combinations together. This is a general diagram for comparison only, not a photo of a specific product, and it does not show real prices.</p>
+      <p data-en="Pick a width, finish, and sink layout and see the real vanity photo update. Mirror, faucet, drain, and toilet are shown alongside as a general diagram for comparison — not tied to real prices." data-es="Elige un ancho, acabado y configuración de lavabo, y mira cómo se actualiza la foto real de la vanidad. El espejo, grifo, desagüe e inodoro se muestran al lado como un diagrama general para comparar — no reflejan precios reales.">Pick a width, finish, and sink layout and see the real vanity photo update. Mirror, faucet, drain, and toilet are shown alongside as a general diagram for comparison — not tied to real prices.</p>
     </div>
 
     <div class="reveal">
@@ -1148,10 +1148,6 @@ footer a:hover {
               <stop offset="40%" stop-color="#E8C55A" stop-opacity=".12"/>
               <stop offset="100%" stop-color="#E8C55A" stop-opacity="0"/>
             </radialGradient>
-            <linearGradient id="sCabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#8E877D" id="cabGradTop"/>
-              <stop offset="100%" stop-color="#68645A" id="cabGradBot"/>
-            </linearGradient>
           </defs>
 
           <!-- back wall (main vanity area) -->
@@ -1200,36 +1196,16 @@ footer a:hover {
             <rect id="mRectFrame" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#7A6B4D" stroke-width="2.5"/>
           </g>
 
-          <!-- faucet (style + finish selectable) -->
-          <rect class="spout-plate" id="sSpoutPlate" x="484" y="282" width="32" height="11" rx="3.5" fill="#C0BDB4"/>
-          <rect class="spout-arm"   id="sSpoutArm"   x="466" y="293" width="52" height="8"  rx="4"   fill="#C0BDB4"/>
-
           <!-- float / floor-contact shadow -->
           <ellipse class="float-shadow" id="sShadow" cx="500" cy="455" rx="240" ry="14"
                    fill="#050D08" opacity=".6" filter="url(#ssoft)"/>
 
-          <!-- countertop -->
-          <rect class="top-slab" id="sTop" x="274" y="306" width="452" height="17" rx="4" fill="#F2EFE8"/>
-
-          <!-- basin(s): single basin, or two for double-sink 60in -->
-          <rect class="basin" id="sBasin" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8"/>
-          <rect class="basin" id="sBasin2" x="424" y="311" width="152" height="8" rx="4" fill="#D4D0C8" style="display:none"/>
-
-          <!-- cabinet body -->
-          <rect class="cab" id="sCab" x="282" y="323" width="436" height="120" rx="5" fill="url(#sCabGrad)"/>
-
-          <!-- cabinet fluted ribs — controlled by JS -->
-          <g id="sFlutes"></g>
-
-          <!-- legs (shown only when "Legs" mount style is selected) -->
-          <g class="legs-group" id="sLegs">
-            <rect class="leg" id="sLegL" x="300" y="443" width="10" height="47" rx="2" fill="#3A2E20"/>
-            <rect class="leg" id="sLegR" x="690" y="443" width="10" height="47" rx="2" fill="#3A2E20"/>
-          </g>
-
-          <!-- drawer pulls (two, symmetrical) -->
-          <rect class="pull" id="sPullA" x="310" y="375" width="172" height="5" rx="2.5" fill="#7A6B4D" opacity=".9"/>
-          <rect class="pull" id="sPullB" x="518" y="375" width="172" height="5" rx="2.5" fill="#7A6B4D" opacity=".9"/>
+          <!-- real vanity photo — swaps with width / finish / sink selection -->
+          <rect class="vanity-photo-bg" id="sPhotoBg" x="274" y="275" width="452" height="200" rx="8" fill="#EFE7DA"/>
+          <image class="vanity-photo" id="sVanityPhoto" x="274" y="275" width="452" height="200"
+                 preserveAspectRatio="xMidYMid meet"
+                 href="images/vanity-60-double-white-oos.jpg"
+                 aria-label="Photo of the selected vanity"/>
 
           <!-- dim -->
           <g id="sDim">
@@ -1242,32 +1218,41 @@ footer a:hover {
             </g>
           </g>
 
+          <!-- faucet (side panel, illustrative — style + finish selectable) -->
+          <text x="1150" y="32" text-anchor="middle" class="stage-fixture-title" data-en="Faucet" data-es="Grifo">Faucet</text>
+          <g id="sFaucetIcon">
+            <rect class="spout-plate" id="sSpoutPlate" x="1134" y="52" width="32" height="11" rx="3.5" fill="#C0BDB4"/>
+            <rect class="spout-arm"   id="sSpoutArm"   x="1140" y="63" width="10" height="46" rx="5"  fill="#C0BDB4"/>
+            <circle id="sSpoutTip" cx="1145" cy="112" r="5" fill="#C0BDB4"/>
+          </g>
+          <text id="sFaucetLabel" x="1150" y="140" text-anchor="middle" class="stage-fixture-label">Single-Handle · Gold</text>
+
           <!-- toilet (side panel, illustrative) -->
-          <text x="1150" y="42" text-anchor="middle" class="stage-fixture-title" data-en="Toilet" data-es="Inodoro">Toilet</text>
+          <text x="1150" y="170" text-anchor="middle" class="stage-fixture-title" data-en="Toilet" data-es="Inodoro">Toilet</text>
           <g id="sToilet">
-            <rect id="sToiletTank" x="1110" y="60" width="80" height="46" rx="8" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
-            <rect id="sToiletFlush" x="1143" y="66" width="14" height="5" rx="2.5" fill="rgba(0,0,0,.2)"/>
-            <ellipse id="sToiletBowl" cx="1150" cy="150" rx="50" ry="42" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
-            <ellipse id="sToiletSeat" cx="1150" cy="108" rx="52" ry="9" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+            <rect id="sToiletTank" x="1110" y="188" width="80" height="46" rx="8" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <rect id="sToiletFlush" x="1143" y="194" width="14" height="5" rx="2.5" fill="rgba(0,0,0,.2)"/>
+            <ellipse id="sToiletBowl" cx="1150" cy="278" rx="50" ry="42" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <ellipse id="sToiletSeat" cx="1150" cy="236" rx="52" ry="9" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
             <g id="sToiletSmartPanel" style="display:none">
-              <rect x="1195" y="70" width="15" height="40" rx="4" fill="#7A6B4D"/>
-              <circle cx="1202.5" cy="81" r="2" fill="#241C12"/>
-              <circle cx="1202.5" cy="90" r="2" fill="#241C12"/>
-              <circle cx="1202.5" cy="99" r="2" fill="#241C12"/>
+              <rect x="1195" y="198" width="15" height="40" rx="4" fill="#7A6B4D"/>
+              <circle cx="1202.5" cy="209" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="218" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="227" r="2" fill="#241C12"/>
             </g>
           </g>
-          <text id="sToiletLabel" x="1150" y="215" text-anchor="middle" class="stage-fixture-label">Elongated, Seamless</text>
+          <text id="sToiletLabel" x="1150" y="343" text-anchor="middle" class="stage-fixture-label">Elongated, Seamless</text>
 
           <!-- shower drain (side panel, illustrative) -->
-          <text x="1150" y="330" text-anchor="middle" class="stage-fixture-title" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</text>
+          <text x="1150" y="372" text-anchor="middle" class="stage-fixture-title" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</text>
           <g id="sDrainIcon">
-            <rect id="sDrainBody" x="1100" y="368" width="100" height="16" rx="4" fill="#C0C0C8"/>
-            <line id="sDrainSlot1" x1="1112" y1="376" x2="1188" y2="376" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-dasharray="3 5"/>
+            <rect id="sDrainBody" x="1100" y="410" width="100" height="16" rx="4" fill="#C0C0C8"/>
+            <line id="sDrainSlot1" x1="1112" y1="418" x2="1188" y2="418" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-dasharray="3 5"/>
           </g>
-          <text id="sDrainLabel" x="1150" y="418" text-anchor="middle" class="stage-fixture-label">24″ · Nickel</text>
+          <text id="sDrainLabel" x="1150" y="460" text-anchor="middle" class="stage-fixture-label">24″ · Nickel</text>
         </svg>
 
-        <p class="stage-caption" data-en="Diagram updates as you select. For comparison only — not a specific product photo or price." data-es="El diagrama se actualiza al seleccionar. Solo para comparar — no es la foto ni el precio de un producto específico.">Diagram updates as you select. For comparison only — not a specific product photo or price.</p>
+        <p class="stage-caption" data-en="The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price." data-es="La foto de la vanidad es real. El espejo, grifo, desagüe e inodoro son un diagrama general para comparar — no son la foto ni el precio de un producto específico.">The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price.</p>
       </div>
 
       <!-- Controls -->
@@ -2050,6 +2035,29 @@ footer a:hover {
     { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
     { id:'wood',  en:'White Oak', es:'Roble',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
   ];
+
+  /* real product photos — keyed by finish + width (and single/double at 60in) */
+  var VANITY_PHOTOS = {
+    white: {
+      24: 'images/vanity-24-white.jpg',
+      30: 'images/vanity-30-white.jpg',
+      36: 'images/vanity-36-white.jpg',
+      48: 'images/vanity-48-white.jpg',
+      60: { single: 'images/vanity-60-single-white.jpg', double: 'images/vanity-60-double-white-oos.jpg' }
+    },
+    wood: {
+      24: 'images/vanity-24-wood.jpg',
+      30: 'images/vanity-30-wood.jpg',
+      36: 'images/vanity-36-wood.jpg',
+      48: 'images/vanity-48-wood.jpg',
+      // no real photo for a single-sink 60in in White Oak yet — double is forced when wood + 60 is selected
+      60: { single: 'images/vanity-60-wood-oos.jpg', double: 'images/vanity-60-wood-oos.jpg' }
+    }
+  };
+  function vanityPhotoSrc() {
+    var byFinish = VANITY_PHOTOS[finish.id];
+    return size === 60 ? byFinish[60][mount] : byFinish[size];
+  }
   var lang      = 'en';
   var size      = 60;
   var mount     = 'double';    // 'single' | 'double' — only relevant when size === 60
@@ -2105,7 +2113,7 @@ footer a:hover {
       tankW:82, tankH:46, bowlRx:54, bowlRy:44, flush:'none', smart:true  }
   ];
   var toiletModel = 'a010';
-  var TOILET_TANK_Y = 60, TOILET_CX = 1150, TOILET_SEAT_CY = 108, TOILET_BOWL_CY = 150;
+  var TOILET_TANK_Y = 188, TOILET_CX = 1150, TOILET_SEAT_CY = 236, TOILET_BOWL_CY = 278;
 
   var $ = function(id){ return document.getElementById(id); };
   var qs = function(sel){ return document.querySelector(sel); };
@@ -2136,60 +2144,29 @@ footer a:hover {
 
   /* ── SVG CONSTANTS (vanity) ── */
   var CENTER = 500, PPI = 7.25;   // svg units per inch  (1000px wide, 60in → 435px)
-  var CAB_Y  = 323, CAB_H = 120;
   var FLOOR_Y = 490;
-  var LEG_W = 10, LEG_INSET = 20;
+  var PHOTO_Y = 275, PHOTO_H = 200;
 
-  /* ── DRAW VANITY (cabinet / countertop / basin / legs / dim) ── */
+  /* ── DRAW VANITY (real photo, sized to width / finish / sink — legs are illustrative only) ── */
   function draw() {
     var w = size * PPI;
     var x = CENTER - w / 2;
-
-    var cab = $('sCab');
-    cab.setAttribute('x', x);
-    cab.setAttribute('width', w);
-
-    var gt = $('cabGradTop'), gb = $('cabGradBot');
-    if (gt && gb) { gt.setAttribute('stop-color', finish.grad[0]); gb.setAttribute('stop-color', finish.grad[1]); }
-
-    var top = $('sTop');
-    top.setAttribute('x', x - 8);
-    top.setAttribute('width', w + 16);
-
     var isDouble = (size === 60 && mount === 'double');
-    var basin  = $('sBasin');
-    var basin2 = $('sBasin2');
-    if (isDouble) {
-      var bw2 = Math.min(w * 0.22, 130);
-      var offset = w * 0.24;
-      basin.setAttribute('x', CENTER - offset - bw2 / 2);
-      basin.setAttribute('width', bw2);
-      basin2.style.display = '';
-      basin2.setAttribute('x', CENTER + offset - bw2 / 2);
-      basin2.setAttribute('width', bw2);
-    } else {
-      var bw = Math.min(w * 0.34, 190);
-      basin.setAttribute('x', CENTER - bw / 2);
-      basin.setAttribute('width', bw);
-      basin2.style.display = 'none';
-    }
 
-    var gap = 28, mid = 38;
-    var pw = Math.max((w - gap * 2 - mid) / 2, 28);
-    $('sPullA').setAttribute('x', x + gap);
-    $('sPullA').setAttribute('width', pw);
-    $('sPullB').setAttribute('x', x + w - gap - pw);
-    $('sPullB').setAttribute('width', pw);
-
-    var legH = FLOOR_Y - (CAB_Y + CAB_H);
-    var legL = $('sLegL'), legR = $('sLegR');
-    legL.setAttribute('x', x + LEG_INSET);
-    legL.setAttribute('y', CAB_Y + CAB_H);
-    legL.setAttribute('height', legH);
-    legR.setAttribute('x', x + w - LEG_INSET - LEG_W);
-    legR.setAttribute('y', CAB_Y + CAB_H);
-    legR.setAttribute('height', legH);
-    $('sLegs').style.opacity = (footStyle === 'legs') ? '1' : '0';
+    var boxX = x - 8, boxW = w + 16;
+    var bg  = $('sPhotoBg');
+    var img = $('sVanityPhoto');
+    bg.setAttribute('x', boxX);   bg.setAttribute('width', boxW);
+    bg.setAttribute('y', PHOTO_Y); bg.setAttribute('height', PHOTO_H);
+    img.setAttribute('x', boxX);  img.setAttribute('width', boxW);
+    img.setAttribute('y', PHOTO_Y); img.setAttribute('height', PHOTO_H);
+    var src = vanityPhotoSrc();
+    img.setAttribute('href', src);
+    img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', src);
+    img.setAttribute('aria-label',
+      (lang === 'es' ? 'Foto de la vanidad flotante de ' : 'Photo of the floating vanity, ') + size +
+      (lang === 'es' ? ' pulgadas, acabado ' : ' in, ') +
+      (lang === 'es' ? finish.es : finish.en));
 
     var shadow = $('sShadow');
     if (footStyle === 'legs') {
@@ -2214,8 +2191,6 @@ footer a:hover {
     if (lbRect) lbRect.setAttribute('x', lbx);
     if (lbText) lbText.setAttribute('x', CENTER);
 
-    drawFlutes(x, w);
-
     $('stage').setAttribute('aria-label',
       (lang === 'es' ? 'Vanidad flotante de ' : 'Floating vanity, ') + size +
       (lang === 'es' ? ' pulgadas' : ' in') +
@@ -2225,28 +2200,6 @@ footer a:hover {
       (footStyle === 'legs' ? (lang === 'es' ? ', con patas' : ', on legs') : ''));
   }
 
-  function drawFlutes(cabX, cabW) {
-    var g = $('sFlutes');
-    g.innerHTML = '';
-    var pitch = 9.5;
-    var numRibs = Math.floor(cabW / pitch);
-    var startX = cabX + (cabW - numRibs * pitch) / 2 + pitch / 2;
-    for (var i = 0; i < numRibs; i++) {
-      var rx = startX + i * pitch;
-      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', rx); line.setAttribute('x2', rx);
-      line.setAttribute('y1', CAB_Y); line.setAttribute('y2', CAB_Y + CAB_H);
-      line.setAttribute('stroke', 'rgba(0,0,0,.22)'); line.setAttribute('stroke-width', '2.5');
-      g.appendChild(line);
-      var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line2.setAttribute('x1', rx + 1.5); line2.setAttribute('x2', rx + 1.5);
-      line2.setAttribute('y1', CAB_Y); line2.setAttribute('y2', CAB_Y + CAB_H);
-      line2.setAttribute('stroke', 'rgba(255,255,255,.09)'); line2.setAttribute('stroke-width', '1');
-      g.appendChild(line2);
-    }
-  }
-
-  /* ── BUILD VANITY CONTROLS ── */
   function buildSizes() {
     var host = $('sizes'); host.innerHTML = '';
     SIZES.forEach(function(s) {
@@ -2264,6 +2217,9 @@ footer a:hover {
     if (size !== 60) { ctl.style.display = 'none'; return; }
     ctl.style.display = 'grid';
     host.innerHTML = '';
+    // no real photo yet for a single-sink 60in in White Oak — disable Single and lock to Double
+    var singleDisabled = (finish.id === 'wood');
+    if (singleDisabled && mount === 'single') { mount = 'double'; }
     var opts = [
       { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
       { id:'double',  en:'Double (60D)', es:'Doble (60D)' }
@@ -2273,6 +2229,7 @@ footer a:hover {
       b.type = 'button';
       b.textContent = lang === 'es' ? o.es : o.en;
       b.setAttribute('aria-pressed', String(o.id === mount));
+      if (o.id === 'single' && singleDisabled) { b.disabled = true; }
       b.addEventListener('click', function(){ mount = o.id; buildMounts(); draw(); });
       host.appendChild(b);
     });
@@ -2288,7 +2245,7 @@ footer a:hover {
       b.setAttribute('aria-label', lbl);
       b.setAttribute('aria-pressed', String(f.id === finish.id));
       b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
-      b.addEventListener('click', function(){ finish = f; buildFinishes(); draw(); });
+      b.addEventListener('click', function(){ finish = f; buildFinishes(); buildMounts(); draw(); });
       host.appendChild(b);
     });
   }
@@ -2389,18 +2346,26 @@ footer a:hover {
   /* ── FAUCET (style + finish selectable) ── */
   function drawFaucet() {
     var isWf = faucetStyle === 'waterfall';
-    var plate = $('sSpoutPlate'), arm = $('sSpoutArm');
+    var plate = $('sSpoutPlate'), arm = $('sSpoutArm'), tip = $('sSpoutTip');
     var finObj = FAUCET_FINISHES[faucetStyle].filter(function(f){ return f.id === faucetFinish; })[0] || FAUCET_FINISHES[faucetStyle][0];
     var hex = finObj.hex;
     if (isWf) {
-      plate.setAttribute('x', 470); plate.setAttribute('y', 282); plate.setAttribute('width', 60); plate.setAttribute('height', 10); plate.setAttribute('rx', 3);
-      arm.setAttribute('x', 462); arm.setAttribute('y', 296); arm.setAttribute('width', 76); arm.setAttribute('height', 12); arm.setAttribute('rx', 3);
+      plate.setAttribute('x', 1120); plate.setAttribute('y', 52); plate.setAttribute('width', 60); plate.setAttribute('height', 10); plate.setAttribute('rx', 3);
+      arm.setAttribute('x', 1112); arm.setAttribute('y', 62); arm.setAttribute('width', 76); arm.setAttribute('height', 14); arm.setAttribute('rx', 3);
+      tip.style.display = 'none';
     } else {
-      plate.setAttribute('x', 484); plate.setAttribute('y', 282); plate.setAttribute('width', 32); plate.setAttribute('height', 11); plate.setAttribute('rx', 3.5);
-      arm.setAttribute('x', 466); arm.setAttribute('y', 293); arm.setAttribute('width', 52); arm.setAttribute('height', 8); arm.setAttribute('rx', 4);
+      plate.setAttribute('x', 1134); plate.setAttribute('y', 52); plate.setAttribute('width', 32); plate.setAttribute('height', 11); plate.setAttribute('rx', 3.5);
+      arm.setAttribute('x', 1145); arm.setAttribute('y', 63); arm.setAttribute('width', 10); arm.setAttribute('height', 46); arm.setAttribute('rx', 5);
+      tip.style.display = '';
+      tip.setAttribute('fill', hex);
     }
     plate.setAttribute('fill', hex);
     arm.setAttribute('fill', hex);
+
+    var styleObj = FAUCET_STYLES.filter(function(s){ return s.id === faucetStyle; })[0];
+    var styleLabel = lang === 'es' ? styleObj.es : styleObj.en;
+    var finLabel = lang === 'es' ? finObj.es : finObj.en;
+    $('sFaucetLabel').textContent = styleLabel + ' \u00b7 ' + finLabel;
   }
 
   function buildFaucetStyles() {
