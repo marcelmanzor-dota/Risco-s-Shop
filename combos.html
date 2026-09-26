@@ -1036,17 +1036,17 @@ footer a:hover {
 }
 .combo-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.1) }
 .combo-photo {
-  position: relative; flex: 1 1 50%; aspect-ratio: 900 / 410;
-  background: var(--warm); align-self: center;
+  position: relative; flex: 0 1 40%;
+  background: var(--warm);
 }
-.combo-photo img { width: 100%; height: 100%; object-fit: contain; display: block }
+.combo-photo img { width: 100%; height: auto; display: block }
 .combo-badge {
   position: absolute; top: 14px; left: 14px; z-index: 1;
   background: var(--brass); color: var(--forest-dk);
   font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   padding: 5px 12px; border-radius: 999px;
 }
-.combo-info { flex: 1 1 50%; padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2) }
+.combo-info { flex: 1 1 60%; padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2) }
 .combo-name { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--ink) }
 .combo-desc { font-size: 15px; color: var(--ink-2); font-weight: 300; line-height: 1.6; max-width: 52ch }
 .combo-price-table { width: 100%; border-collapse: collapse; margin-top: var(--sp-3) }
@@ -1063,7 +1063,7 @@ footer a:hover {
 .combo-fineprint { font-size: 12.5px; color: var(--muted); margin-top: 4px }
 .combo-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-3) }
 @media (min-width: 860px) {
-  .combo-card { flex-direction: row; align-items: stretch }
+  .combo-card { flex-direction: row; align-items: flex-start }
   .combo-card-reverse { flex-direction: row-reverse }
   .combo-info { padding: var(--sp-6) }
 }
