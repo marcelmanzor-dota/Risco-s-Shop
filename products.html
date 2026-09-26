@@ -15,21 +15,21 @@
    Type: DM Sans (UI) / Cormorant Garamond (editorial display)
    ============================================================ */
 :root {
-  --forest:    #7BA889;
-  --forest-dk: #2E5A3E;
-  --forest-lt: #92BDA0;
-  --brass:     #C6A24E;
-  --brass-lt:  #D4B76A;
-  --cream:     #FDFBF7;
-  --warm:      #F5F0E8;
+  --forest:    #68645A;
+  --forest-dk: #4A3B29;
+  --forest-lt: #8E877D;
+  --brass:     #C9A24A;
+  --brass-lt:  #E3C179;
+  --cream:     #F0E9DD;
+  --warm:      #EFE7DA;
   --paper:     #FFFFFF;
-  --ink:       #2C2C2A;
-  --ink-2:     #4A4A46;
-  --muted:     #8A8880;
-  --stone:     #C8C4BA;
-  --on-forest: #EDF5EF;
-  --line:      rgba(44,44,42,.08);
-  --line-f:    rgba(237,245,239,.18);
+  --ink:       #4A3B29;
+  --ink-2:     #68645A;
+  --muted:     #8E877D;
+  --stone:     #D1CFCB;
+  --on-forest: #F2EBE1;
+  --line:      rgba(74,59,41,.08);
+  --line-f:    rgba(239,231,218,.18);
 
   --sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
@@ -177,7 +177,7 @@ img, svg { display: block; max-width: 100% }
 .hero::before {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(30,50,35,.82) 0%, rgba(30,50,35,.55) 50%, rgba(30,50,35,.3) 100%);
+  background: linear-gradient(135deg, rgba(74,59,41,.82) 0%, rgba(74,59,41,.55) 50%, rgba(74,59,41,.3) 100%);
   pointer-events: none; z-index: 0;
 }
 .hero-inner {
@@ -203,15 +203,15 @@ img, svg { display: block; max-width: 100% }
 }
 .hero-cta-icon {
   width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(46,90,62,.14); display: flex; align-items: center; justify-content: center;
+  background: rgba(74,59,41,.14); display: flex; align-items: center; justify-content: center;
 }
 .hero-cta-icon svg { width: 26px; height: 26px }
 .hero-cta-text { display: flex; flex-direction: column; text-align: left }
 .hero-cta-title { font-size: 23px; font-weight: 700; line-height: 1.15; letter-spacing: -.01em }
 .hero-cta-sub { font-size: 13px; font-weight: 600; opacity: .72; margin-top: 3px }
 @keyframes heroCtaPulse {
-  0%, 100% { box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 0 rgba(198,162,78,.55) }
-  50%      { box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 16px rgba(198,162,78,0) }
+  0%, 100% { box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 0 rgba(201,162,74,.55) }
+  50%      { box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 16px rgba(201,162,74,0) }
 }
 @media (min-width: 900px) {
   .hero-inner {
@@ -251,7 +251,7 @@ img, svg { display: block; max-width: 100% }
 }
 .btn:active { transform: scale(.98) }
 .btn-brass { background: var(--brass); color: var(--forest-dk) }
-.btn-brass:hover { background: var(--brass-lt); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,150,58,.35) }
+.btn-brass:hover { background: var(--brass-lt); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,162,74,.35) }
 .btn-outline { background: transparent; color: var(--paper); border: 1.5px solid var(--line-f) }
 .btn-outline:hover { border-color: var(--brass-lt); color: var(--brass-lt) }
 .btn-green { background: var(--forest); color: var(--paper) }
@@ -294,7 +294,7 @@ section { padding: var(--sp-7) 0 }
 }
 .about-photo-inner {
   width: 100%; height: 100%;
-  background: linear-gradient(0deg, rgba(15,26,18,.92) 0%, rgba(15,26,18,.55) 32%, rgba(15,26,18,0) 62%);
+  background: linear-gradient(0deg, rgba(36,28,18,.92) 0%, rgba(36,28,18,.55) 32%, rgba(36,28,18,0) 62%);
   display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
   gap: var(--sp-2); padding: var(--sp-5);
 }
@@ -319,7 +319,7 @@ section { padding: var(--sp-7) 0 }
 /* ============================================================
    PRODUCTS / CONFIGURATOR
    ============================================================ */
-#products { background: linear-gradient(170deg, var(--forest-dk) 0%, #3A6B4A 100%); color: var(--on-forest) }
+#products { background: linear-gradient(170deg, var(--forest-dk) 0%, #68645A 100%); color: var(--on-forest) }
 #products .sec-head h2 { color: var(--paper) }
 #products .sec-head h2 em { color: var(--brass-lt) }
 #products .sec-head p { color: var(--on-forest); opacity: .8 }
@@ -334,7 +334,7 @@ section { padding: var(--sp-7) 0 }
 .cab, .top-slab, .basin, .pull, .mirror-glass, .spout-arm, .spout-plate, .leg {
   transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), fill .3s var(--ease);
 }
-.mirror-off .mirror-glass { fill: #0A211E; stroke: rgba(196,208,196,.3) }
+.mirror-off .mirror-glass { fill: #1A140D; stroke: rgba(199,195,190,.3) }
 .led-halo { transition: opacity .5s var(--ease), x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), r .5s var(--ease), cx .5s var(--ease), cy .5s var(--ease) }
 .mirror-off .led-halo { opacity: 0 }
 @keyframes led-pulse {
@@ -343,9 +343,9 @@ section { padding: var(--sp-7) 0 }
 }
 .halo-pulse { animation: led-pulse 3s ease-in-out infinite }
 .mirror-off .halo-pulse { animation: none }
-.mirror-glass { fill: #0f2a24; stroke: var(--brass-lt); stroke-width: 2; transition: fill .5s var(--ease), stroke .3s }
+.mirror-glass { fill: #241C12; stroke: var(--brass-lt); stroke-width: 2; transition: fill .5s var(--ease), stroke .3s }
 .stage-wrap:not(.mirror-off) .mirror-glass,
-:not(.mirror-off) > .mirror-glass { fill: #122E25 }
+:not(.mirror-off) > .mirror-glass { fill: #2A2015 }
 .float-shadow { transition: cx .5s var(--ease), cy .5s var(--ease), rx .5s var(--ease), ry .5s var(--ease) }
 .dim-line { stroke: var(--brass-lt); stroke-width: 1.5; transition: x1 .5s var(--ease), x2 .5s var(--ease) }
 .dim-tick { stroke: var(--brass-lt); stroke-width: 1.5; transition: transform .5s var(--ease) }
@@ -427,7 +427,7 @@ section { padding: var(--sp-7) 0 }
 /* small text labels drawn inside the stage SVG (toilet/drain side panel) */
 .stage-fixture-label {
   font-family: var(--sans); font-size: 13px; font-weight: 500;
-  fill: rgba(216,228,211,.7);
+  fill: rgba(239,231,218,.7);
 }
 .stage-fixture-title {
   font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .12em;
@@ -499,7 +499,7 @@ section { padding: var(--sp-7) 0 }
 }
 .gal-item .gal-label {
   align-self: flex-end; margin-top: auto;
-  background: rgba(15,26,18,.72); padding: 5px 12px; border-radius: 999px;
+  background: rgba(36,28,18,.72); padding: 5px 12px; border-radius: 999px;
   opacity: 1; font-style: normal; font-size: 13px; font-weight: 500;
   font-family: var(--sans);
 }
@@ -528,7 +528,7 @@ section { padding: var(--sp-7) 0 }
 /* ============================================================
    REVIEWS
    ============================================================ */
-#reviews { background: linear-gradient(170deg, #2E5A3E 0%, #3A6B4A 100%); color: var(--on-forest) }
+#reviews { background: linear-gradient(170deg, #4A3B29 0%, #68645A 100%); color: var(--on-forest) }
 .reviews-top { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-6); align-items: center; margin-bottom: var(--sp-5) }
 .score-block { text-align: center }
 .score-num { font-family: var(--sans); font-size: 84px; font-weight: 700; color: var(--paper); line-height: 1; letter-spacing: -.04em }
@@ -574,7 +574,7 @@ section { padding: var(--sp-7) 0 }
    FOOTER
    ============================================================ */
 footer {
-  background: #2C2C2A; color: rgba(255,255,255,.5);
+  background: #4A3B29; color: rgba(255,255,255,.5);
   padding: var(--sp-4) 0; font-size: 13px;
 }
 .footer-inner { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; justify-content: space-between }
@@ -596,8 +596,8 @@ footer a:hover { color: var(--brass-lt) }
   50%      { transform: translateY(-8px) }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(184,150,58,.0) }
-  50%      { box-shadow: 0 0 30px rgba(184,150,58,.25) }
+  0%, 100% { box-shadow: 0 0 20px rgba(201,162,74,.0) }
+  50%      { box-shadow: 0 0 30px rgba(201,162,74,.25) }
 }
 @keyframes grain {
   0%, 100% { transform: translate(0, 0) }
@@ -650,17 +650,17 @@ footer a:hover { color: var(--brass-lt) }
   transition: background-position .65s var(--ease);
 }
 .btn-brass {
-  box-shadow: 0 2px 12px rgba(184,150,58,.0), 0 0 0 0 rgba(184,150,58,.0);
+  box-shadow: 0 2px 12px rgba(201,162,74,.0), 0 0 0 0 rgba(201,162,74,.0);
   transition: background .18s, color .18s, transform .18s var(--ease), box-shadow .35s var(--ease);
 }
 .btn-brass:hover {
   background: var(--brass-lt);
   transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(184,150,58,.35), 0 0 60px rgba(212,173,87,.12);
+  box-shadow: 0 8px 28px rgba(201,162,74,.35), 0 0 60px rgba(227,193,121,.12);
 }
 .btn-brass:active {
   transform: translateY(-1px) scale(.98);
-  box-shadow: 0 2px 10px rgba(184,150,58,.3);
+  box-shadow: 0 2px 10px rgba(201,162,74,.3);
 }
 .btn-outline {
   transition: border-color .22s, color .22s, background .22s, transform .18s var(--ease), box-shadow .3s;
@@ -668,8 +668,8 @@ footer a:hover { color: var(--brass-lt) }
 .btn-outline:hover {
   border-color: var(--brass-lt);
   color: var(--brass-lt);
-  background: rgba(212,173,87,.06);
-  box-shadow: 0 0 24px rgba(212,173,87,.08);
+  background: rgba(227,193,121,.06);
+  box-shadow: 0 0 24px rgba(227,193,121,.08);
   transform: translateY(-2px);
 }
 .btn-green {
@@ -678,7 +678,7 @@ footer a:hover { color: var(--brass-lt) }
 .btn-green:hover {
   background: var(--forest-lt);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(75,107,82,.25);
+  box-shadow: 0 6px 20px rgba(104,100,90,.25);
 }
 .btn-ghost {
   transition: background .18s, border-color .22s, transform .18s var(--ease);
@@ -691,13 +691,13 @@ footer a:hover { color: var(--brass-lt) }
 
 /* ── Navigation — Glass frost + animated underlines ── */
 #nav {
-  background: rgba(40,64,46,.88);
+  background: rgba(74,59,41,.88);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   backdrop-filter: blur(18px) saturate(140%);
 }
 #nav.scrolled {
   box-shadow: 0 4px 30px rgba(0,0,0,.3);
-  background: rgba(40,64,46,.95);
+  background: rgba(74,59,41,.95);
 }
 .nav-links a {
   position: relative;
@@ -750,7 +750,7 @@ footer a:hover { color: var(--brass-lt) }
 }
 .about-point:hover .about-point-icon {
   transform: scale(1.12);
-  box-shadow: 0 0 16px rgba(75,107,82,.3);
+  box-shadow: 0 0 16px rgba(104,100,90,.3);
 }
 
 /* ── Included strip items — glow border on hover ── */
@@ -766,7 +766,7 @@ footer a:hover { color: var(--brass-lt) }
 }
 .incl-item:hover svg {
   transform: scale(1.1) rotate(-4deg);
-  filter: drop-shadow(0 0 8px rgba(212,173,87,.4));
+  filter: drop-shadow(0 0 8px rgba(227,193,121,.4));
 }
 
 /* ── Gallery items — zoom + overlay sweep ── */
@@ -804,8 +804,8 @@ footer a:hover { color: var(--brass-lt) }
 }
 .review-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,.22), 0 0 0 1px rgba(212,173,87,.2);
-  border-color: rgba(212,173,87,.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,.22), 0 0 0 1px rgba(227,193,121,.2);
+  border-color: rgba(227,193,121,.35);
   background: rgba(255,255,255,.08);
 }
 .review-card-stars {
@@ -845,7 +845,7 @@ footer a:hover { color: var(--brass-lt) }
   transition: background .15s;
 }
 .hours-table tr:hover {
-  background: rgba(61,89,68,.04);
+  background: rgba(104,100,90,.04);
 }
 
 /* ── Footer — subtle link glow ── */
@@ -854,7 +854,7 @@ footer a {
 }
 footer a:hover {
   color: var(--brass-lt);
-  text-shadow: 0 0 12px rgba(212,173,87,.2);
+  text-shadow: 0 0 12px rgba(227,193,121,.2);
 }
 
 /* ── Enhanced scroll reveal — with stagger and blur ── */
@@ -903,7 +903,7 @@ footer a:hover {
 }
 .sizes button[aria-pressed="true"] {
   animation: slide-up-in .3s var(--ease);
-  box-shadow: 0 4px 16px rgba(184,150,58,.3);
+  box-shadow: 0 4px 16px rgba(201,162,74,.3);
 }
 
 .finishes button {
@@ -922,8 +922,8 @@ footer a:hover {
   transition: border-color .3s, box-shadow .3s;
 }
 .stage-wrap:hover {
-  border-color: rgba(212,173,87,.25);
-  box-shadow: 0 0 40px rgba(212,173,87,.06);
+  border-color: rgba(227,193,121,.25);
+  box-shadow: 0 0 40px rgba(227,193,121,.06);
 }
 
 /* ── Lang toggle — smooth pill slide ── */
@@ -947,7 +947,7 @@ footer a:hover {
   width: 400px; height: 400px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(212,173,87,.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(227,193,121,.04) 0%, transparent 70%);
   transform: translate(-50%, -50%);
   z-index: 0;
   transition: opacity .3s;
@@ -959,7 +959,7 @@ footer a:hover {
    PRODUCTS PAGE (products.html)
    ============================================================ */
 .page-hero {
-  background: linear-gradient(170deg, var(--forest-dk) 0%, #3A6B4A 100%);
+  background: linear-gradient(170deg, var(--forest-dk) 0%, #68645A 100%);
   color: var(--on-forest); padding: 140px 0 var(--sp-6);
 }
 .page-hero .eyebrow { color: var(--brass-lt) }
@@ -980,12 +980,12 @@ footer a:hover {
 .product-photo {
   aspect-ratio: 4/3; position: relative; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 8px; overflow: hidden;
-  background: linear-gradient(150deg, #EDEDEA 0%, #D8D8D4 100%);
+  background: linear-gradient(150deg, #EFEAE0 0%, #DDD5C5 100%);
 }
-.product-photo.finish-wood { background: linear-gradient(150deg, #E1C49B 0%, #C9A97A 100%) }
+.product-photo.finish-wood { background: linear-gradient(150deg, #B7A47F 0%, #9D8B66 100%) }
 .product-photo.photo-pending { box-shadow: inset 0 0 0 1px var(--line); }
 .product-photo.photo-pending::after {
-  content: ''; position: absolute; inset: 6px; border: 1px dashed rgba(44,44,42,.28); border-radius: 4px; pointer-events: none;
+  content: ''; position: absolute; inset: 6px; border: 1px dashed rgba(74,59,41,.28); border-radius: 4px; pointer-events: none;
 }
 .product-photo img { width: 100%; height: 100%; object-fit: cover; display: block }
 .product-photo svg { opacity: .45; width: 46px; height: 46px }
@@ -1001,7 +1001,7 @@ footer a:hover {
 }
 .product-oos {
   position: absolute; top: 10px; right: 10px; z-index: 1;
-  background: rgba(44,44,42,.82); color: var(--paper);
+  background: rgba(74,59,41,.82); color: var(--paper);
   font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   padding: 4px 10px; border-radius: 999px;
 }
@@ -1147,13 +1147,13 @@ footer a:hover {
               <stop offset="100%" stop-color="#E8C55A" stop-opacity="0"/>
             </radialGradient>
             <linearGradient id="sCabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#4B6B52" id="cabGradTop"/>
-              <stop offset="100%" stop-color="#3A5440" id="cabGradBot"/>
+              <stop offset="0%" stop-color="#8E877D" id="cabGradTop"/>
+              <stop offset="100%" stop-color="#68645A" id="cabGradBot"/>
             </linearGradient>
           </defs>
 
           <!-- back wall (main vanity area) -->
-          <rect x="0" y="0" width="1000" height="490" fill="#162B1E"/>
+          <rect x="0" y="0" width="1000" height="490" fill="#2D2419"/>
           <!-- wall texture flutes (static, decorative) -->
           <g opacity=".06">
             <line x1="100" y1="0" x2="100" y2="490" stroke="white" stroke-width="1"/>
@@ -1167,13 +1167,13 @@ footer a:hover {
             <line x1="900" y1="0" x2="900" y2="490" stroke="white" stroke-width="1"/>
           </g>
           <!-- floor -->
-          <rect x="0" y="490" width="1000" height="70" fill="#122418"/>
-          <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(216,228,211,.25)" stroke-width="1.5"/>
+          <rect x="0" y="490" width="1000" height="70" fill="#211A12"/>
+          <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(239,231,218,.25)" stroke-width="1.5"/>
 
           <!-- side fixtures panel (toilet + shower drain) -->
-          <rect x="1000" y="0" width="300" height="490" fill="#13251A"/>
-          <rect x="1000" y="490" width="300" height="70" fill="#0f1f15"/>
-          <line x1="1000" y1="0" x2="1000" y2="560" stroke="rgba(216,228,211,.15)" stroke-width="1"/>
+          <rect x="1000" y="0" width="300" height="490" fill="#271F16"/>
+          <rect x="1000" y="490" width="300" height="70" fill="#1D170F"/>
+          <line x1="1000" y1="0" x2="1000" y2="560" stroke="rgba(239,231,218,.15)" stroke-width="1"/>
 
           <!-- LED ambient light cast on wall -->
           <rect class="led-halo" x="0" y="0" width="1000" height="490" fill="url(#ledAmbient)"/>
@@ -1185,7 +1185,7 @@ footer a:hover {
             <circle class="led-halo halo-pulse" id="mCircHalo" cx="500" cy="162" r="0" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
             <circle class="led-halo" id="mCircInner" cx="500" cy="162" r="0" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
             <circle class="mirror-glass" id="mCircGlass" cx="500" cy="162" r="0"/>
-            <circle id="mCircFrame" cx="500" cy="162" r="0" fill="none" stroke="#B8963A" stroke-width="2.5"/>
+            <circle id="mCircFrame" cx="500" cy="162" r="0" fill="none" stroke="#7A6B4D" stroke-width="2.5"/>
           </g>
 
           <!-- mirror: rectangular group -->
@@ -1195,7 +1195,7 @@ footer a:hover {
             <rect class="led-halo halo-pulse" id="mRectHalo" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
             <rect class="led-halo" id="mRectInner" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
             <rect class="mirror-glass" id="mRectGlass" x="500" y="162" width="0" height="0" rx="8"/>
-            <rect id="mRectFrame" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#B8963A" stroke-width="2.5"/>
+            <rect id="mRectFrame" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#7A6B4D" stroke-width="2.5"/>
           </g>
 
           <!-- faucet (style + finish selectable) -->
@@ -1221,13 +1221,13 @@ footer a:hover {
 
           <!-- legs (shown only when "Legs" mount style is selected) -->
           <g class="legs-group" id="sLegs">
-            <rect class="leg" id="sLegL" x="300" y="443" width="10" height="47" rx="2" fill="#2C4A34"/>
-            <rect class="leg" id="sLegR" x="690" y="443" width="10" height="47" rx="2" fill="#2C4A34"/>
+            <rect class="leg" id="sLegL" x="300" y="443" width="10" height="47" rx="2" fill="#3A2E20"/>
+            <rect class="leg" id="sLegR" x="690" y="443" width="10" height="47" rx="2" fill="#3A2E20"/>
           </g>
 
           <!-- drawer pulls (two, symmetrical) -->
-          <rect class="pull" id="sPullA" x="310" y="375" width="172" height="5" rx="2.5" fill="#B8963A" opacity=".9"/>
-          <rect class="pull" id="sPullB" x="518" y="375" width="172" height="5" rx="2.5" fill="#B8963A" opacity=".9"/>
+          <rect class="pull" id="sPullA" x="310" y="375" width="172" height="5" rx="2.5" fill="#7A6B4D" opacity=".9"/>
+          <rect class="pull" id="sPullB" x="518" y="375" width="172" height="5" rx="2.5" fill="#7A6B4D" opacity=".9"/>
 
           <!-- dim -->
           <g id="sDim">
@@ -1248,10 +1248,10 @@ footer a:hover {
             <ellipse id="sToiletBowl" cx="1150" cy="150" rx="50" ry="42" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
             <ellipse id="sToiletSeat" cx="1150" cy="108" rx="52" ry="9" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
             <g id="sToiletSmartPanel" style="display:none">
-              <rect x="1195" y="70" width="15" height="40" rx="4" fill="#B8963A"/>
-              <circle cx="1202.5" cy="81" r="2" fill="#0f2a24"/>
-              <circle cx="1202.5" cy="90" r="2" fill="#0f2a24"/>
-              <circle cx="1202.5" cy="99" r="2" fill="#0f2a24"/>
+              <rect x="1195" y="70" width="15" height="40" rx="4" fill="#7A6B4D"/>
+              <circle cx="1202.5" cy="81" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="90" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="99" r="2" fill="#241C12"/>
             </g>
           </g>
           <text id="sToiletLabel" x="1150" y="215" text-anchor="middle" class="stage-fixture-label">Elongated, Seamless</text>
@@ -2046,7 +2046,7 @@ footer a:hover {
   var SIZES = [24, 30, 36, 48, 60];
   var FINISHES = [
     { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
-    { id:'wood',  en:'White Oak', es:'Roble',   cab:'#C9A97A', pull:'#A07A42', grad:['#C9A97A','#B09065'] }
+    { id:'wood',  en:'White Oak', es:'Roble',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
   ];
   var lang      = 'en';
   var size      = 60;
@@ -2494,7 +2494,7 @@ footer a:hover {
 
     var seat = $('sToiletSeat');
     seat.setAttribute('rx', m.bowlRx + 2);
-    seat.setAttribute('stroke', m.smart ? '#B8963A' : 'rgba(0,0,0,.2)');
+    seat.setAttribute('stroke', m.smart ? '#7A6B4D' : 'rgba(0,0,0,.2)');
 
     var flush = $('sToiletFlush');
     if (m.flush === 'top') {
