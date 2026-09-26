@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Risco's Shop — Floating Bathroom Vanities | Cutler Bay, Miami</title>
-<meta name="description" content="Direct-import floating bathroom vanities in 20, 24, 30, 36, 48 and 60 inches (single or double sink). LED defogging mirror, wall faucet, drain and mounting kit included. Showroom in Cutler Bay, Miami. Florida delivery.">
+<title>Bathroom Combos — Vanity, Mirror, Faucet &amp; Toilet Bundles | Risco's Shop</title>
+<meta name="description" content="Complete bathroom combo packages from Risco's Shop — vanity, LED mirror, wall faucet, and matching toilet, bundled at one price, every size 24&quot; to 60&quot;. Showroom in Cutler Bay, Miami.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -186,13 +186,10 @@ img, svg { display: block; max-width: 100% }
 }
 .hero-copy { max-width: 58ch }
 
-/* Big, unmissable CTAs in the open space beside the hero copy */
-.hero-cta-group {
-  display: flex; flex-direction: column; gap: 16px;
-  align-items: flex-start; margin-top: var(--sp-5);
-}
+/* Big, unmissable CTA in the open space beside the hero copy */
 .hero-cta-big {
   display: inline-flex; align-items: center; gap: 18px;
+  margin-top: var(--sp-5); align-self: flex-start;
   background: var(--brass); color: var(--forest-dk);
   padding: 20px 32px; border-radius: 999px;
   text-decoration: none; font-family: var(--sans);
@@ -222,7 +219,7 @@ img, svg { display: block; max-width: 100% }
     gap: var(--sp-6);
   }
   .hero-copy { flex: 0 1 auto }
-  .hero-cta-group { margin-top: 0; flex: 0 0 auto }
+  .hero-cta-big { margin-top: 0; flex: 0 0 auto }
 }
 @media (max-width: 640px) {
   .hero-cta-big { padding: 16px 24px; gap: 14px }
@@ -328,34 +325,49 @@ section { padding: var(--sp-7) 0 }
 #products .sec-head p { color: var(--on-forest); opacity: .8 }
 #products .eyebrow { color: var(--brass-lt) }
 
-/* Real-photo stage */
+/* SVG stage (illustrative diagram — not a real product photo, no pricing) */
 .stage-wrap {
   background: rgba(0,0,0,.45); border-radius: 12px; overflow: hidden;
   border: 1px solid var(--line-f); padding: var(--sp-4) var(--sp-4) var(--sp-3);
 }
-.stage-photo-frame {
-  position: relative; border-radius: 8px; overflow: hidden;
-  aspect-ratio: 4/3; background: #241C12;
+.stage-svg-el { width: 100%; height: auto; display: block }
+.cab, .top-slab, .basin, .pull, .mirror-glass, .spout-arm, .spout-plate, .leg {
+  transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), fill .3s var(--ease);
 }
-.stage-photo {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  opacity: 0; transition: opacity .35s var(--ease);
+.mirror-off .mirror-glass { fill: #1A140D; stroke: rgba(199,195,190,.3) }
+.led-halo { transition: opacity .5s var(--ease), x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), r .5s var(--ease), cx .5s var(--ease), cy .5s var(--ease) }
+.mirror-off .led-halo { opacity: 0 }
+@keyframes led-pulse {
+  0%, 100% { opacity: 1 }
+  50% { opacity: .82 }
 }
-.stage-photo.loaded { opacity: 1 }
-.stage-oos-badge {
-  position: absolute; top: 12px; right: 12px;
-  background: rgba(36,28,18,.85); color: var(--paper);
-  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 999px;
+.halo-pulse { animation: led-pulse 3s ease-in-out infinite }
+.mirror-off .halo-pulse { animation: none }
+.mirror-glass { fill: #241C12; stroke: var(--brass-lt); stroke-width: 2; transition: fill .5s var(--ease), stroke .3s }
+.stage-wrap:not(.mirror-off) .mirror-glass,
+:not(.mirror-off) > .mirror-glass { fill: #2A2015 }
+.float-shadow { transition: cx .5s var(--ease), cy .5s var(--ease), rx .5s var(--ease), ry .5s var(--ease) }
+.dim-line { stroke: var(--brass-lt); stroke-width: 1.5; transition: x1 .5s var(--ease), x2 .5s var(--ease) }
+.dim-tick { stroke: var(--brass-lt); stroke-width: 1.5; transition: transform .5s var(--ease) }
+.dim-label text { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--forest-dk) }
+.dim-label rect { fill: var(--brass-lt) }
+.flute { transition: x .5s var(--ease), opacity .3s }
+.legs-group { opacity: 0; transition: opacity .35s var(--ease) }
+
+/* LED toggle */
+.led-toggle {
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--on-forest);
+  background: transparent; border: 1.5px solid var(--line-f); border-radius: 999px;
+  padding: 9px 18px; cursor: pointer; min-height: 42px;
+  display: inline-flex; align-items: center; gap: 9px;
+  transition: border-color .18s, color .18s;
 }
-.stage-meta {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: var(--sp-3); margin-top: var(--sp-3); flex-wrap: wrap;
+.led-toggle:hover { border-color: var(--brass-lt) }
+.led-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--brass-lt);
+  box-shadow: 0 0 10px var(--brass-lt); transition: .3s;
 }
-.stage-dim { display: block; font-family: var(--sans); font-size: 19px; font-weight: 700; color: var(--paper) }
-.stage-spec { display: block; margin-top: 3px; font-size: 13px; color: var(--on-forest); opacity: .75; font-weight: 300 }
-.stage-price { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--brass-lt); white-space: nowrap }
-.stage-price sup { font-size: 13px; font-weight: 500; opacity: .7 }
+.led-toggle[aria-pressed="false"] .led-dot { background: var(--muted); box-shadow: none }
 
 /* controls */
 .configurator { display: flex; flex-direction: column; gap: var(--sp-4); margin-top: var(--sp-4) }
@@ -402,6 +414,24 @@ section { padding: var(--sp-7) 0 }
 .stage-caption {
   margin-top: var(--sp-3); font-size: 13px; color: var(--on-forest);
   opacity: .55; font-weight: 300; font-style: italic;
+}
+
+/* group sub-headings inside the merged configurator (Vanity / Mirror / Faucet / ...) */
+.ctl-group-label {
+  font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--paper); opacity: .5;
+  margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--line-f);
+}
+.configurator > .ctl-group-label:first-child { margin-top: 0; padding-top: 0; border-top: none }
+
+/* small text labels drawn inside the stage SVG (toilet/drain side panel) */
+.stage-fixture-label {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  fill: rgba(239,231,218,.7);
+}
+.stage-fixture-title {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; fill: var(--brass-lt);
 }
 
 /* what's included strip */
@@ -953,6 +983,10 @@ footer a:hover {
   background: linear-gradient(150deg, #EFEAE0 0%, #DDD5C5 100%);
 }
 .product-photo.finish-wood { background: linear-gradient(150deg, #B7A47F 0%, #9D8B66 100%) }
+.product-photo.photo-pending { box-shadow: inset 0 0 0 1px var(--line); }
+.product-photo.photo-pending::after {
+  content: ''; position: absolute; inset: 6px; border: 1px dashed rgba(74,59,41,.28); border-radius: 4px; pointer-events: none;
+}
 .product-photo img { width: 100%; height: 100%; object-fit: cover; display: block }
 .product-photo svg { opacity: .45; width: 46px; height: 46px }
 .product-photo-note {
@@ -991,6 +1025,47 @@ footer a:hover {
 .configurator-intro { text-align: center; max-width: 620px; margin: 0 auto var(--sp-5) }
 
 /* ============================================================
+   COMBOS
+   ============================================================ */
+#combos { background: var(--cream); padding: var(--sp-7) 0 var(--sp-6) }
+.combo-list { display: flex; flex-direction: column; gap: var(--sp-6) }
+.combo-card {
+  display: flex; flex-direction: column; background: var(--paper);
+  border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.combo-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.1) }
+.combo-photo { position: relative; flex: 1 1 50%; min-height: 260px; background: var(--warm) }
+.combo-photo img { width: 100%; height: 100%; object-fit: cover; display: block }
+.combo-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 1;
+  background: var(--brass); color: var(--forest-dk);
+  font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px;
+}
+.combo-info { flex: 1 1 50%; padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2) }
+.combo-name { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--ink) }
+.combo-desc { font-size: 15px; color: var(--ink-2); font-weight: 300; line-height: 1.6; max-width: 52ch }
+.combo-price-table { width: 100%; border-collapse: collapse; margin-top: var(--sp-3) }
+.combo-price-table th {
+  text-align: left; font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  padding-bottom: 8px; border-bottom: 1.5px solid var(--stone);
+}
+.combo-price-table th:last-child, .combo-price-table td:last-child { text-align: right }
+.combo-price-table td { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px }
+.combo-price-table td:first-child { color: var(--ink-2); font-weight: 500 }
+.combo-price-table td:first-child span { color: var(--muted); font-weight: 400; font-size: 13px }
+.combo-price-table td:last-child { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--forest) }
+.combo-fineprint { font-size: 12.5px; color: var(--muted); margin-top: 4px }
+.combo-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--sp-3) }
+@media (min-width: 860px) {
+  .combo-card { flex-direction: row; min-height: 420px }
+  .combo-card-reverse { flex-direction: row-reverse }
+  .combo-info { padding: var(--sp-6) }
+}
+
+/* ============================================================
    UTILS
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1015,7 +1090,7 @@ footer a:hover {
   <div class="wrap nav-inner">
 
     <!-- Logo -->
-    <a class="nav-logo" href="#top" aria-label="Risco's Shop — Home">
+    <a class="nav-logo" href="index.html" aria-label="Risco's Shop — Home">
       <svg class="nav-logo-mark" viewBox="0 0 640 340" aria-hidden="true" style="width:auto;height:38px">
         <g fill="currentColor">
           <polygon points="60,150 60,215 90,235 90,130"/>
@@ -1032,11 +1107,11 @@ footer a:hover {
 
     <!-- Desktop nav links -->
     <div class="nav-links">
-      <a href="#top" data-en="Home" data-es="Inicio">Home</a>
-      <a href="#about" data-en="About Us" data-es="Nosotros">About Us</a>
+      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="index.html#about" data-en="About Us" data-es="Nosotros">About Us</a>
       <a href="products.html" data-en="Products" data-es="Productos">Products</a>
-      <a href="combos.html" data-en="Combos" data-es="Combos">Combos</a>
-      <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="combos.html" class="active" data-en="Combos" data-es="Combos">Combos</a>
+      <a href="index.html#contact" data-en="Contact" data-es="Contacto">Contact</a>
     </div>
 
     <div class="nav-actions">
@@ -1055,11 +1130,11 @@ footer a:hover {
 
   <!-- Mobile nav -->
   <div class="nav-mobile wrap" id="navMobile" role="navigation" aria-label="Mobile menu">
-    <a href="#top" data-en="Home" data-es="Inicio">Home</a>
-    <a href="#about" data-en="About Us" data-es="Nosotros">About Us</a>
+    <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="index.html#about" data-en="About Us" data-es="Nosotros">About Us</a>
     <a href="products.html" data-en="Products" data-es="Productos">Products</a>
-    <a href="combos.html" data-en="Combos" data-es="Combos">Combos</a>
-    <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="combos.html" class="active" data-en="Combos" data-es="Combos">Combos</a>
+    <a href="index.html#contact" data-en="Contact" data-es="Contacto">Contact</a>
     <a class="nav-mobile-call" href="tel:+17867100750">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       <span data-en="Call 786-710-0750" data-es="Llamar 786-710-0750">Call 786-710-0750</span>
@@ -1067,194 +1142,161 @@ footer a:hover {
   </div>
 </nav>
 
-<main id="top">
+<main>
 
 <!-- ============================================================
-     HERO
+     PAGE HERO
      ============================================================ -->
-<div class="hero">
-  <div class="wrap hero-inner">
-    <div class="hero-copy reveal">
-      <p class="eyebrow on-forest" data-en="Direct importer · Cutler Bay, Miami" data-es="Importador directo · Cutler Bay, Miami">Direct importer · Cutler Bay, Miami</p>
-      <h1><span data-en="Vanities that" data-es="Vanidades que">Vanities that</span> <em data-en="elevate." data-es="elevan.">elevate.</em></h1>
-      <p class="hero-lede" data-en="Wall-mounted floating vanities from 20 to 60 inches, single or double sink. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves." data-es="Vanidades flotantes de 20 a 60 pulgadas, sencillas o dobles. El espejo LED antiempañante, el grifo de pared, el desagüe y los herrajes vienen incluidos — y nosotros mismos hacemos la entrega en Florida.">Wall-mounted floating vanities from 20 to 60 inches, single or double sink. The LED defogging mirror, wall faucet, drain, and mounting hardware all come in the box — and we deliver across Florida ourselves.</p>
-      <div class="hero-actions">
-        <a class="btn btn-outline" href="tel:+17867100750" data-en="Call showroom" data-es="Llamar al showroom">Call showroom</a>
+<div class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow" data-en="Direct importer · Cutler Bay, Miami" data-es="Importador directo · Cutler Bay, Miami">Direct importer · Cutler Bay, Miami</p>
+    <h1><span data-en="Our" data-es="Nuestros">Our</span> <em data-en="combos." data-es="combos.">combos.</em></h1>
+    <p data-en="Complete bathroom packages — vanity, LED mirror, wall-mounted faucet, and matching toilet — bundled at one price. Pick a size, pick a look, and everything ships together." data-es="Paquetes completos para el baño — vanidad, espejo LED, grifo de pared y sanitario a juego — a un solo precio. Elige un tamaño, elige un estilo, y todo se envía junto.">Complete bathroom packages — vanity, LED mirror, wall-mounted faucet, and matching toilet — bundled at one price. Pick a size, pick a look, and everything ships together.</p>
+
+    <!-- What's included, every combo -->
+    <div class="included-strip reveal reveal-stagger" style="margin-top:var(--sp-5)">
+      <div class="incl-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3h10v6a5 5 0 0 1-10 0V3z"/><path d="M6 14h12l-1 6.2a1.8 1.8 0 0 1-1.8 1.8H8.8A1.8 1.8 0 0 1 7 20.2L6 14z"/></svg>
+        <h4 data-en="Toilet" data-es="Inodoro">Toilet</h4>
+        <p data-en="Elongated, seamless one-piece." data-es="Alargado, de una pieza.">Elongated, seamless one-piece.</p>
+      </div>
+      <div class="incl-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="1.5"/><line x1="12" y1="7" x2="12" y2="19"/><circle cx="8.5" cy="13" r=".6" fill="currentColor" stroke="none"/><circle cx="15.5" cy="13" r=".6" fill="currentColor" stroke="none"/></svg>
+        <h4 data-en="Vanity" data-es="Vanidad">Vanity</h4>
+        <p data-en="Wall-mounted, every size 24&quot;–60&quot;." data-es="Montada en pared, de 24&quot; a 60&quot;.">Wall-mounted, every size 24"–60".</p>
+      </div>
+      <div class="incl-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        <h4 data-en="Mirror" data-es="Espejo">Mirror</h4>
+        <p data-en="LED backlit, defogging." data-es="LED retroiluminado, antiempañante.">LED backlit, defogging.</p>
+      </div>
+      <div class="incl-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h8a4 4 0 0 1 0 8H5V8z"/><line x1="5" y1="6" x2="5" y2="10"/><line x1="17" y1="16" x2="17" y2="20"/></svg>
+        <h4 data-en="Faucet" data-es="Grifo">Faucet</h4>
+        <p data-en="Wall-mounted, finish-matched." data-es="De pared, a juego con el acabado.">Wall-mounted, finish-matched.</p>
       </div>
     </div>
-
-    <div class="hero-cta-group">
-      <a class="hero-cta-big" href="products.html" aria-label="Explore vanities">
-        <span class="hero-cta-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </span>
-        <span class="hero-cta-text">
-          <span class="hero-cta-title" data-en="Explore Vanities" data-es="Ver Vanidades">Explore Vanities</span>
-          <span class="hero-cta-sub" data-en="Every size, in stock &amp; priced" data-es="Cada tamaño, en inventario y con precio">Every size, in stock &amp; priced</span>
-        </span>
-      </a>
-
-      <a class="hero-cta-big" href="combos.html" aria-label="See combo packages">
-        <span class="hero-cta-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </span>
-        <span class="hero-cta-text">
-          <span class="hero-cta-title" data-en="Combos" data-es="Combos">Combos</span>
-          <span class="hero-cta-sub" data-en="Vanity, mirror, faucet &amp; toilet, one price" data-es="Vanidad, espejo, grifo e inodoro, un precio">Vanity, mirror, faucet &amp; toilet, one price</span>
-        </span>
-      </a>
-    </div>
-
   </div>
 </div>
 
-<!-- ============================================================
-     ABOUT
-     ============================================================ -->
-<section id="about">
-  <div class="wrap">
-    <div class="about-grid reveal">
-      <div>
-        <p class="eyebrow" data-en="Who we are" data-es="Quiénes somos">Who we are</p>
-        <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(28px,4vw,46px);margin-top:10px">
-          <span data-en="Factory to showroom" data-es="De la fábrica">Factory to showroom</span>
-          <em style="font-style:italic;color:var(--forest)" data-en=" to your bathroom." data-es=" al showroom a tu baño."> to your bathroom.</em>
-        </h2>
-        <p style="margin-top:var(--sp-3);color:var(--muted);font-size:17px;font-weight:300;max-width:46ch" data-en="Risco's Shop is a direct importer of floating bathroom vanities, based in Cutler Bay, Miami. We cut out the middleman so you get a better vanity for less." data-es="Risco's Shop es un importador directo de vanidades flotantes, ubicado en Cutler Bay, Miami. Eliminamos al intermediario para que obtenga una mejor vanidad por menos.">Risco's Shop is a direct importer of floating bathroom vanities, based in Cutler Bay, Miami. We cut out the middleman so you get a better vanity for less.</p>
-        <div class="about-points">
-          <div class="about-point">
-            <div class="about-point-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h4 data-en="We import directly" data-es="Importamos directamente">We import directly</h4>
-              <p data-en="Straight from the factory to our showroom. No distributors adding margin in between." data-es="Directo de la fábrica a nuestro showroom. Sin distribuidores que agreguen margen.">Straight from the factory to our showroom. No distributors adding margin in between.</p>
-            </div>
-          </div>
-          <div class="about-point">
-            <div class="about-point-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h4 data-en="We deliver ourselves" data-es="Entregamos nosotros mismos">We deliver ourselves</h4>
-              <p data-en="Anywhere in Florida — no third-party freight. We inspect the vanity with you at drop-off, before we leave." data-es="A cualquier parte de Florida — sin transportistas externos. Revisamos la vanidad contigo al entregarla, antes de irnos.">Anywhere in Florida — no third-party freight. We inspect the vanity with you at drop-off, before we leave.</p>
-            </div>
-          </div>
-          <div class="about-point">
-            <div class="about-point-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h4 data-en="See it in person" data-es="Véla en persona">See it in person</h4>
-              <p data-en="Finishes look different on screen. Our Cutler Bay showroom is open six days a week." data-es="Los acabados se ven distintos en pantalla. Nuestro showroom en Cutler Bay abre seis días a la semana.">Finishes look different on screen. Our Cutler Bay showroom is open six days a week.</p>
-            </div>
-          </div>
-          <div class="about-point">
-            <div class="about-point-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h4 data-en="Homeowners &amp; contractors" data-es="Propietarios y contratistas">Homeowners &amp; contractors</h4>
-              <p data-en="One bathroom or a whole building. Ask about volume pricing on multiple units." data-es="Un baño o un edificio completo. Pregunta por precios en cantidad.">One bathroom or a whole building. Ask about volume pricing on multiple units.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="about-photo">
-        <div class="about-photo-inner">
-          <p class="about-photo-label" data-en="Cutler Bay Showroom<br>10755 SW 190th St, Suite 69" data-es="Showroom Cutler Bay<br>10755 SW 190th St, Suite 69">Cutler Bay Showroom<br>10755 SW 190th St, Suite 69</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ============================================================
-     REVIEWS
+     COMBOS — vanity + mirror + faucet + toilet bundles
      ============================================================ -->
-<section id="reviews" class="on-forest">
-  <div class="wrap">
-    <div class="reviews-top reveal">
-      <div class="score-block">
-        <div class="score-num">5.0</div>
-        <div class="score-stars" aria-label="5 stars">★★★★★</div>
-        <div class="score-source" data-en="40 Google reviews" data-es="40 reseñas en Google">40 Google reviews</div>
-      </div>
-      <div>
-        <p class="eyebrow" data-en="What customers say" data-es="Lo que dicen los clientes">What customers say</p>
-        <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.5vw,42px);color:var(--paper);margin-top:10px" data-en="People come back for their second bathroom." data-es="Los clientes vuelven por su segundo baño.">People come back for their second bathroom.</h2>
-      </div>
-    </div>
-    <div class="review-cards reveal reveal-stagger">
-      <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
-        <p class="review-card-text" data-en='"Best combination of price and quality I found in Miami. The delivery was fast and they carried it inside for me."' data-es='"La mejor combinación de precio y calidad que encontré en Miami. La entrega fue rápida y lo llevaron adentro."'>"Best combination of price and quality I found in Miami. The delivery was fast and they carried it inside for me."</p>
-        <p class="review-card-author">— Google Review</p>
-      </div>
-      <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
-        <p class="review-card-text" data-en='"I came for one vanity and ended up ordering three for a remodel. Incredible service, they know exactly what they\'re selling."' data-es='"Vine por una vanidad y terminé pidiendo tres para una remodelación. Servicio increíble, saben exactamente lo que venden."'>"I came for one vanity and ended up ordering three for a remodel. Incredible service, they know exactly what they're selling."</p>
-        <p class="review-card-author">— Google Review</p>
-      </div>
-      <div class="review-card">
-        <div class="review-card-stars" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#9D8B66"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
-        <p class="review-card-text" data-en='"They inspected it with me when they delivered it. That level of care is rare. Already recommend them to every contractor I know."' data-es='"Lo inspeccionaron conmigo cuando lo entregaron. Ese nivel de atención es raro. Ya los recomiendo a todos los contratistas que conozco."'>"They inspected it with me when they delivered it. That level of care is rare. Already recommend them to every contractor I know."</p>
-        <p class="review-card-author">— Google Review</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTACT
-     ============================================================ -->
-<section id="contact">
+<section id="combos">
   <div class="wrap">
     <div class="sec-head reveal">
-      <p class="eyebrow" data-en="Come see us" data-es="Ven a vernos">Come see us</p>
-      <h2><em data-en="The showroom" data-es="El showroom">The showroom</em> <span data-en="is open." data-es="está abierto.">is open.</span></h2>
-      <p data-en="Six days a week in Cutler Bay, Miami. Come in, pick a finish, ask questions — no pressure." data-es="Seis días a la semana en Cutler Bay, Miami. Entra, elige un acabado, haz preguntas — sin presión.">Six days a week in Cutler Bay, Miami. Come in, pick a finish, ask questions — no pressure.</p>
+      <p class="eyebrow" data-en="Choose your combo" data-es="Elige tu combo">Choose your combo</p>
+      <h2><span data-en="Three looks," data-es="Tres estilos,">Three looks,</span> <em data-en="one bundle price." data-es="un solo precio.">one bundle price.</em></h2>
+      <p data-en="Every combo below includes the toilet, vanity, LED mirror, and wall faucet shown with it — sized from 24&quot; to 60&quot;, single or double sink. Pick the finish that fits your bathroom, then call or message us to order." data-es="Cada combo incluye el inodoro, la vanidad, el espejo LED y el grifo de pared que se muestran junto a él — de 24&quot; a 60&quot;, lavabo sencillo o doble. Elige el acabado que va con tu baño, y llámanos o escríbenos para pedirlo.">Every combo below includes the toilet, vanity, LED mirror, and wall faucet shown with it — sized from 24" to 60", single or double sink. Pick the finish that fits your bathroom, then call or message us to order.</p>
     </div>
-    <div class="contact-grid reveal">
-      <div class="contact-info">
-        <h3 data-en="Get in touch" data-es="Contáctanos">Get in touch</h3>
-        <p class="addr">10755 SW 190th St, Suite 69<br>Miami, FL 33157</p>
-        <div class="contact-actions">
-          <a class="btn btn-green" href="tel:+17867100750">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span data-en="Call 786-710-0750" data-es="Llamar 786-710-0750">Call 786-710-0750</span>
-          </a>
-          <a class="btn btn-ghost" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&query=Riscos+Shop+10755+SW+190th+St+Miami+FL+33157"
-             data-en="Get directions" data-es="Cómo llegar">Get directions</a>
-        </div>
 
-        <div style="margin-top:var(--sp-5)">
-          <p class="hours-head" data-en="Hours" data-es="Horario">Hours</p>
-          <table class="hours-table"><tbody id="hoursBody"></tbody></table>
+    <div class="combo-list">
+
+      <!-- COMBO 1 — Classic White -->
+      <div class="combo-card reveal">
+        <div class="combo-photo">
+          <img src="images/combo-white-gloss.jpg" alt="Classic White combo — glossy white vanity, backlit LED mirror, and matching toilet">
+        </div>
+        <div class="combo-info">
+          <span class="combo-name" data-en="Classic White Combo" data-es="Combo Blanco Clásico">Classic White Combo</span>
+          <span class="combo-desc" data-en="Glossy white cabinetry with soft scalloped pulls, paired with our rectangular backlit LED mirror. A warm, polished look that works single or double sink, in every size we stock." data-es="Gabinete blanco brillante con tiradores curvos, junto a nuestro espejo LED retroiluminado rectangular. Un look cálido y pulido, disponible en lavabo sencillo o doble, en todos los tamaños que tenemos en inventario.">Glossy white cabinetry with soft scalloped pulls, paired with our rectangular backlit LED mirror. A warm, polished look that works single or double sink, in every size we stock.</span>
+
+          <table class="combo-price-table">
+            <thead><tr>
+              <th data-en="Size" data-es="Tamaño">Size</th>
+              <th data-en="Combo price" data-es="Precio del combo">Combo price</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>24&quot;</td><td>$550</td></tr>
+              <tr><td>30&quot;</td><td>$640</td></tr>
+              <tr><td>36&quot;</td><td>$680</td></tr>
+              <tr><td>48&quot;</td><td>$870</td></tr>
+              <tr><td>60&quot; <span data-en="Single" data-es="Sencillo">Single</span></td><td>$1,080</td></tr>
+              <tr><td>60&quot; <span data-en="Double" data-es="Doble">Double</span></td><td>$1,250</td></tr>
+            </tbody>
+          </table>
+          <p class="combo-fineprint" data-en="Price includes the complete combo shown above." data-es="El precio incluye el combo completo que se muestra arriba.">Price includes the complete combo shown above.</p>
+
+          <div class="combo-cta-row">
+            <a class="btn btn-brass" target="_blank" rel="noopener" href="https://wa.me/17867100750?text=Hi!%20I%27d%20like%20more%20info%20on%20the%20Classic%20White%20Combo." data-en="Message on WhatsApp" data-es="Escribir por WhatsApp">Message on WhatsApp</a>
+            <a class="btn btn-ghost" href="tel:+17867100750" data-en="Call showroom" data-es="Llamar al showroom">Call showroom</a>
+          </div>
         </div>
       </div>
 
-      <div class="map-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-        </svg>
-        <p><strong>Risco's Shop</strong><br>10755 SW 190th St, Suite 69<br>Miami, FL 33157</p>
-        <a class="btn btn-green" target="_blank" rel="noopener"
-           href="https://www.google.com/maps/search/?api=1&query=Riscos+Shop+10755+SW+190th+St+Miami+FL+33157"
-           data-en="Open in Google Maps" data-es="Abrir en Google Maps">Open in Google Maps</a>
+      <!-- COMBO 2 — Modern White -->
+      <div class="combo-card combo-card-reverse reveal">
+        <div class="combo-photo">
+          <span class="combo-badge" data-en="Best value" data-es="Mejor precio">Best value</span>
+          <img src="images/combo-white-flat.jpg" alt="Modern White combo — flat-panel white vanity, slim LED mirror, and matching toilet">
+        </div>
+        <div class="combo-info">
+          <span class="combo-name" data-en="Modern White Combo" data-es="Combo Blanco Moderno">Modern White Combo</span>
+          <span class="combo-desc" data-en="Clean, handle-free flat-panel cabinetry in glossy white, with a slim-frame backlit LED mirror. A minimalist look for a brighter, more contemporary bathroom — our lowest combo pricing." data-es="Gabinete de paneles lisos sin tiradores, en blanco brillante, con espejo LED de marco delgado. Un estilo minimalista para un baño más luminoso y contemporáneo — nuestro precio de combo más bajo.">Clean, handle-free flat-panel cabinetry in glossy white, with a slim-frame backlit LED mirror. A minimalist look for a brighter, more contemporary bathroom — our lowest combo pricing.</span>
+
+          <table class="combo-price-table">
+            <thead><tr>
+              <th data-en="Size" data-es="Tamaño">Size</th>
+              <th data-en="Combo price" data-es="Precio del combo">Combo price</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>24&quot;</td><td>$499</td></tr>
+              <tr><td>30&quot;</td><td>$599</td></tr>
+              <tr><td>36&quot;</td><td>$629</td></tr>
+              <tr><td>48&quot;</td><td>$799</td></tr>
+              <tr><td>60&quot; <span data-en="Single" data-es="Sencillo">Single</span></td><td>$1,050</td></tr>
+              <tr><td>60&quot; <span data-en="Double" data-es="Doble">Double</span></td><td>$1,100</td></tr>
+            </tbody>
+          </table>
+          <p class="combo-fineprint" data-en="Price includes the complete combo shown above." data-es="El precio incluye el combo completo que se muestra arriba.">Price includes the complete combo shown above.</p>
+
+          <div class="combo-cta-row">
+            <a class="btn btn-brass" target="_blank" rel="noopener" href="https://wa.me/17867100750?text=Hi!%20I%27d%20like%20more%20info%20on%20the%20Modern%20White%20Combo." data-en="Message on WhatsApp" data-es="Escribir por WhatsApp">Message on WhatsApp</a>
+            <a class="btn btn-ghost" href="tel:+17867100750" data-en="Call showroom" data-es="Llamar al showroom">Call showroom</a>
+          </div>
+        </div>
       </div>
+
+      <!-- COMBO 3 — Natural Wood -->
+      <div class="combo-card reveal">
+        <div class="combo-photo">
+          <img src="images/combo-wood.jpg" alt="Natural Wood combo — wood-grain vanity, slim LED mirror, and matching toilet">
+        </div>
+        <div class="combo-info">
+          <span class="combo-name" data-en="Natural Wood Combo" data-es="Combo Madera Natural">Natural Wood Combo</span>
+          <span class="combo-desc" data-en="The same clean, handle-free cabinetry in a warm natural wood grain, paired with the slim-frame LED mirror. Brings texture and warmth into a light bathroom." data-es="El mismo gabinete de líneas limpias, en un cálido acabado de madera natural, junto al espejo LED de marco delgado. Aporta textura y calidez a un baño luminoso.">The same clean, handle-free cabinetry in a warm natural wood grain, paired with the slim-frame LED mirror. Brings texture and warmth into a light bathroom.</span>
+
+          <table class="combo-price-table">
+            <thead><tr>
+              <th data-en="Size" data-es="Tamaño">Size</th>
+              <th data-en="Combo price" data-es="Precio del combo">Combo price</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>24&quot;</td><td>$600</td></tr>
+              <tr><td>30&quot;</td><td>$650</td></tr>
+              <tr><td>36&quot;</td><td>$720</td></tr>
+              <tr><td>48&quot;</td><td>$900</td></tr>
+              <tr><td>60&quot; <span data-en="Single" data-es="Sencillo">Single</span></td><td>$1,120</td></tr>
+              <tr><td>60&quot; <span data-en="Double" data-es="Doble">Double</span></td><td>$1,300</td></tr>
+            </tbody>
+          </table>
+          <p class="combo-fineprint" data-en="Price includes the complete combo shown above." data-es="El precio incluye el combo completo que se muestra arriba.">Price includes the complete combo shown above.</p>
+
+          <div class="combo-cta-row">
+            <a class="btn btn-brass" target="_blank" rel="noopener" href="https://wa.me/17867100750?text=Hi!%20I%27d%20like%20more%20info%20on%20the%20Natural%20Wood%20Combo." data-en="Message on WhatsApp" data-es="Escribir por WhatsApp">Message on WhatsApp</a>
+            <a class="btn btn-ghost" href="tel:+17867100750" data-en="Call showroom" data-es="Llamar al showroom">Call showroom</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 </main>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer>
   <div class="wrap footer-inner">
     <!-- Footer logo: compact version -->
@@ -1278,18 +1320,7 @@ footer a:hover {
 (function () {
   'use strict';
 
-  /* ── DATA ── */
-  var HOURS = [
-    { en:'Monday',    es:'Lunes',      t:'9:00 AM – 6:00 PM' },
-    { en:'Tuesday',   es:'Martes',     t:'9:00 AM – 6:00 PM' },
-    { en:'Wednesday', es:'Miércoles',  t:'9:00 AM – 6:00 PM' },
-    { en:'Thursday',  es:'Jueves',     t:'9:00 AM – 6:00 PM' },
-    { en:'Friday',    es:'Viernes',    t:'9:00 AM – 6:00 PM' },
-    { en:'Saturday',  es:'Sábado',     t:'9:00 AM – 5:00 PM' },
-    { en:'Sunday',    es:'Domingo',    t:'10:00 AM – 2:00 PM' }
-  ];
-
-  var lang   = 'en';
+  var lang = 'en';
 
   var $ = function(id){ return document.getElementById(id); };
   var qs = function(sel){ return document.querySelector(sel); };
@@ -1302,7 +1333,6 @@ footer a:hover {
       var v = el.getAttribute('data-' + lang);
       if (v !== null) el.innerHTML = v;
     });
-    buildHours();
   }
 
   qsa('.lang-toggle button').forEach(function(b) {
@@ -1313,27 +1343,12 @@ footer a:hover {
     });
   });
 
-  /* ── DRAW STAGE SVG (unused on this page — kept out; see products.html) ── */
-  function buildHours() {
-    var body = $('hoursBody'); body.innerHTML = '';
-    var todayIdx = (new Date().getDay() + 6) % 7;
-    HOURS.forEach(function(h, i) {
-      var tr = document.createElement('tr');
-      if (i === todayIdx) tr.className = 'today';
-      var d = document.createElement('td'); d.textContent = lang === 'es' ? h.es : h.en;
-      var t = document.createElement('td'); t.textContent = h.t;
-      tr.appendChild(d); tr.appendChild(t);
-      body.appendChild(tr);
-    });
-  }
-
   /* ── HAMBURGER ── */
   var ham = $('navHam'), mob = $('navMobile');
   ham.addEventListener('click', function() {
     var open = mob.classList.toggle('open');
     ham.setAttribute('aria-expanded', String(open));
   });
-  // close on link click
   mob.querySelectorAll('a').forEach(function(a) {
     a.addEventListener('click', function() {
       mob.classList.remove('open');
@@ -1341,21 +1356,10 @@ footer a:hover {
     });
   });
 
-  /* ── NAV ACTIVE + SCROLL SHADOW ── */
+  /* ── NAV SCROLL SHADOW ── */
   var nav = document.getElementById('nav');
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-    // highlight active nav link
-    var sections = ['top','about','reviews','contact'];
-    var current = 'top';
-    sections.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top < 120) current = id;
-    });
-    qsa('.nav-links a').forEach(function(a) {
-      var href = a.getAttribute('href').replace('#','');
-      a.classList.toggle('active', href === current);
-    });
   }, { passive: true });
 
   /* ── SCROLL REVEAL (enhanced with stagger support) ── */
@@ -1398,27 +1402,7 @@ footer a:hover {
     document.addEventListener('mouseleave', function() { cursorGlow.style.opacity = '0'; });
   }
 
-  /* ── SMOOTH COUNT-UP for score number ── */
-  var scoreEl = qs('.score-num');
-  if (scoreEl) {
-    var scored = false;
-    var scoreObs = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting && !scored) {
-        scored = true;
-        var target = 5.0, current = 0, step = 0.1;
-        var interval = setInterval(function() {
-          current = Math.min(current + step, target);
-          scoreEl.textContent = current.toFixed(1);
-          if (current >= target) clearInterval(interval);
-        }, 40);
-        scoreObs.unobserve(scoreEl);
-      }
-    }, { threshold: .5 });
-    scoreObs.observe(scoreEl);
-  }
-
   /* ── INIT ── */
-  $('yr') && ($('yr').textContent = String(new Date().getFullYear()));
   applyLang();
 
 })();
