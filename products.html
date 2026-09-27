@@ -1203,7 +1203,7 @@ footer a:hover {
           <!-- real vanity photo — swaps with width / finish / sink selection -->
           <rect class="vanity-photo-bg" id="sPhotoBg" x="274" y="275" width="452" height="200" rx="8" fill="#EFE7DA"/>
           <image class="vanity-photo" id="sVanityPhoto" x="274" y="275" width="452" height="200"
-                 preserveAspectRatio="xMidYMid meet"
+                 preserveAspectRatio="xMidYMid slice"
                  href="images/vanity-60-double-white-oos.jpg"
                  aria-label="Photo of the selected vanity"/>
 
@@ -1259,6 +1259,10 @@ footer a:hover {
       <div class="configurator">
         <div class="ctl-group-label" data-en="Vanity" data-es="Vanidad">Vanity</div>
         <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblStyle" data-en="Cabinet style" data-es="Estilo de gabinete">Cabinet style</span>
+            <div class="sizes" role="group" aria-labelledby="lblStyle" id="vanityStyles"></div>
+          </div>
           <div class="ctl">
             <span class="ctl-label" id="lblSize" data-en="Choose a width" data-es="Elige un ancho">Choose a width</span>
             <div class="sizes" role="group" aria-labelledby="lblSize" id="sizes"></div>
@@ -2035,34 +2039,86 @@ footer a:hover {
     { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
     { id:'wood',  en:'White Oak', es:'Roble',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
   ];
+  var VANITY_STYLES = [
+    { id:'drawers',   en:'Drawers',    es:'Gavetas' },
+    { id:'doorfront', en:'Door Front', es:'Puertas' }
+  ];
 
-  /* real product photos — keyed by finish + width (and single/double at 60in) */
+  /* real product photos — keyed by style, finish, mount (floating/legs — door-front only) + width (and single/double at 60in) */
   var VANITY_PHOTOS = {
-    white: {
-      24: 'images/vanity-24-white.jpg',
-      30: 'images/vanity-30-white.jpg',
-      36: 'images/vanity-36-white.jpg',
-      48: 'images/vanity-48-white.jpg',
-      60: { single: 'images/vanity-60-single-white.jpg', double: 'images/vanity-60-double-white-oos.jpg' }
+    drawers: {
+      white: {
+        24: 'images/vanity-24-white.jpg',
+        30: 'images/vanity-30-white.jpg',
+        36: 'images/vanity-36-white.jpg',
+        48: 'images/vanity-48-white.jpg',
+        60: { single: 'images/vanity-60-single-white.jpg', double: 'images/vanity-60-double-white-oos.jpg' }
+      },
+      wood: {
+        24: 'images/vanity-24-wood.jpg',
+        30: 'images/vanity-30-wood.jpg',
+        36: 'images/vanity-36-wood.jpg',
+        48: 'images/vanity-48-wood.jpg',
+        // no real photo for a single-sink 60in in White Oak yet — double is forced when wood + 60 is selected
+        60: { single: 'images/vanity-60-wood-oos.jpg', double: 'images/vanity-60-wood-oos.jpg' }
+      }
     },
-    wood: {
-      24: 'images/vanity-24-wood.jpg',
-      30: 'images/vanity-30-wood.jpg',
-      36: 'images/vanity-36-wood.jpg',
-      48: 'images/vanity-48-wood.jpg',
-      // no real photo for a single-sink 60in in White Oak yet — double is forced when wood + 60 is selected
-      60: { single: 'images/vanity-60-wood-oos.jpg', double: 'images/vanity-60-wood-oos.jpg' }
+    doorfront: {
+      // no 30in SKU in any door-front line yet
+      white: {
+        floating: {
+          24: 'images/vanity-fv01-24-white.jpg',
+          36: 'images/vanity-fv01-36-white.jpg',
+          48: 'images/vanity-fv01-48-white.jpg',
+          60: { single: 'images/vanity-fv01-60s-white.jpg', double: 'images/vanity-fv01-60d-white.jpg' }
+        },
+        legs: {
+          24: 'images/vanity-fe01-24-white.jpg',
+          36: 'images/vanity-fe01-36-white.jpg',
+          48: 'images/vanity-fe01-48-white.jpg',
+          60: { single: 'images/vanity-fe01-60s-white.jpg', double: 'images/vanity-fe01-60d-white.jpg' }
+        }
+      },
+      wood: {
+        // no floating door-front SKU in White Oak — legs is forced when wood + door front is selected
+        legs: {
+          24: 'images/vanity-fe02-24-wood.jpg',
+          36: 'images/vanity-fe02-36-wood.jpg',
+          // no 48in SKU yet in this line
+          60: { single: 'images/vanity-fe02-60s-wood.jpg', double: 'images/vanity-fe02-60d-wood.jpg' }
+        }
+      }
     }
   };
   function vanityPhotoSrc() {
-    var byFinish = VANITY_PHOTOS[finish.id];
+    var byFinish = vanityStyle === 'doorfront'
+      ? VANITY_PHOTOS.doorfront[finish.id][footStyle === 'floating' && finish.id === 'white' ? 'floating' : 'legs']
+      : VANITY_PHOTOS.drawers[finish.id];
     return size === 60 ? byFinish[60][mount] : byFinish[size];
   }
+
+  /* keeps size / mount / foot-style selections valid whenever style or finish changes */
+  function syncVanitySelection() {
+    if (vanityStyle === 'doorfront') {
+      if (size === 30) { size = 24; }               // no 30in door-front SKU
+      if (finish.id === 'wood') {
+        footStyle = 'legs';                          // no floating door-front in White Oak
+        if (size === 48) { size = 36; }               // no 48in door-front SKU in White Oak
+      }
+    } else {
+      footStyle = 'floating';                         // no drawers-on-legs product
+      if (size === 60 && finish.id === 'wood' && mount === 'single') {
+        mount = 'double';                              // no real photo for a wood single-sink 60in
+      }
+    }
+  }
+
   var lang      = 'en';
   var size      = 60;
   var mount     = 'double';    // 'single' | 'double' — only relevant when size === 60
   var finish    = FINISHES[0];
-  var footStyle = 'floating';  // 'floating' | 'legs' — illustrative only
+  var vanityStyle = 'drawers'; // 'drawers' | 'doorfront'
+  var footStyle = 'floating';  // 'floating' | 'legs'
   var ledOn     = true;
 
   var MIRROR_SIZES = {
@@ -2126,12 +2182,20 @@ footer a:hover {
       var v = el.getAttribute('data-' + lang);
       if (v !== null) el.innerHTML = v;
     });
-    buildSizes(); buildMounts(); buildFinishes(); buildFeet();
+    syncVanitySelection();
+    buildVanityStyle(); buildSizes(); buildMounts(); buildFinishes(); buildFeet();
     draw(); syncLed();
     buildMirrorShapes(); buildMirrorSizes(); drawMirror();
     buildFaucetStyles(); buildFaucetFinishes(); drawFaucet();
     buildDrainFinishes(); buildDrainSizes(); drawDrain();
     buildToiletModels(); drawToilet();
+  }
+
+  /* re-validates the current selection, then rebuilds every vanity control + the photo */
+  function refreshVanity() {
+    syncVanitySelection();
+    buildVanityStyle(); buildSizes(); buildMounts(); buildFinishes(); buildFeet();
+    draw();
   }
 
   qsa('.lang-toggle button').forEach(function(b) {
@@ -2200,14 +2264,30 @@ footer a:hover {
       (footStyle === 'legs' ? (lang === 'es' ? ', con patas' : ', on legs') : ''));
   }
 
+  function buildVanityStyle() {
+    var host = $('vanityStyles'); host.innerHTML = '';
+    VANITY_STYLES.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === vanityStyle));
+      b.addEventListener('click', function(){ vanityStyle = o.id; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
   function buildSizes() {
     var host = $('sizes'); host.innerHTML = '';
+    // no 30in SKU in the door-front line yet; White Oak door-front also skips 48in
+    var no30 = vanityStyle === 'doorfront';
+    var no48 = vanityStyle === 'doorfront' && finish.id === 'wood';
     SIZES.forEach(function(s) {
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = s + '\u2033';
       b.setAttribute('aria-pressed', String(s === size));
-      b.addEventListener('click', function(){ size = s; buildSizes(); buildMounts(); draw(); });
+      if ((s === 30 && no30) || (s === 48 && no48)) { b.disabled = true; }
+      b.addEventListener('click', function(){ size = s; refreshVanity(); });
       host.appendChild(b);
     });
   }
@@ -2217,8 +2297,9 @@ footer a:hover {
     if (size !== 60) { ctl.style.display = 'none'; return; }
     ctl.style.display = 'grid';
     host.innerHTML = '';
-    // no real photo yet for a single-sink 60in in White Oak — disable Single and lock to Double
-    var singleDisabled = (finish.id === 'wood');
+    // no real photo yet for a single-sink 60in in White Oak drawers — disable Single and lock to Double
+    // (the door-front White Oak line has real photos for both single and double)
+    var singleDisabled = (vanityStyle === 'drawers' && finish.id === 'wood');
     if (singleDisabled && mount === 'single') { mount = 'double'; }
     var opts = [
       { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
@@ -2230,7 +2311,7 @@ footer a:hover {
       b.textContent = lang === 'es' ? o.es : o.en;
       b.setAttribute('aria-pressed', String(o.id === mount));
       if (o.id === 'single' && singleDisabled) { b.disabled = true; }
-      b.addEventListener('click', function(){ mount = o.id; buildMounts(); draw(); });
+      b.addEventListener('click', function(){ mount = o.id; refreshVanity(); });
       host.appendChild(b);
     });
   }
@@ -2245,13 +2326,16 @@ footer a:hover {
       b.setAttribute('aria-label', lbl);
       b.setAttribute('aria-pressed', String(f.id === finish.id));
       b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
-      b.addEventListener('click', function(){ finish = f; buildFinishes(); buildMounts(); draw(); });
+      b.addEventListener('click', function(){ finish = f; refreshVanity(); });
       host.appendChild(b);
     });
   }
 
   function buildFeet() {
     var host = $('feet'); host.innerHTML = '';
+    // no drawers-on-legs product, and no floating door-front in White Oak
+    var floatingDisabled = (vanityStyle === 'doorfront' && finish.id === 'wood');
+    var legsDisabled = (vanityStyle === 'drawers');
     var opts = [
       { id:'floating', en:'Floating', es:'Flotante' },
       { id:'legs',     en:'Legs',     es:'Patas' }
@@ -2261,7 +2345,8 @@ footer a:hover {
       b.type = 'button';
       b.textContent = lang === 'es' ? o.es : o.en;
       b.setAttribute('aria-pressed', String(o.id === footStyle));
-      b.addEventListener('click', function(){ footStyle = o.id; buildFeet(); draw(); });
+      if ((o.id === 'floating' && floatingDisabled) || (o.id === 'legs' && legsDisabled)) { b.disabled = true; }
+      b.addEventListener('click', function(){ footStyle = o.id; refreshVanity(); });
       host.appendChild(b);
     });
   }
