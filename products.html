@@ -1130,7 +1130,7 @@ footer a:hover {
     <div class="reveal">
       <!-- Stage -->
       <div class="stage-wrap">
-        <svg class="stage-svg-el" id="stage" viewBox="0 0 1300 560"
+        <svg class="stage-svg-el" id="stage" viewBox="0 0 1300 630"
              aria-label="Interactive diagram of a floating bathroom vanity with mirror, faucet, drain, and toilet">
           <defs>
             <filter id="sglow" x="-120%" y="-120%" width="340%" height="340%">
@@ -1151,30 +1151,30 @@ footer a:hover {
           </defs>
 
           <!-- back wall (main vanity area) -->
-          <rect x="0" y="0" width="1000" height="490" fill="#2D2419"/>
+          <rect x="0" y="0" width="1000" height="560" fill="#2D2419"/>
           <!-- wall texture flutes (static, decorative) -->
           <g opacity=".06">
-            <line x1="100" y1="0" x2="100" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="200" y1="0" x2="200" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="300" y1="0" x2="300" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="400" y1="0" x2="400" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="500" y1="0" x2="500" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="600" y1="0" x2="600" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="700" y1="0" x2="700" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="800" y1="0" x2="800" y2="490" stroke="white" stroke-width="1"/>
-            <line x1="900" y1="0" x2="900" y2="490" stroke="white" stroke-width="1"/>
+            <line x1="100" y1="0" x2="100" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="200" y1="0" x2="200" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="300" y1="0" x2="300" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="400" y1="0" x2="400" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="500" y1="0" x2="500" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="600" y1="0" x2="600" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="700" y1="0" x2="700" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="800" y1="0" x2="800" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="900" y1="0" x2="900" y2="560" stroke="white" stroke-width="1"/>
           </g>
           <!-- floor -->
-          <rect x="0" y="490" width="1000" height="70" fill="#211A12"/>
-          <line x1="0" y1="490" x2="1000" y2="490" stroke="rgba(239,231,218,.25)" stroke-width="1.5"/>
+          <rect x="0" y="560" width="1000" height="70" fill="#211A12"/>
+          <line x1="0" y1="560" x2="1000" y2="560" stroke="rgba(239,231,218,.25)" stroke-width="1.5"/>
 
           <!-- side fixtures panel (toilet + shower drain) -->
-          <rect x="1000" y="0" width="300" height="490" fill="#271F16"/>
-          <rect x="1000" y="490" width="300" height="70" fill="#1D170F"/>
-          <line x1="1000" y1="0" x2="1000" y2="560" stroke="rgba(239,231,218,.15)" stroke-width="1"/>
+          <rect x="1000" y="0" width="300" height="560" fill="#271F16"/>
+          <rect x="1000" y="560" width="300" height="70" fill="#1D170F"/>
+          <line x1="1000" y1="0" x2="1000" y2="630" stroke="rgba(239,231,218,.15)" stroke-width="1"/>
 
           <!-- LED ambient light cast on wall -->
-          <rect class="led-halo" x="0" y="0" width="1000" height="490" fill="url(#ledAmbient)"/>
+          <rect class="led-halo" x="0" y="0" width="1000" height="560" fill="url(#ledAmbient)"/>
 
           <!-- mirror: circular group -->
           <g id="mCircGroup">
@@ -1197,19 +1197,19 @@ footer a:hover {
           </g>
 
           <!-- float / floor-contact shadow -->
-          <ellipse class="float-shadow" id="sShadow" cx="500" cy="455" rx="240" ry="14"
+          <ellipse class="float-shadow" id="sShadow" cx="500" cy="525" rx="240" ry="14"
                    fill="#050D08" opacity=".6" filter="url(#ssoft)"/>
 
           <!-- real vanity photo — swaps with width / finish / sink selection -->
-          <rect class="vanity-photo-bg" id="sPhotoBg" x="274" y="275" width="452" height="200" rx="8" fill="#EFE7DA"/>
-          <image class="vanity-photo" id="sVanityPhoto" x="274" y="275" width="452" height="200"
+          <rect class="vanity-photo-bg" id="sPhotoBg" x="274" y="275" width="452" height="270" rx="8" fill="#EFE7DA"/>
+          <image class="vanity-photo" id="sVanityPhoto" x="274" y="275" width="452" height="270"
                  preserveAspectRatio="xMidYMid slice"
                  href="images/vanity-60-double-white-oos.jpg"
                  aria-label="Photo of the selected vanity"/>
 
           <!-- "coming soon" placeholder — shown instead of the photo when this combination has no real photo yet -->
           <g id="sComingSoon" style="display:none">
-            <rect id="sComingSoonBg" x="274" y="275" width="452" height="200" rx="8" fill="#EFE7DA" stroke="#CFC3A8" stroke-width="1.5" stroke-dasharray="7 6"/>
+            <rect id="sComingSoonBg" x="274" y="275" width="452" height="270" rx="8" fill="#EFE7DA" stroke="#CFC3A8" stroke-width="1.5" stroke-dasharray="7 6"/>
             <g id="sComingSoonIcon" stroke="#9C8F76" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <rect x="-23" y="-17" width="46" height="34" rx="5"/>
               <circle cx="0" cy="1" r="8"/>
@@ -1221,12 +1221,12 @@ footer a:hover {
 
           <!-- dim -->
           <g id="sDim">
-            <line class="dim-line" id="sDimLine" x1="282" y1="476" x2="718" y2="476"/>
-            <line class="dim-tick" id="sTickL" x1="282" y1="468" x2="282" y2="484"/>
-            <line class="dim-tick" id="sTickR" x1="718" y1="468" x2="718" y2="484"/>
+            <line class="dim-line" id="sDimLine" x1="282" y1="546" x2="718" y2="546"/>
+            <line class="dim-tick" id="sTickL" x1="282" y1="538" x2="282" y2="554"/>
+            <line class="dim-tick" id="sTickR" x1="718" y1="538" x2="718" y2="554"/>
             <g class="dim-label" id="sDimLabel">
-              <rect x="460" y="462" width="80" height="30" rx="15"/>
-              <text x="500" y="483" text-anchor="middle" id="sDimText">60″</text>
+              <rect x="460" y="532" width="80" height="30" rx="15"/>
+              <text x="500" y="553" text-anchor="middle" id="sDimText">60″</text>
             </g>
           </g>
 
@@ -1702,8 +1702,8 @@ footer a:hover {
         </div>
         <div class="product-info">
           <span class="product-name" data-en="36&quot; Freestanding Vanity — White Oak, Door Front" data-es="Vanidad con patas 36&quot; — Roble, puertas">36&quot; Freestanding Vanity — White Oak, Door Front</span>
-          <span class="product-spec" data-en="36&quot; x 18&quot; · One door, two drawers" data-es="36&quot; x 18&quot; · Una puerta, dos gavetas">36&quot; x 18&quot; · One door, two drawers</span>
-          <span class="product-desc" data-en="A freestanding vanity in warm White Oak that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look." data-es="Una vanidad con patas en cálido Roble que combina una puerta de gabinete de altura completa con dos gavetas laterales — espacio para toallas y artículos más grandes detrás de la puerta, y gavetas de acceso rápido para lo cotidiano. Sus patas robustas eliminan la necesidad de herrajes de pared y le dan un aspecto clásico y asentado.">A freestanding vanity in warm White Oak that pairs a full-height cabinet door with two side drawers — room for towels and bulkier items behind the door, quick-access drawers for the everyday essentials. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look.</span>
+          <span class="product-spec" data-en="36&quot; x 18&quot; · Two drawers, two doors" data-es="36&quot; x 18&quot; · Dos gavetas, dos puertas">36&quot; x 18&quot; · Two drawers, two doors</span>
+          <span class="product-desc" data-en="A freestanding vanity in warm White Oak with a stack of two drawers alongside a pair of cabinet doors — quick-access drawers for the everyday essentials, extra room behind the doors for towels and bulkier items. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look." data-es="Una vanidad con patas en cálido Roble con dos gavetas apiladas junto a un par de puertas de gabinete — gavetas de acceso rápido para lo cotidiano, y espacio extra detrás de las puertas para toallas y artículos más grandes. Sus patas robustas eliminan la necesidad de herrajes de pared y le dan un aspecto clásico y asentado.">A freestanding vanity in warm White Oak with a stack of two drawers alongside a pair of cabinet doors — quick-access drawers for the everyday essentials, extra room behind the doors for towels and bulkier items. Sturdy leg construction means no wall-mounting hardware and a classic, grounded look.</span>
           <span class="product-price">$460<sup> USD</sup></span>
         </div>
       </div>
@@ -2214,9 +2214,9 @@ footer a:hover {
   });
 
   /* ── SVG CONSTANTS (vanity) ── */
-  var CENTER = 500, PPI = 7.25;   // svg units per inch  (1000px wide, 60in → 435px)
-  var FLOOR_Y = 490;
-  var PHOTO_Y = 275, PHOTO_H = 200;
+  var CENTER = 500, PPI = 9.7875;   // svg units per inch  (1000px wide, 60in → 587px) — scaled 1.35x from the original 7.25 so the vanity photo reads larger and more detailed
+  var FLOOR_Y = 560;
+  var PHOTO_Y = 275, PHOTO_H = 270;
 
   /* ── DRAW VANITY (real photo, sized to width / finish / sink — legs are illustrative only) ── */
   function draw() {
@@ -2224,7 +2224,7 @@ footer a:hover {
     var x = CENTER - w / 2;
     var isDouble = (size === 60 && mount === 'double');
 
-    var boxX = x - 8, boxW = w + 16;
+    var boxX = x - 10.8, boxW = w + 21.6;
     var bg  = $('sPhotoBg');
     var img = $('sVanityPhoto');
     bg.setAttribute('x', boxX);   bg.setAttribute('width', boxW);
@@ -2264,7 +2264,7 @@ footer a:hover {
       shadow.setAttribute('rx', Math.max(w / 2 - 6, 40));
       shadow.setAttribute('ry', 5);
     } else {
-      shadow.setAttribute('cy', 455);
+      shadow.setAttribute('cy', 525);
       shadow.setAttribute('rx', w / 2 + 16);
       shadow.setAttribute('ry', 14);
     }
