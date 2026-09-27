@@ -1207,6 +1207,18 @@ footer a:hover {
                  href="images/vanity-60-double-white-oos.jpg"
                  aria-label="Photo of the selected vanity"/>
 
+          <!-- "coming soon" placeholder — shown instead of the photo when this combination has no real photo yet -->
+          <g id="sComingSoon" style="display:none">
+            <rect id="sComingSoonBg" x="274" y="275" width="452" height="200" rx="8" fill="#EFE7DA" stroke="#CFC3A8" stroke-width="1.5" stroke-dasharray="7 6"/>
+            <g id="sComingSoonIcon" stroke="#9C8F76" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-23" y="-17" width="46" height="34" rx="5"/>
+              <circle cx="0" cy="1" r="8"/>
+              <path d="M-23 12 L-8 -1 L4 9 L14 1 L23 9" />
+            </g>
+            <text id="sComingSoonText" text-anchor="middle" font-size="15" font-weight="600" fill="#7A6E58"
+                  data-en="Photo coming soon" data-es="Foto próximamente">Photo coming soon</text>
+          </g>
+
           <!-- dim -->
           <g id="sDim">
             <line class="dim-line" id="sDimLine" x1="282" y1="476" x2="718" y2="476"/>
@@ -2059,8 +2071,8 @@ footer a:hover {
         30: 'images/vanity-30-wood.jpg',
         36: 'images/vanity-36-wood.jpg',
         48: 'images/vanity-48-wood.jpg',
-        // no real photo for a single-sink 60in in White Oak yet — double is forced when wood + 60 is selected
-        60: { single: 'images/vanity-60-wood-oos.jpg', double: 'images/vanity-60-wood-oos.jpg' }
+        // no real photo yet for a single-sink 60in in White Oak — shows "coming soon"
+        60: { single: null, double: 'images/vanity-60-wood-oos.jpg' }
       }
     },
     doorfront: {
@@ -2090,28 +2102,25 @@ footer a:hover {
       }
     }
   };
+  /* returns the real photo path for the current selection, or null when no real photo exists yet
+     (every button stays clickable regardless — a missing combination just shows "coming soon") */
   function vanityPhotoSrc() {
-    var byFinish = vanityStyle === 'doorfront'
-      ? VANITY_PHOTOS.doorfront[finish.id][footStyle === 'floating' && finish.id === 'white' ? 'floating' : 'legs']
-      : VANITY_PHOTOS.drawers[finish.id];
-    return size === 60 ? byFinish[60][mount] : byFinish[size];
+    var bySize;
+    if (vanityStyle === 'doorfront') {
+      var byFinish = VANITY_PHOTOS.doorfront[finish.id];
+      var byFoot = byFinish ? byFinish[footStyle] : null; // White Oak has no 'floating' line yet
+      bySize = byFoot ? byFoot[size] : null;
+    } else {
+      // the Drawers line only exists as a floating product — Legs has no SKU at all
+      bySize = footStyle === 'floating' ? (VANITY_PHOTOS.drawers[finish.id] || {})[size] : null;
+    }
+    if (!bySize) return null;
+    return size === 60 ? (bySize[mount] || null) : bySize;
   }
 
-  /* keeps size / mount / foot-style selections valid whenever style or finish changes */
-  function syncVanitySelection() {
-    if (vanityStyle === 'doorfront') {
-      if (size === 30) { size = 24; }               // no 30in door-front SKU
-      if (finish.id === 'wood') {
-        footStyle = 'legs';                          // no floating door-front in White Oak
-        if (size === 48) { size = 36; }               // no 48in door-front SKU in White Oak
-      }
-    } else {
-      footStyle = 'floating';                         // no drawers-on-legs product
-      if (size === 60 && finish.id === 'wood' && mount === 'single') {
-        mount = 'double';                              // no real photo for a wood single-sink 60in
-      }
-    }
-  }
+  /* no forced overrides — every button (size, mount, foot style) stays selectable; a combination
+     with no real photo simply shows a "coming soon" placeholder in the photo box */
+  function syncVanitySelection() {}
 
   var lang      = 'en';
   var size      = 60;
@@ -2225,12 +2234,31 @@ footer a:hover {
     img.setAttribute('x', boxX);  img.setAttribute('width', boxW);
     img.setAttribute('y', PHOTO_Y); img.setAttribute('height', PHOTO_H);
     var src = vanityPhotoSrc();
-    img.setAttribute('href', src);
-    img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', src);
-    img.setAttribute('aria-label',
-      (lang === 'es' ? 'Foto de la vanidad flotante de ' : 'Photo of the floating vanity, ') + size +
-      (lang === 'es' ? ' pulgadas, acabado ' : ' in, ') +
-      (lang === 'es' ? finish.es : finish.en));
+    var cs = $('sComingSoon');
+    if (src) {
+      img.style.display = '';
+      bg.style.display = '';
+      cs.style.display = 'none';
+      img.setAttribute('href', src);
+      img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', src);
+      img.setAttribute('aria-label',
+        (lang === 'es' ? 'Foto de la vanidad flotante de ' : 'Photo of the floating vanity, ') + size +
+        (lang === 'es' ? ' pulgadas, acabado ' : ' in, ') +
+        (lang === 'es' ? finish.es : finish.en));
+    } else {
+      img.style.display = 'none';
+      bg.style.display = 'none';
+      cs.style.display = '';
+      var csBg = $('sComingSoonBg');
+      csBg.setAttribute('x', boxX);   csBg.setAttribute('width', boxW);
+      csBg.setAttribute('y', PHOTO_Y); csBg.setAttribute('height', PHOTO_H);
+      var ccx = boxX + boxW / 2, ccy = PHOTO_Y + PHOTO_H / 2;
+      $('sComingSoonIcon').setAttribute('transform', 'translate(' + ccx + ',' + (ccy - 16) + ')');
+      var csText = $('sComingSoonText');
+      csText.setAttribute('x', ccx);
+      csText.setAttribute('y', ccy + 38);
+      csText.textContent = lang === 'es' ? 'Foto próximamente' : 'Photo coming soon';
+    }
 
     var shadow = $('sShadow');
     if (footStyle === 'legs') {
@@ -2278,15 +2306,11 @@ footer a:hover {
 
   function buildSizes() {
     var host = $('sizes'); host.innerHTML = '';
-    // no 30in SKU in the door-front line yet; White Oak door-front also skips 48in
-    var no30 = vanityStyle === 'doorfront';
-    var no48 = vanityStyle === 'doorfront' && finish.id === 'wood';
     SIZES.forEach(function(s) {
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = s + '\u2033';
       b.setAttribute('aria-pressed', String(s === size));
-      if ((s === 30 && no30) || (s === 48 && no48)) { b.disabled = true; }
       b.addEventListener('click', function(){ size = s; refreshVanity(); });
       host.appendChild(b);
     });
@@ -2297,10 +2321,6 @@ footer a:hover {
     if (size !== 60) { ctl.style.display = 'none'; return; }
     ctl.style.display = 'grid';
     host.innerHTML = '';
-    // no real photo yet for a single-sink 60in in White Oak drawers — disable Single and lock to Double
-    // (the door-front White Oak line has real photos for both single and double)
-    var singleDisabled = (vanityStyle === 'drawers' && finish.id === 'wood');
-    if (singleDisabled && mount === 'single') { mount = 'double'; }
     var opts = [
       { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
       { id:'double',  en:'Double (60D)', es:'Doble (60D)' }
@@ -2310,7 +2330,6 @@ footer a:hover {
       b.type = 'button';
       b.textContent = lang === 'es' ? o.es : o.en;
       b.setAttribute('aria-pressed', String(o.id === mount));
-      if (o.id === 'single' && singleDisabled) { b.disabled = true; }
       b.addEventListener('click', function(){ mount = o.id; refreshVanity(); });
       host.appendChild(b);
     });
@@ -2333,9 +2352,6 @@ footer a:hover {
 
   function buildFeet() {
     var host = $('feet'); host.innerHTML = '';
-    // no drawers-on-legs product, and no floating door-front in White Oak
-    var floatingDisabled = (vanityStyle === 'doorfront' && finish.id === 'wood');
-    var legsDisabled = (vanityStyle === 'drawers');
     var opts = [
       { id:'floating', en:'Floating', es:'Flotante' },
       { id:'legs',     en:'Legs',     es:'Patas' }
@@ -2345,7 +2361,6 @@ footer a:hover {
       b.type = 'button';
       b.textContent = lang === 'es' ? o.es : o.en;
       b.setAttribute('aria-pressed', String(o.id === footStyle));
-      if ((o.id === 'floating' && floatingDisabled) || (o.id === 'legs' && legsDisabled)) { b.disabled = true; }
       b.addEventListener('click', function(){ footStyle = o.id; refreshVanity(); });
       host.appendChild(b);
     });
