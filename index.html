@@ -171,7 +171,6 @@ img, svg { display: block; max-width: 100% }
 .hero {
   background: url('hero-bg.png') center/cover no-repeat; color: var(--on-forest);
   padding: var(--sp-7) 0 var(--sp-6); position: relative; overflow: hidden;
-  min-height: 88vh;
 }
 /* dark overlay for text readability */
 .hero::before {
@@ -182,7 +181,7 @@ img, svg { display: block; max-width: 100% }
 }
 .hero-inner {
   display: flex; flex-direction: column; justify-content: center;
-  min-height: 72vh; position: relative;
+  position: relative;
 }
 .hero-copy { max-width: 58ch }
 
@@ -263,9 +262,8 @@ img, svg { display: block; max-width: 100% }
 .btn-ghost:hover { background: var(--warm) }
 
 @media (max-width: 480px) {
-  .hero { padding: var(--sp-5) 0 var(--sp-5); min-height: 70vh }
+  .hero { padding: var(--sp-5) 0 var(--sp-5) }
   .hero h1 { font-size: 38px }
-  .hero-inner { min-height: 55vh }
 }
 
 /* ============================================================
@@ -887,6 +885,137 @@ footer a:hover {
   transform: scale(.94);
 }
 
+/* ── Configurator (interactive tool) — moved here from products.html ── */
+#configurator { background: linear-gradient(170deg, var(--forest-dk) 0%, #68645A 100%); color: var(--on-forest) }
+#configurator .sec-head h2 { color: var(--paper) }
+#configurator .sec-head h2 em { color: var(--brass-lt) }
+#configurator .sec-head p { color: var(--on-forest); opacity: .8 }
+#configurator .eyebrow { color: var(--brass-lt) }
+
+/* SVG stage (illustrative diagram — not a real product photo, no pricing) */
+.stage-wrap {
+  background: rgba(0,0,0,.45); border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line-f); padding: var(--sp-4) var(--sp-4) var(--sp-3);
+}
+.stage-svg-el { width: 100%; height: auto; display: block }
+.mirror-glass, .spout-arm, .spout-plate {
+  transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), fill .3s var(--ease);
+}
+#sSpoutTip { transition: fill .3s var(--ease) }
+.vanity-photo-bg, .vanity-photo { transition: x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease) }
+.mirror-off .mirror-glass { fill: #1A140D; stroke: rgba(199,195,190,.3) }
+.led-halo { transition: opacity .5s var(--ease), x .5s var(--ease), y .5s var(--ease), width .5s var(--ease), height .5s var(--ease), r .5s var(--ease), cx .5s var(--ease), cy .5s var(--ease) }
+.mirror-off .led-halo { opacity: 0 }
+@keyframes led-pulse {
+  0%, 100% { opacity: 1 }
+  50% { opacity: .82 }
+}
+.halo-pulse { animation: led-pulse 3s ease-in-out infinite }
+.mirror-off .halo-pulse { animation: none }
+.mirror-glass { fill: #241C12; stroke: var(--brass-lt); stroke-width: 2; transition: fill .5s var(--ease), stroke .3s }
+.stage-wrap:not(.mirror-off) .mirror-glass,
+:not(.mirror-off) > .mirror-glass { fill: #2A2015 }
+.float-shadow { transition: cx .5s var(--ease), cy .5s var(--ease), rx .5s var(--ease), ry .5s var(--ease) }
+.dim-line { stroke: var(--brass-lt); stroke-width: 1.5; transition: x1 .5s var(--ease), x2 .5s var(--ease) }
+.dim-tick { stroke: var(--brass-lt); stroke-width: 1.5; transition: transform .5s var(--ease) }
+.dim-label text { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--forest-dk) }
+.dim-label rect { fill: var(--brass-lt) }
+
+/* LED toggle */
+.led-toggle {
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--on-forest);
+  background: transparent; border: 1.5px solid var(--line-f); border-radius: 999px;
+  padding: 9px 18px; cursor: pointer; min-height: 42px;
+  display: inline-flex; align-items: center; gap: 9px;
+  transition: border-color .18s, color .18s;
+}
+.led-toggle:hover { border-color: var(--brass-lt) }
+.led-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--brass-lt);
+  box-shadow: 0 0 10px var(--brass-lt); transition: .3s;
+}
+.led-toggle[aria-pressed="false"] .led-dot { background: var(--muted); box-shadow: none }
+
+/* controls */
+.configurator { display: flex; flex-direction: column; gap: var(--sp-4); margin-top: var(--sp-4) }
+.ctl-row { display: flex; flex-wrap: wrap; gap: var(--sp-5) }
+.ctl { display: grid; gap: var(--sp-2) }
+.ctl-label {
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--brass-lt);
+}
+
+/* size chips */
+.sizes { display: flex; flex-wrap: wrap; gap: 8px }
+.sizes button {
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--on-forest);
+  background: transparent; border: 1.5px solid var(--line-f); border-radius: 999px;
+  padding: 8px 16px; cursor: pointer; min-height: 42px;
+  transition: background .18s, color .18s, border-color .18s;
+}
+.sizes button:hover { border-color: var(--brass-lt) }
+.sizes button[aria-pressed="true"] { background: var(--brass); border-color: var(--brass); color: var(--forest-dk) }
+.sizes button:disabled {
+  opacity: .32; cursor: not-allowed; border-color: var(--line-f);
+  background: transparent; transform: none; box-shadow: none;
+}
+
+/* finish swatches */
+.finishes { display: flex; gap: 10px; flex-wrap: wrap }
+.finishes button {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; border: 2px solid transparent;
+  padding: 0; position: relative; transition: transform .18s, box-shadow .18s;
+}
+.finishes button:hover { transform: translateY(-2px) }
+.finishes button[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--forest-dk), 0 0 0 4px var(--brass-lt);
+}
+.fin-tooltip {
+  position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--paper); font-size: 11px; font-weight: 600;
+  padding: 4px 9px; border-radius: 6px; white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity .15s;
+}
+.finishes button:hover .fin-tooltip { opacity: 1 }
+
+.stage-caption {
+  margin-top: var(--sp-3); font-size: 13px; color: var(--on-forest);
+  opacity: .55; font-weight: 300; font-style: italic;
+}
+
+/* group sub-headings inside the merged configurator (Vanity / Mirror / Faucet / ...) */
+.ctl-group-label {
+  font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--paper); opacity: .5;
+  margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--line-f);
+}
+.configurator > .ctl-group-label:first-child { margin-top: 0; padding-top: 0; border-top: none }
+
+/* small text labels drawn inside the stage SVG (toilet/drain side panel) */
+.stage-fixture-label {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  fill: rgba(239,231,218,.7);
+}
+.stage-fixture-title {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; fill: var(--brass-lt);
+}
+
+/* what's included strip */
+.included-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1px; background: var(--line-f); border: 1px solid var(--line-f);
+  border-radius: 8px; overflow: hidden; margin-top: var(--sp-5);
+}
+.incl-item {
+  background: rgba(255,255,255,.04); padding: var(--sp-4) var(--sp-3);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.incl-item svg { color: var(--brass-lt) }
+.incl-item h4 { font-size: 15px; font-weight: 600; color: var(--paper) }
+.incl-item p { font-size: 14px; color: var(--on-forest); font-weight: 300; opacity: .8; line-height: 1.55 }
+
+
 /* ── Configurator stage — border glow ── */
 .stage-wrap {
   transition: border-color .3s, box-shadow .3s;
@@ -1016,12 +1145,21 @@ footer a:hover {
 
     <!-- Logo -->
     <a class="nav-logo" href="#top" aria-label="Risco's Shop — Home">
-      <svg class="nav-logo-mark" viewBox="0 0 640 340" aria-hidden="true" style="width:auto;height:38px">
-        <g fill="currentColor">
-          <polygon points="60,150 60,215 90,235 90,130"/>
-          <polygon points="100,120 100,245 132,268 132,95"/>
-          <polygon points="142,88 142,278 176,302 176,62"/>
-          <path d="M186 40 L268 40 Q300 40 300 74 L300 268 Q300 302 268 302 L186 302 Z"/>
+      <svg class="nav-logo-mark" viewBox="0 0 453.984048 452.602694" aria-hidden="true" style="width:auto;height:38px">
+        <g fill="currentColor" transform="translate(-157.015952,541.000000) scale(0.100000,-0.100000)">
+          <path d="M3300 3144 c0 -2089 1 -2266 16 -2260 16 6 811 257 954 301 41 13
+161 50 265 83 105 33 219 69 255 80 67 21 812 255 1138 358 l182 58 0 1067 c0
+913 -2 1078 -15 1147 -59 311 -259 573 -543 712 -48 24 -390 136 -912 299
+-459 144 -853 268 -875 276 -22 7 -101 32 -175 55 -74 23 -169 53 -210 66 -41
+13 -76 24 -77 24 -2 0 -3 -1020 -3 -2266z"/>
+          <path d="M3003 5167 l-133 -99 0 -1923 0 -1923 131 -96 c72 -54 133 -95 135
+-93 2 2 3 955 2 2119 l-3 2115 -132 -100z"/>
+          <path d="M2562 4650 l-132 -100 2 -1422 3 -1422 130 -98 c72 -54 133 -98 138
+-98 4 0 7 729 7 1620 0 891 -3 1620 -7 1620 -5 0 -68 -45 -141 -100z"/>
+          <path d="M2138 4144 l-138 -105 0 -927 1 -927 128 -95 c71 -52 134 -96 140
+-98 8 -3 11 321 11 1127 0 622 -1 1131 -2 1130 -2 0 -65 -47 -140 -105z"/>
+          <path d="M1703 3631 l-132 -96 0 -435 -1 -435 133 -98 132 -98 3 316 c1 173 1
+456 0 629 l-3 314 -132 -97z"/>
         </g>
       </svg>
       <span class="nav-logo-text">
@@ -1070,8 +1208,269 @@ footer a:hover {
 <main id="top">
 
 <!-- ============================================================
-     HERO
+     INTERACTIVE CONFIGURATOR (moved here from products.html — now
+     the Home page's main content, per owner request)
      ============================================================ -->
+<section id="configurator">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-en="Try it yourself" data-es="Pruébalo tú mismo">Try it yourself</p>
+      <h2><span data-en="See it before" data-es="Míralo antes">See it before</span> <em data-en="you order." data-es="de pedirlo.">you order.</em></h2>
+      <p data-en="Pick a width, finish, and sink layout and see the real vanity photo update. Mirror, faucet, drain, and toilet are shown alongside as a general diagram for comparison — not tied to real prices." data-es="Elige un ancho, acabado y configuración de lavabo, y mira cómo se actualiza la foto real de la vanidad. El espejo, grifo, desagüe e inodoro se muestran al lado como un diagrama general para comparar — no reflejan precios reales.">Pick a width, finish, and sink layout and see the real vanity photo update. Mirror, faucet, drain, and toilet are shown alongside as a general diagram for comparison — not tied to real prices.</p>
+    </div>
+
+    <div class="reveal">
+      <!-- Stage -->
+      <div class="stage-wrap">
+        <svg class="stage-svg-el" id="stage" viewBox="0 0 1300 630"
+             aria-label="Interactive diagram of a floating bathroom vanity with mirror, faucet, drain, and toilet">
+          <defs>
+            <filter id="sglow" x="-120%" y="-120%" width="340%" height="340%">
+              <feGaussianBlur stdDeviation="28" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="ssoft" x="-150%" y="-150%" width="400%" height="400%">
+              <feGaussianBlur stdDeviation="40"/>
+            </filter>
+            <filter id="sbloom" x="-200%" y="-200%" width="500%" height="500%">
+              <feGaussianBlur stdDeviation="65"/>
+            </filter>
+            <radialGradient id="ledAmbient" cx="50%" cy="30%" r="55%">
+              <stop offset="0%" stop-color="#F5DFA0" stop-opacity=".35"/>
+              <stop offset="40%" stop-color="#E8C55A" stop-opacity=".12"/>
+              <stop offset="100%" stop-color="#E8C55A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- back wall (main vanity area) -->
+          <rect x="0" y="0" width="1000" height="560" fill="#2D2419"/>
+          <!-- wall texture flutes (static, decorative) -->
+          <g opacity=".06">
+            <line x1="100" y1="0" x2="100" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="200" y1="0" x2="200" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="300" y1="0" x2="300" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="400" y1="0" x2="400" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="500" y1="0" x2="500" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="600" y1="0" x2="600" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="700" y1="0" x2="700" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="800" y1="0" x2="800" y2="560" stroke="white" stroke-width="1"/>
+            <line x1="900" y1="0" x2="900" y2="560" stroke="white" stroke-width="1"/>
+          </g>
+          <!-- floor -->
+          <rect x="0" y="560" width="1000" height="70" fill="#211A12"/>
+          <line x1="0" y1="560" x2="1000" y2="560" stroke="rgba(239,231,218,.25)" stroke-width="1.5"/>
+
+          <!-- side fixtures panel (toilet + shower drain) -->
+          <rect x="1000" y="0" width="300" height="560" fill="#271F16"/>
+          <rect x="1000" y="560" width="300" height="70" fill="#1D170F"/>
+          <line x1="1000" y1="0" x2="1000" y2="630" stroke="rgba(239,231,218,.15)" stroke-width="1"/>
+
+          <!-- LED ambient light cast on wall -->
+          <rect class="led-halo" x="0" y="0" width="1000" height="560" fill="url(#ledAmbient)"/>
+
+          <!-- mirror: circular group -->
+          <g id="mCircGroup">
+            <circle class="led-halo" id="mCircBloom" cx="500" cy="162" r="0" fill="#E8C55A" opacity=".12" filter="url(#sbloom)"/>
+            <circle class="led-halo" id="mCircGlow" cx="500" cy="162" r="0" fill="none" stroke="#F5DFA0" stroke-width="6" opacity=".5" filter="url(#ssoft)"/>
+            <circle class="led-halo halo-pulse" id="mCircHalo" cx="500" cy="162" r="0" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
+            <circle class="led-halo" id="mCircInner" cx="500" cy="162" r="0" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
+            <circle class="mirror-glass" id="mCircGlass" cx="500" cy="162" r="0"/>
+            <circle id="mCircFrame" cx="500" cy="162" r="0" fill="none" stroke="#7A6B4D" stroke-width="2.5"/>
+          </g>
+
+          <!-- mirror: rectangular group -->
+          <g id="mRectGroup" style="display:none">
+            <rect class="led-halo" id="mRectBloom" x="500" y="162" width="0" height="0" rx="10" fill="#E8C55A" opacity=".12" filter="url(#sbloom)"/>
+            <rect class="led-halo" id="mRectGlow" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#F5DFA0" stroke-width="6" opacity=".5" filter="url(#ssoft)"/>
+            <rect class="led-halo halo-pulse" id="mRectHalo" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFEEA0" stroke-width="4" opacity="1" filter="url(#sglow)"/>
+            <rect class="led-halo" id="mRectInner" x="500" y="162" width="0" height="0" rx="7" fill="none" stroke="#FFF8DC" stroke-width="1.5" opacity=".9"/>
+            <rect class="mirror-glass" id="mRectGlass" x="500" y="162" width="0" height="0" rx="8"/>
+            <rect id="mRectFrame" x="500" y="162" width="0" height="0" rx="9" fill="none" stroke="#7A6B4D" stroke-width="2.5"/>
+          </g>
+
+          <!-- float / floor-contact shadow -->
+          <ellipse class="float-shadow" id="sShadow" cx="500" cy="525" rx="240" ry="14"
+                   fill="#050D08" opacity=".6" filter="url(#ssoft)"/>
+
+          <!-- real vanity photo — swaps with width / finish / sink selection -->
+          <rect class="vanity-photo-bg" id="sPhotoBg" x="274" y="275" width="452" height="270" rx="8" fill="#EFE7DA"/>
+          <image class="vanity-photo" id="sVanityPhoto" x="274" y="275" width="452" height="270"
+                 preserveAspectRatio="xMidYMid slice"
+                 href="images/vanity-60-double-white-oos.jpg"
+                 aria-label="Photo of the selected vanity"/>
+
+          <!-- "coming soon" placeholder — shown instead of the photo when this combination has no real photo yet -->
+          <g id="sComingSoon" style="display:none">
+            <rect id="sComingSoonBg" x="274" y="275" width="452" height="270" rx="8" fill="#EFE7DA" stroke="#CFC3A8" stroke-width="1.5" stroke-dasharray="7 6"/>
+            <g id="sComingSoonIcon" stroke="#9C8F76" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-23" y="-17" width="46" height="34" rx="5"/>
+              <circle cx="0" cy="1" r="8"/>
+              <path d="M-23 12 L-8 -1 L4 9 L14 1 L23 9" />
+            </g>
+            <text id="sComingSoonText" text-anchor="middle" font-size="15" font-weight="600" fill="#7A6E58"
+                  data-en="Photo coming soon" data-es="Foto próximamente">Photo coming soon</text>
+          </g>
+
+          <!-- dim -->
+          <g id="sDim">
+            <line class="dim-line" id="sDimLine" x1="282" y1="546" x2="718" y2="546"/>
+            <line class="dim-tick" id="sTickL" x1="282" y1="538" x2="282" y2="554"/>
+            <line class="dim-tick" id="sTickR" x1="718" y1="538" x2="718" y2="554"/>
+            <g class="dim-label" id="sDimLabel">
+              <rect x="460" y="532" width="80" height="30" rx="15"/>
+              <text x="500" y="553" text-anchor="middle" id="sDimText">60″</text>
+            </g>
+          </g>
+
+          <!-- faucet (side panel, illustrative — style + finish selectable) -->
+          <text x="1150" y="32" text-anchor="middle" class="stage-fixture-title" data-en="Faucet" data-es="Grifo">Faucet</text>
+          <g id="sFaucetIcon">
+            <rect class="spout-plate" id="sSpoutPlate" x="1134" y="52" width="32" height="11" rx="3.5" fill="#C0BDB4"/>
+            <rect class="spout-arm"   id="sSpoutArm"   x="1140" y="63" width="10" height="46" rx="5"  fill="#C0BDB4"/>
+            <circle id="sSpoutTip" cx="1145" cy="112" r="5" fill="#C0BDB4"/>
+          </g>
+          <text id="sFaucetLabel" x="1150" y="140" text-anchor="middle" class="stage-fixture-label">Single-Handle · Gold</text>
+
+          <!-- toilet (side panel, illustrative) -->
+          <text x="1150" y="170" text-anchor="middle" class="stage-fixture-title" data-en="Toilet" data-es="Inodoro">Toilet</text>
+          <g id="sToilet">
+            <rect id="sToiletTank" x="1110" y="188" width="80" height="46" rx="8" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <rect id="sToiletFlush" x="1143" y="194" width="14" height="5" rx="2.5" fill="rgba(0,0,0,.2)"/>
+            <ellipse id="sToiletBowl" cx="1150" cy="278" rx="50" ry="42" fill="#EDEDEA" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+            <ellipse id="sToiletSeat" cx="1150" cy="236" rx="52" ry="9" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+            <g id="sToiletSmartPanel" style="display:none">
+              <rect x="1195" y="198" width="15" height="40" rx="4" fill="#7A6B4D"/>
+              <circle cx="1202.5" cy="209" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="218" r="2" fill="#241C12"/>
+              <circle cx="1202.5" cy="227" r="2" fill="#241C12"/>
+            </g>
+          </g>
+          <text id="sToiletLabel" x="1150" y="343" text-anchor="middle" class="stage-fixture-label">Elongated, Seamless</text>
+
+          <!-- shower drain (side panel, illustrative) -->
+          <text x="1150" y="372" text-anchor="middle" class="stage-fixture-title" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</text>
+          <g id="sDrainIcon">
+            <rect id="sDrainBody" x="1100" y="410" width="100" height="16" rx="4" fill="#C0C0C8"/>
+            <line id="sDrainSlot1" x1="1112" y1="418" x2="1188" y2="418" stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-dasharray="3 5"/>
+          </g>
+          <text id="sDrainLabel" x="1150" y="460" text-anchor="middle" class="stage-fixture-label">24″ · Nickel</text>
+        </svg>
+
+        <p class="stage-caption" data-en="The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price." data-es="La foto de la vanidad es real. El espejo, grifo, desagüe e inodoro son un diagrama general para comparar — no son la foto ni el precio de un producto específico.">The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price.</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="configurator">
+        <div class="ctl-group-label" data-en="Vanity" data-es="Vanidad">Vanity</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblStyle" data-en="Cabinet style" data-es="Estilo de gabinete">Cabinet style</span>
+            <div class="sizes" role="group" aria-labelledby="lblStyle" id="vanityStyles"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblSize" data-en="Choose a width" data-es="Elige un ancho">Choose a width</span>
+            <div class="sizes" role="group" aria-labelledby="lblSize" id="sizes"></div>
+          </div>
+          <div class="ctl" id="mountCtl">
+            <span class="ctl-label" id="lblMount" data-en="Sink configuration" data-es="Configuración del lavabo">Sink configuration</span>
+            <div class="sizes" role="group" aria-labelledby="lblMount" id="mounts"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFin" data-en="Cabinet finish" data-es="Acabado del mueble">Cabinet finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblFin" id="finishes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFoot" data-en="Mount style" data-es="Estilo de montaje">Mount style</span>
+            <div class="sizes" role="group" aria-labelledby="lblFoot" id="feet"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" data-en="Mirror light" data-es="Luz del espejo">Mirror light</span>
+            <button type="button" class="led-toggle" id="ledBtn" aria-pressed="true">
+              <span class="led-dot" aria-hidden="true"></span>
+              <span id="ledLabel" data-en="LED on" data-es="LED encendido">LED on</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Mirror" data-es="Espejo">Mirror</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblMirShape" data-en="Shape" data-es="Forma">Shape</span>
+            <div class="sizes" role="group" aria-labelledby="lblMirShape" id="mirrorShapes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblMirSize" data-en="Size" data-es="Tamaño">Size</span>
+            <div class="sizes" role="group" aria-labelledby="lblMirSize" id="mirrorSizes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Faucet" data-es="Grifo">Faucet</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblFaucetStyle" data-en="Style" data-es="Estilo">Style</span>
+            <div class="sizes" role="group" aria-labelledby="lblFaucetStyle" id="faucetStyles"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblFaucetFin" data-en="Finish" data-es="Acabado">Finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblFaucetFin" id="faucetFinishes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Shower Drain" data-es="Desagüe de ducha">Shower Drain</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblDrainFin" data-en="Finish" data-es="Acabado">Finish</span>
+            <div class="finishes" role="group" aria-labelledby="lblDrainFin" id="drainFinishes"></div>
+          </div>
+          <div class="ctl">
+            <span class="ctl-label" id="lblDrainSize" data-en="Length" data-es="Largo">Length</span>
+            <div class="sizes" role="group" aria-labelledby="lblDrainSize" id="drainSizes"></div>
+          </div>
+        </div>
+
+        <div class="ctl-group-label" data-en="Toilet" data-es="Inodoro">Toilet</div>
+        <div class="ctl-row">
+          <div class="ctl">
+            <span class="ctl-label" id="lblToilet" data-en="Model" data-es="Modelo">Model</span>
+            <div class="sizes" role="group" aria-labelledby="lblToilet" id="toiletModels"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What's included -->
+      <div class="included-strip reveal reveal-stagger" style="margin-top:var(--sp-5)">
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+          <h4 data-en="LED defogging mirror" data-es="Espejo LED antiempañante">LED defogging mirror</h4>
+          <p data-en="Backlit. Stays clear after a hot shower." data-es="Retroiluminado. Sin empañarse tras la ducha.">Backlit. Stays clear after a hot shower.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h8a4 4 0 0 1 0 8H5V8z"/><line x1="5" y1="6" x2="5" y2="10"/><line x1="17" y1="16" x2="17" y2="20"/></svg>
+          <h4 data-en="Wall-mounted faucet" data-es="Grifo de pared">Wall-mounted faucet</h4>
+          <p data-en="Mounts above the basin, keeping the counter clean." data-es="Se instala en la pared, dejando la encimera despejada.">Mounts above the basin, keeping the counter clean.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg>
+          <h4 data-en="Drain" data-es="Desagüe">Drain</h4>
+          <p data-en="Finish-matched. No extra trip to the hardware store." data-es="A juego con el acabado. Sin viajes extra a la ferretería.">Finish-matched. No extra trip to the hardware store.</p>
+        </div>
+        <div class="incl-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4l6 6-9 9H5v-6z"/><path d="M12 6l6 6"/></svg>
+          <h4 data-en="Full mounting kit" data-es="Kit de instalación">Full mounting kit</h4>
+          <p data-en="Rail and all hardware to hang it level, in the box." data-es="Riel y herrajes para colgarla nivelada, en la caja.">Rail and all hardware to hang it level, in the box.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <div class="wrap">
+
+    <!-- relocated from the old Home hero, now serves as the About intro -->
 <div class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy reveal">
@@ -1108,11 +1507,6 @@ footer a:hover {
   </div>
 </div>
 
-<!-- ============================================================
-     ABOUT
-     ============================================================ -->
-<section id="about">
-  <div class="wrap">
     <div class="about-grid reveal">
       <div>
         <p class="eyebrow" data-en="Who we are" data-es="Quiénes somos">Who we are</p>
@@ -1259,12 +1653,21 @@ footer a:hover {
   <div class="wrap footer-inner">
     <!-- Footer logo: compact version -->
     <div class="footer-logo-block">
-      <svg viewBox="0 0 640 340" aria-label="Risco's Shop" style="height:32px;width:auto;color:var(--paper)">
-        <g fill="currentColor">
-          <polygon points="60,150 60,215 90,235 90,130"/>
-          <polygon points="100,120 100,245 132,268 132,95"/>
-          <polygon points="142,88 142,278 176,302 176,62"/>
-          <path d="M186 40 L268 40 Q300 40 300 74 L300 268 Q300 302 268 302 L186 302 Z"/>
+      <svg viewBox="0 0 453.984048 452.602694" aria-label="Risco's Shop" style="height:32px;width:auto;color:var(--paper)">
+        <g fill="currentColor" transform="translate(-157.015952,541.000000) scale(0.100000,-0.100000)">
+          <path d="M3300 3144 c0 -2089 1 -2266 16 -2260 16 6 811 257 954 301 41 13
+161 50 265 83 105 33 219 69 255 80 67 21 812 255 1138 358 l182 58 0 1067 c0
+913 -2 1078 -15 1147 -59 311 -259 573 -543 712 -48 24 -390 136 -912 299
+-459 144 -853 268 -875 276 -22 7 -101 32 -175 55 -74 23 -169 53 -210 66 -41
+13 -76 24 -77 24 -2 0 -3 -1020 -3 -2266z"/>
+          <path d="M3003 5167 l-133 -99 0 -1923 0 -1923 131 -96 c72 -54 133 -95 135
+-93 2 2 3 955 2 2119 l-3 2115 -132 -100z"/>
+          <path d="M2562 4650 l-132 -100 2 -1422 3 -1422 130 -98 c72 -54 133 -98 138
+-98 4 0 7 729 7 1620 0 891 -3 1620 -7 1620 -5 0 -68 -45 -141 -100z"/>
+          <path d="M2138 4144 l-138 -105 0 -927 1 -927 128 -95 c71 -52 134 -96 140
+-98 8 -3 11 321 11 1127 0 622 -1 1131 -2 1130 -2 0 -65 -47 -140 -105z"/>
+          <path d="M1703 3631 l-132 -96 0 -435 -1 -435 133 -98 132 -98 3 316 c1 173 1
+456 0 629 l-3 314 -132 -97z"/>
         </g>
       </svg>
       <span class="footer-logo">RISCO'S SHOP</span>
@@ -1303,6 +1706,13 @@ footer a:hover {
       if (v !== null) el.innerHTML = v;
     });
     buildHours();
+    syncVanitySelection();
+    buildVanityStyle(); buildSizes(); buildMounts(); buildFinishes(); buildFeet();
+    draw(); syncLed();
+    buildMirrorShapes(); buildMirrorSizes(); drawMirror();
+    buildFaucetStyles(); buildFaucetFinishes(); drawFaucet();
+    buildDrainFinishes(); buildDrainSizes(); drawDrain();
+    buildToiletModels(); drawToilet();
   }
 
   qsa('.lang-toggle button').forEach(function(b) {
@@ -1324,6 +1734,531 @@ footer a:hover {
       var t = document.createElement('td'); t.textContent = h.t;
       tr.appendChild(d); tr.appendChild(t);
       body.appendChild(tr);
+    });
+  }
+
+  /* ── DATA ── */
+  var SIZES = [24, 30, 36, 48, 60];
+  var FINISHES = [
+    { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
+    { id:'wood',  en:'White Oak', es:'Roble',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
+  ];
+  var VANITY_STYLES = [
+    { id:'drawers',   en:'Drawers',    es:'Gavetas' },
+    { id:'doorfront', en:'Door Front', es:'Puertas' }
+  ];
+
+  /* real product photos — keyed by style, finish, mount (floating/legs — door-front only) + width (and single/double at 60in) */
+  var VANITY_PHOTOS = {
+    drawers: {
+      white: {
+        24: 'images/vanity-24-white.jpg',
+        30: 'images/vanity-30-white.jpg',
+        36: 'images/vanity-36-white.jpg',
+        48: 'images/vanity-48-white.jpg',
+        60: { single: 'images/vanity-60-single-white.jpg', double: 'images/vanity-60-double-white-oos.jpg' }
+      },
+      wood: {
+        24: 'images/vanity-24-wood.jpg',
+        30: 'images/vanity-30-wood.jpg',
+        36: 'images/vanity-36-wood.jpg',
+        48: 'images/vanity-48-wood.jpg',
+        60: { single: 'images/vanity-60-single-wood.jpg', double: 'images/vanity-60-wood-oos.jpg' }
+      }
+    },
+    doorfront: {
+      // no 30in SKU in any door-front line yet
+      white: {
+        floating: {
+          24: 'images/vanity-fv01-24-white.jpg',
+          36: 'images/vanity-fv01-36-white.jpg',
+          48: 'images/vanity-fv01-48-white.jpg',
+          60: { single: 'images/vanity-fv01-60s-white.jpg', double: 'images/vanity-fv01-60d-white.jpg' }
+        },
+        legs: {
+          24: 'images/vanity-fe01-24-white.jpg',
+          36: 'images/vanity-fe01-36-white.jpg',
+          48: 'images/vanity-fe01-48-white.jpg',
+          60: { single: 'images/vanity-fe01-60s-white.jpg', double: 'images/vanity-fe01-60d-white.jpg' }
+        }
+      },
+      wood: {
+        // no floating door-front SKU in White Oak yet
+        legs: {
+          24: 'images/vanity-fe02-24-wood.jpg',
+          30: 'images/vanity-fe02-30-wood.jpg',
+          36: 'images/vanity-fe02-36-wood.jpg',
+          // no 48in SKU yet in this line
+          60: { single: 'images/vanity-fe02-60s-wood.jpg', double: 'images/vanity-fe02-60d-wood.jpg' }
+        }
+      }
+    }
+  };
+  /* returns the real photo path for the current selection, or null when no real photo exists yet
+     (every button stays clickable regardless — a missing combination just shows "coming soon") */
+  function vanityPhotoSrc() {
+    var bySize;
+    if (vanityStyle === 'doorfront') {
+      var byFinish = VANITY_PHOTOS.doorfront[finish.id];
+      var byFoot = byFinish ? byFinish[footStyle] : null; // White Oak has no 'floating' line yet
+      bySize = byFoot ? byFoot[size] : null;
+    } else {
+      // the Drawers line only exists as a floating product — Legs has no SKU at all
+      bySize = footStyle === 'floating' ? (VANITY_PHOTOS.drawers[finish.id] || {})[size] : null;
+    }
+    if (!bySize) return null;
+    return size === 60 ? (bySize[mount] || null) : bySize;
+  }
+
+  /* no forced overrides — every button (size, mount, foot style) stays selectable; a combination
+     with no real photo simply shows a "coming soon" placeholder in the photo box */
+  function syncVanitySelection() {}
+
+  var size      = 60;
+  var mount     = 'double';    // 'single' | 'double' — only relevant when size === 60
+  var finish    = FINISHES[0];
+  var vanityStyle = 'drawers'; // 'drawers' | 'doorfront'
+  var footStyle = 'floating';  // 'floating' | 'legs'
+  var ledOn     = true;
+
+  var MIRROR_SIZES = {
+    circular:    [24, 30, 36],
+    rectangular: [24, 30, 36, 40, 48, 60]
+  };
+  var mirrorShape = 'circular';
+  var mirrorSize  = 30;
+
+  var FAUCET_STYLES = [
+    { id:'standard',  en:'Single-Handle', es:'Monomando' },
+    { id:'waterfall', en:'Waterfall',     es:'Cascada' }
+  ];
+  var FAUCET_FINISHES = {
+    standard:  [
+      { id:'gold',   en:'Gold',   es:'Oro',    hex:'#C9A227' },
+      { id:'nickel', en:'Nickel', es:'Níquel', hex:'#C0C0C8' },
+      { id:'black',  en:'Black',  es:'Negro',  hex:'#2b2b2b' }
+    ],
+    waterfall: [
+      { id:'gold',   en:'Gold',   es:'Oro',   hex:'#C9A227' },
+      { id:'chrome', en:'Chrome', es:'Cromo', hex:'#D8D8DC' },
+      { id:'black',  en:'Black',  es:'Negro', hex:'#2b2b2b' }
+    ]
+  };
+  var faucetStyle  = 'standard';
+  var faucetFinish = 'gold';
+
+  var DRAIN_FINISHES = [
+    { id:'nickel', en:'Nickel', es:'Níquel', hex:'#C0C0C8' },
+    { id:'black',  en:'Black',  es:'Negro',  hex:'#2b2b2b' },
+    { id:'gold',   en:'Gold',   es:'Oro',    hex:'#C9A227' }
+  ];
+  var DRAIN_SIZES = [12, 24, 32];
+  var drainFinish = 'nickel';
+  var drainSize   = 24;
+
+  var TOILET_MODELS = [
+    { id:'a010',  en:'Elongated',  es:'Alargado',   labelEn:'Elongated, Seamless',        labelEs:'Alargado, sin uniones',
+      tankW:68, tankH:30, bowlRx:58, bowlRy:46, flush:'top',  smart:false },
+    { id:'a04',   en:'Compact',    es:'Compacto',   labelEn:'Compact',                    labelEs:'Compacto',
+      tankW:60, tankH:38, bowlRx:40, bowlRy:32, flush:'top',  smart:false },
+    { id:'a09',   en:'Sculptural', es:'Escultural', labelEn:'Sculptural, Side Flush',     labelEs:'Escultural, descarga lateral',
+      tankW:78, tankH:42, bowlRx:52, bowlRy:42, flush:'side', smart:false },
+    { id:'a03',   en:'Rounded',    es:'Redondeado', labelEn:'Rounded, Side Flush',        labelEs:'Redondeado, descarga lateral',
+      tankW:72, tankH:40, bowlRx:50, bowlRy:44, flush:'side', smart:false },
+    { id:'smart', en:'Smart',      es:'Inteligente',labelEn:'Smart Toilet',               labelEs:'Inodoro inteligente',
+      tankW:82, tankH:46, bowlRx:54, bowlRy:44, flush:'none', smart:true  }
+  ];
+  var toiletModel = 'a010';
+  var TOILET_TANK_Y = 188, TOILET_CX = 1150, TOILET_SEAT_CY = 236, TOILET_BOWL_CY = 278;
+
+
+  /* re-validates the current selection, then rebuilds every vanity control + the photo */
+  function refreshVanity() {
+    syncVanitySelection();
+    buildVanityStyle(); buildSizes(); buildMounts(); buildFinishes(); buildFeet();
+    draw();
+  }
+
+  /* ── SVG CONSTANTS (vanity) ── */
+  var CENTER = 500, PPI = 9.7875;   // svg units per inch  (1000px wide, 60in → 587px) — scaled 1.35x from the original 7.25 so the vanity photo reads larger and more detailed
+  var FLOOR_Y = 560;
+  var PHOTO_Y = 275, PHOTO_H = 270;
+
+  /* ── DRAW VANITY (real photo, sized to width / finish / sink — legs are illustrative only) ── */
+  function draw() {
+    var w = size * PPI;
+    var x = CENTER - w / 2;
+    var isDouble = (size === 60 && mount === 'double');
+
+    var boxX = x - 10.8, boxW = w + 21.6;
+    var bg  = $('sPhotoBg');
+    var img = $('sVanityPhoto');
+    bg.setAttribute('x', boxX);   bg.setAttribute('width', boxW);
+    bg.setAttribute('y', PHOTO_Y); bg.setAttribute('height', PHOTO_H);
+    img.setAttribute('x', boxX);  img.setAttribute('width', boxW);
+    img.setAttribute('y', PHOTO_Y); img.setAttribute('height', PHOTO_H);
+    var src = vanityPhotoSrc();
+    var cs = $('sComingSoon');
+    if (src) {
+      img.style.display = '';
+      bg.style.display = '';
+      cs.style.display = 'none';
+      img.setAttribute('href', src);
+      img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', src);
+      img.setAttribute('aria-label',
+        (lang === 'es' ? 'Foto de la vanidad flotante de ' : 'Photo of the floating vanity, ') + size +
+        (lang === 'es' ? ' pulgadas, acabado ' : ' in, ') +
+        (lang === 'es' ? finish.es : finish.en));
+    } else {
+      img.style.display = 'none';
+      bg.style.display = 'none';
+      cs.style.display = '';
+      var csBg = $('sComingSoonBg');
+      csBg.setAttribute('x', boxX);   csBg.setAttribute('width', boxW);
+      csBg.setAttribute('y', PHOTO_Y); csBg.setAttribute('height', PHOTO_H);
+      var ccx = boxX + boxW / 2, ccy = PHOTO_Y + PHOTO_H / 2;
+      $('sComingSoonIcon').setAttribute('transform', 'translate(' + ccx + ',' + (ccy - 16) + ')');
+      var csText = $('sComingSoonText');
+      csText.setAttribute('x', ccx);
+      csText.setAttribute('y', ccy + 38);
+      csText.textContent = lang === 'es' ? 'Foto próximamente' : 'Photo coming soon';
+    }
+
+    var shadow = $('sShadow');
+    if (footStyle === 'legs') {
+      shadow.setAttribute('cy', FLOOR_Y - 3);
+      shadow.setAttribute('rx', Math.max(w / 2 - 6, 40));
+      shadow.setAttribute('ry', 5);
+    } else {
+      shadow.setAttribute('cy', 525);
+      shadow.setAttribute('rx', w / 2 + 16);
+      shadow.setAttribute('ry', 14);
+    }
+
+    $('sDimLine').setAttribute('x1', x);
+    $('sDimLine').setAttribute('x2', x + w);
+    $('sTickL').setAttribute('transform', 'translate(' + (x - 282) + ',0)');
+    $('sTickR').setAttribute('transform', 'translate(' + ((x + w) - 718) + ',0)');
+    $('sDimText').textContent = size + '\u2033' + (isDouble ? 'D' : (size === 60 ? 'S' : ''));
+
+    var lbx = CENTER - 40;
+    var lbRect = $('sDimLabel').querySelector('rect');
+    var lbText = $('sDimLabel').querySelector('text');
+    if (lbRect) lbRect.setAttribute('x', lbx);
+    if (lbText) lbText.setAttribute('x', CENTER);
+
+    $('stage').setAttribute('aria-label',
+      (lang === 'es' ? 'Vanidad flotante de ' : 'Floating vanity, ') + size +
+      (lang === 'es' ? ' pulgadas' : ' in') +
+      (isDouble ? (lang === 'es' ? ', doble lavabo' : ', double sink') : '') +
+      (lang === 'es' ? ', acabado ' : ', finish ') +
+      (lang === 'es' ? finish.es : finish.en) +
+      (footStyle === 'legs' ? (lang === 'es' ? ', con patas' : ', on legs') : ''));
+  }
+
+  function buildVanityStyle() {
+    var host = $('vanityStyles'); host.innerHTML = '';
+    VANITY_STYLES.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === vanityStyle));
+      b.addEventListener('click', function(){ vanityStyle = o.id; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildSizes() {
+    var host = $('sizes'); host.innerHTML = '';
+    SIZES.forEach(function(s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s + '\u2033';
+      b.setAttribute('aria-pressed', String(s === size));
+      b.addEventListener('click', function(){ size = s; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildMounts() {
+    var ctl = $('mountCtl'), host = $('mounts');
+    if (size !== 60) { ctl.style.display = 'none'; return; }
+    ctl.style.display = 'grid';
+    host.innerHTML = '';
+    var opts = [
+      { id:'single', en:'Single (60S)', es:'Sencillo (60S)' },
+      { id:'double',  en:'Double (60D)', es:'Doble (60D)' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === mount));
+      b.addEventListener('click', function(){ mount = o.id; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildFinishes() {
+    var host = $('finishes'); host.innerHTML = '';
+    FINISHES.forEach(function(f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = f.cab;
+      var lbl = lang === 'es' ? f.es : f.en;
+      b.setAttribute('aria-label', lbl);
+      b.setAttribute('aria-pressed', String(f.id === finish.id));
+      b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
+      b.addEventListener('click', function(){ finish = f; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildFeet() {
+    var host = $('feet'); host.innerHTML = '';
+    var opts = [
+      { id:'floating', en:'Floating', es:'Flotante' },
+      { id:'legs',     en:'Legs',     es:'Patas' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === footStyle));
+      b.addEventListener('click', function(){ footStyle = o.id; refreshVanity(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── LED TOGGLE (mirror) ── */
+  function syncLed() {
+    var btn = $('ledBtn');
+    btn.setAttribute('aria-pressed', String(ledOn));
+    $('ledLabel').textContent = ledOn
+      ? (lang === 'es' ? 'LED encendido' : 'LED on')
+      : (lang === 'es' ? 'LED apagado'   : 'LED off');
+    $('stage').classList.toggle('mirror-off', !ledOn);
+  }
+  $('ledBtn').addEventListener('click', function(){ ledOn = !ledOn; syncLed(); });
+
+  /* ── MIRROR (independent of vanity width — shape + size selectable) ── */
+  var MCX = 500, MCY = 162, MPPI = 5.4;
+  var MIRROR_RECT_H_IN = 30; // rectangular mirrors are always 30in tall
+
+  function drawMirror() {
+    var isCirc = mirrorShape === 'circular';
+    $('mCircGroup').style.display = isCirc ? '' : 'none';
+    $('mRectGroup').style.display = isCirc ? 'none' : '';
+
+    if (isCirc) {
+      var r = (mirrorSize * MPPI) / 2;
+      ['mCircBloom','mCircGlow','mCircHalo','mCircInner','mCircGlass'].forEach(function(id){
+        $(id).setAttribute('cx', MCX); $(id).setAttribute('cy', MCY); $(id).setAttribute('r', r);
+      });
+      $('mCircFrame').setAttribute('cx', MCX);
+      $('mCircFrame').setAttribute('cy', MCY);
+      $('mCircFrame').setAttribute('r', r + 2);
+    } else {
+      var w = mirrorSize * MPPI;
+      var h = MIRROR_RECT_H_IN * MPPI;
+      var x = MCX - w / 2, y = MCY - h / 2;
+      ['mRectBloom','mRectGlow','mRectHalo','mRectInner','mRectGlass'].forEach(function(id){
+        var el = $(id);
+        el.setAttribute('x', x); el.setAttribute('y', y);
+        el.setAttribute('width', w); el.setAttribute('height', h);
+      });
+      $('mRectFrame').setAttribute('x', x - 2);
+      $('mRectFrame').setAttribute('y', y - 2);
+      $('mRectFrame').setAttribute('width', w + 4);
+      $('mRectFrame').setAttribute('height', h + 4);
+    }
+  }
+
+  function buildMirrorShapes() {
+    var host = $('mirrorShapes'); host.innerHTML = '';
+    var opts = [
+      { id:'circular',    en:'Circular',    es:'Circular' },
+      { id:'rectangular', en:'Rectangular', es:'Rectangular' }
+    ];
+    opts.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === mirrorShape));
+      b.addEventListener('click', function(){
+        mirrorShape = o.id;
+        var validSizes = MIRROR_SIZES[mirrorShape];
+        if (validSizes.indexOf(mirrorSize) === -1) { mirrorSize = validSizes[Math.floor(validSizes.length / 2)]; }
+        buildMirrorShapes(); buildMirrorSizes(); drawMirror();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildMirrorSizes() {
+    var host = $('mirrorSizes'); host.innerHTML = '';
+    MIRROR_SIZES[mirrorShape].forEach(function(s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s + '\u2033';
+      b.setAttribute('aria-pressed', String(s === mirrorSize));
+      b.addEventListener('click', function(){ mirrorSize = s; buildMirrorSizes(); drawMirror(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── FAUCET (style + finish selectable) ── */
+  function drawFaucet() {
+    var isWf = faucetStyle === 'waterfall';
+    var plate = $('sSpoutPlate'), arm = $('sSpoutArm'), tip = $('sSpoutTip');
+    var finObj = FAUCET_FINISHES[faucetStyle].filter(function(f){ return f.id === faucetFinish; })[0] || FAUCET_FINISHES[faucetStyle][0];
+    var hex = finObj.hex;
+    if (isWf) {
+      plate.setAttribute('x', 1120); plate.setAttribute('y', 52); plate.setAttribute('width', 60); plate.setAttribute('height', 10); plate.setAttribute('rx', 3);
+      arm.setAttribute('x', 1112); arm.setAttribute('y', 62); arm.setAttribute('width', 76); arm.setAttribute('height', 14); arm.setAttribute('rx', 3);
+      tip.style.display = 'none';
+    } else {
+      plate.setAttribute('x', 1134); plate.setAttribute('y', 52); plate.setAttribute('width', 32); plate.setAttribute('height', 11); plate.setAttribute('rx', 3.5);
+      arm.setAttribute('x', 1145); arm.setAttribute('y', 63); arm.setAttribute('width', 10); arm.setAttribute('height', 46); arm.setAttribute('rx', 5);
+      tip.style.display = '';
+      tip.setAttribute('fill', hex);
+    }
+    plate.setAttribute('fill', hex);
+    arm.setAttribute('fill', hex);
+
+    var styleObj = FAUCET_STYLES.filter(function(s){ return s.id === faucetStyle; })[0];
+    var styleLabel = lang === 'es' ? styleObj.es : styleObj.en;
+    var finLabel = lang === 'es' ? finObj.es : finObj.en;
+    $('sFaucetLabel').textContent = styleLabel + ' \u00b7 ' + finLabel;
+  }
+
+  function buildFaucetStyles() {
+    var host = $('faucetStyles'); host.innerHTML = '';
+    FAUCET_STYLES.forEach(function(o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? o.es : o.en;
+      b.setAttribute('aria-pressed', String(o.id === faucetStyle));
+      b.addEventListener('click', function(){
+        faucetStyle = o.id;
+        var validFinishes = FAUCET_FINISHES[faucetStyle].map(function(f){ return f.id; });
+        if (validFinishes.indexOf(faucetFinish) === -1) { faucetFinish = validFinishes[0]; }
+        buildFaucetStyles(); buildFaucetFinishes(); drawFaucet();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildFaucetFinishes() {
+    var host = $('faucetFinishes'); host.innerHTML = '';
+    FAUCET_FINISHES[faucetStyle].forEach(function(f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = f.hex;
+      var lbl = lang === 'es' ? f.es : f.en;
+      b.setAttribute('aria-label', lbl);
+      b.setAttribute('aria-pressed', String(f.id === faucetFinish));
+      b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
+      b.addEventListener('click', function(){ faucetFinish = f.id; buildFaucetFinishes(); drawFaucet(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── SHOWER DRAIN (finish + length, illustrated in the side panel) ── */
+  function drawDrain() {
+    var body = $('sDrainBody');
+    var w = 60 + (drainSize - 12) * (140 - 60) / (32 - 12);
+    var x = 1150 - w / 2;
+    var finObj = DRAIN_FINISHES.filter(function(f){ return f.id === drainFinish; })[0] || DRAIN_FINISHES[0];
+    body.setAttribute('x', x);
+    body.setAttribute('width', w);
+    body.setAttribute('fill', finObj.hex);
+    var slot = $('sDrainSlot1');
+    slot.setAttribute('x1', x + 12);
+    slot.setAttribute('x2', x + w - 12);
+    var finLabel = lang === 'es' ? finObj.es : finObj.en;
+    $('sDrainLabel').textContent = drainSize + '\u2033 \u00b7 ' + finLabel;
+  }
+
+  function buildDrainFinishes() {
+    var host = $('drainFinishes'); host.innerHTML = '';
+    DRAIN_FINISHES.forEach(function(f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = f.hex;
+      var lbl = lang === 'es' ? f.es : f.en;
+      b.setAttribute('aria-label', lbl);
+      b.setAttribute('aria-pressed', String(f.id === drainFinish));
+      b.innerHTML = '<span class="fin-tooltip">' + lbl + '</span>';
+      b.addEventListener('click', function(){ drainFinish = f.id; buildDrainFinishes(); drawDrain(); });
+      host.appendChild(b);
+    });
+  }
+
+  function buildDrainSizes() {
+    var host = $('drainSizes'); host.innerHTML = '';
+    DRAIN_SIZES.forEach(function(s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s + '\u2033';
+      b.setAttribute('aria-pressed', String(s === drainSize));
+      b.addEventListener('click', function(){ drainSize = s; buildDrainSizes(); drawDrain(); });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── TOILET (model selector, illustrated in the side panel — shape actually changes per model) ── */
+  function drawToilet() {
+    var m = TOILET_MODELS.filter(function(t){ return t.id === toiletModel; })[0] || TOILET_MODELS[0];
+
+    var tank = $('sToiletTank');
+    tank.setAttribute('x', TOILET_CX - m.tankW / 2);
+    tank.setAttribute('y', TOILET_TANK_Y);
+    tank.setAttribute('width', m.tankW);
+    tank.setAttribute('height', m.tankH);
+
+    var bowl = $('sToiletBowl');
+    bowl.setAttribute('cx', TOILET_CX);
+    bowl.setAttribute('cy', TOILET_BOWL_CY);
+    bowl.setAttribute('rx', m.bowlRx);
+    bowl.setAttribute('ry', m.bowlRy);
+
+    var seat = $('sToiletSeat');
+    seat.setAttribute('rx', m.bowlRx + 2);
+    seat.setAttribute('stroke', m.smart ? '#7A6B4D' : 'rgba(0,0,0,.2)');
+
+    var flush = $('sToiletFlush');
+    if (m.flush === 'top') {
+      flush.style.display = '';
+      flush.setAttribute('x', TOILET_CX - 7);
+      flush.setAttribute('y', TOILET_TANK_Y + 6);
+      flush.setAttribute('width', 14);
+      flush.setAttribute('height', 5);
+    } else if (m.flush === 'side') {
+      flush.style.display = '';
+      flush.setAttribute('x', TOILET_CX + m.tankW / 2 - 6);
+      flush.setAttribute('y', TOILET_TANK_Y + m.tankH / 2 - 8);
+      flush.setAttribute('width', 5);
+      flush.setAttribute('height', 16);
+    } else {
+      flush.style.display = 'none';
+    }
+
+    $('sToiletSmartPanel').style.display = m.smart ? '' : 'none';
+    var label = $('sToiletLabel');
+    label.setAttribute('y', TOILET_BOWL_CY + m.bowlRy + 18);
+    label.textContent = lang === 'es' ? m.labelEs : m.labelEn;
+  }
+
+  function buildToiletModels() {
+    var host = $('toiletModels'); host.innerHTML = '';
+    TOILET_MODELS.forEach(function(m) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lang === 'es' ? m.es : m.en;
+      b.setAttribute('aria-pressed', String(m.id === toiletModel));
+      b.addEventListener('click', function(){ toiletModel = m.id; buildToiletModels(); drawToilet(); });
+      host.appendChild(b);
     });
   }
 
