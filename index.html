@@ -945,6 +945,20 @@ footer a:hover {
   letter-spacing: .16em; text-transform: uppercase; color: var(--brass-lt);
 }
 
+/* side-by-side layout: photo stays pinned on the left while controls scroll on the right.
+   The stage column is stretched to match the (taller) controls column's height so the
+   sticky photo inside it has room to travel and stay in view the whole time. */
+.configurator-layout .configurator { margin-top: 0 }
+@media (min-width: 900px) {
+  .configurator-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--sp-5);
+    align-items: stretch;
+  }
+  .configurator-stage-col .stage-wrap { position: sticky; top: 88px }
+}
+
 /* size chips */
 .sizes { display: flex; flex-wrap: wrap; gap: 8px }
 .sizes button {
@@ -1220,8 +1234,10 @@ footer a:hover {
     </div>
 
     <div class="reveal">
-      <!-- Stage -->
-      <div class="stage-wrap">
+      <div class="configurator-layout">
+        <!-- Stage -->
+        <div class="configurator-stage-col">
+        <div class="stage-wrap">
         <svg class="stage-svg-el" id="stage" viewBox="0 0 1300 630"
              aria-label="Interactive diagram of a floating bathroom vanity with mirror, faucet, drain, and toilet">
           <defs>
@@ -1357,10 +1373,11 @@ footer a:hover {
         </svg>
 
         <p class="stage-caption" data-en="The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price." data-es="La foto de la vanidad es real. El espejo, grifo, desagüe e inodoro son un diagrama general para comparar — no son la foto ni el precio de un producto específico.">The vanity photo is real. Mirror, faucet, drain, and toilet are a general diagram for comparison — not a specific product photo or price.</p>
-      </div>
+        </div>
+        </div>
 
-      <!-- Controls -->
-      <div class="configurator">
+        <!-- Controls -->
+        <div class="configurator">
         <div class="ctl-group-label" data-en="Vanity" data-es="Vanidad">Vanity</div>
         <div class="ctl-row">
           <div class="ctl">
@@ -1434,6 +1451,7 @@ footer a:hover {
             <span class="ctl-label" id="lblToilet" data-en="Model" data-es="Modelo">Model</span>
             <div class="sizes" role="group" aria-labelledby="lblToilet" id="toiletModels"></div>
           </div>
+        </div>
         </div>
       </div>
 
