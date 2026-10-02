@@ -1763,7 +1763,7 @@ footer a:hover {
   var SIZES = [24, 30, 36, 48, 60];
   var FINISHES = [
     { id:'white', en:'White',     es:'Blanco',  cab:'#EDEDEA', pull:'#B9BCB7', grad:['#EDEDEA','#D8D8D4'] },
-    { id:'wood',  en:'White Oak', es:'Roble',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
+    { id:'wood',  en:'Wood', es:'Color madera',   cab:'#9D8B66', pull:'#4A3B29', grad:['#9D8B66','#6B5A3E'] }
   ];
   var VANITY_STYLES = [
     { id:'drawers',   en:'Drawers',    es:'Gavetas' },
@@ -1806,7 +1806,7 @@ footer a:hover {
         }
       },
       wood: {
-        // no floating door-front SKU in White Oak yet
+        // no floating door-front SKU in Wood yet
         legs: {
           24: 'images/vanity-fe02-24-wood.jpg',
           30: 'images/vanity-fe02-30-wood.jpg',
@@ -1823,7 +1823,7 @@ footer a:hover {
     var bySize;
     if (vanityStyle === 'doorfront') {
       var byFinish = VANITY_PHOTOS.doorfront[finish.id];
-      var byFoot = byFinish ? byFinish[footStyle] : null; // White Oak has no 'floating' line yet
+      var byFoot = byFinish ? byFinish[footStyle] : null; // Wood has no 'floating' line yet
       bySize = byFoot ? byFoot[size] : null;
     } else {
       // the Drawers line only exists as a floating product — Legs has no SKU at all
