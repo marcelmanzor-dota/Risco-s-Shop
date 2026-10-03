@@ -835,6 +835,31 @@ footer a:hover {
 .page-hero h1 em { font-style: italic; color: var(--brass-lt) }
 .page-hero p { max-width: 640px; margin-top: var(--sp-3); color: var(--on-forest); opacity: .85; font-size: 17px; line-height: 1.6 }
 
+
+/* ── Quick-jump chips in the page hero ── */
+.page-hero .wrap { display: flex; flex-direction: column; gap: var(--sp-5) }
+.hero-jump { flex: 0 0 auto }
+.hero-jump-label {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--brass-lt); margin-bottom: 12px;
+}
+.hero-jump-chips { display: flex; flex-wrap: wrap; gap: 10px }
+.hero-jump-chips a {
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+  padding: 10px 18px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--paper); text-decoration: none;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.28);
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.hero-jump-chips a:hover, .hero-jump-chips a:focus-visible { background: var(--brass-lt); border-color: var(--brass-lt); color: var(--forest-dk); transform: translateY(-1px) }
+@media (min-width: 960px) {
+  .page-hero .wrap { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: var(--sp-6) }
+  .page-hero .wrap > div:first-child { flex: 1 1 auto; min-width: 0 }
+  .hero-jump { width: 400px }
+  .hero-jump-chips { display: grid; grid-template-columns: repeat(2, 1fr) }
+}
+.catalog-divider[id] { scroll-margin-top: 130px }
+
 .product-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--sp-4); margin-top: var(--sp-5);
@@ -989,9 +1014,15 @@ footer a:hover {
      ============================================================ -->
 <div class="page-hero">
   <div class="wrap">
+    <div>
     <p class="eyebrow" data-en="Direct importer · Cutler Bay, Miami" data-es="Importador directo · Cutler Bay, Miami">Direct importer · Cutler Bay, Miami</p>
     <h1><span data-en="Our" data-es="Nuestras">Our</span> <em data-en="vanities." data-es="vanidades.">vanities.</em></h1>
     <p data-en="The best vanities in Florida, direct from the importer — every size we stock, with full specs and pricing. Vanities sold here include the vanity and full mounting kit. Want the complete look with mirror, faucet, and drain included? Check out our Combos." data-es="Las mejores vanidades de Florida, directo del importador — cada tamaño que tenemos en inventario, con todas sus especificaciones y precio. Las vanidades vendidas aquí incluyen la vanidad y el kit de instalación completo. ¿Quieres el look completo con espejo, grifo y desagüe incluidos? Visita nuestra página de Combos.">The best vanities in Florida, direct from the importer — every size we stock, with full specs and pricing. Vanities sold here include the vanity and full mounting kit. Want the complete look with mirror, faucet, and drain included? Check out our <a href="combos.html" style="color:inherit;text-decoration:underline">Combos</a>.</p>
+    </div>
+    <div class="hero-jump">
+      <p class="hero-jump-label" data-en="Jump to" data-es="Ir a">Jump to</p>
+      <nav class="hero-jump-chips" aria-label="Product sections"><a href="#sec-floating-white" data-en="Floating White" data-es="Flotante Blanco">Floating White</a><a href="#sec-floating-wood" data-en="Floating Wood" data-es="Flotante Madera">Floating Wood</a><a href="#sec-floating-doors" data-en="Floating Doors" data-es="Flotante Puertas">Floating Doors</a><a href="#sec-standing-white" data-en="Standing White" data-es="De piso Blanco">Standing White</a><a href="#sec-standing-wood" data-en="Standing Wood" data-es="De piso Madera">Standing Wood</a><a href="#sec-double" data-en="72&quot; &amp; 82&quot;" data-es="72&quot; y 82&quot;">72&quot; &amp; 82&quot;</a><a href="#sec-cabinets" data-en="Cabinets" data-es="Gabinetes">Cabinets</a></nav>
+    </div>
   </div>
 </div>
 
@@ -1001,7 +1032,7 @@ footer a:hover {
      ============================================================ -->
 <section id="catalog" style="padding-top:var(--sp-6)">
   <div class="wrap">
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-floating-white">
       <span data-en="Floating Vanity — White" data-es="Vanidad Flotante — Blanco">Floating Vanity — White</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1074,7 +1105,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-floating-wood">
       <span data-en="Floating Vanity — Wood" data-es="Vanidad Flotante — Color madera">Floating Vanity — Wood</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1146,7 +1177,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-floating-doors">
       <span data-en="Floating Vanity — White, Door Front" data-es="Vanidad Flotante — Blanco, Puertas">Floating Vanity — White, Door Front</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1218,7 +1249,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-standing-white">
       <span data-en="Freestanding Vanity — White, Door Front" data-es="Vanidad con Patas — Blanco, Puertas">Freestanding Vanity — White, Door Front</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1290,7 +1321,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-standing-wood">
       <span data-en="Freestanding Vanity — Wood, Door Front" data-es="Vanidad con Patas — Color madera, Puertas">Freestanding Vanity — Wood, Door Front</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1358,6 +1389,84 @@ footer a:hover {
           <span class="product-spec" data-en="60&quot; x 18&quot; · Four drawers, two doors · Double sink" data-es="60&quot; x 18&quot; · Cuatro gavetas, dos puertas · Lavabo doble">60&quot; x 18&quot; · Four drawers, two doors · Double sink</span>
           <span class="product-desc" data-en="Our largest freestanding vanity in warm wood, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath." data-es="Nuestra vanidad con patas más grande en cálido color madera, con dos lavabos completos y amplio almacenamiento — dos gavetas a cada lado más un gabinete central de dos puertas con repisas internas para toallas y artículos de baño. Sus patas robustas le dan una postura clásica y asentada — pensada para un baño principal compartido.">Our largest freestanding vanity in warm wood, with two full basins and generous storage — two drawers on each side plus a central two-door cabinet with open shelving inside for towels and toiletries. Sturdy leg construction gives it a grounded, classic stance — built for a shared primary bath.</span>
           <span class="product-price">$960<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal" id="sec-double">
+      <span data-en="Double Vanities — 72&quot; &amp; 82&quot;" data-es="Vanidades Dobles — 72&quot; y 82&quot;">Double Vanities — 72&quot; &amp; 82&quot;</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-dbl-dark-rect.jpg" alt="72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Rectangular Bowls" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Rectangular Bowls" data-es="Vanidad flotante doble 72&quot; / 82&quot; — Color madera oscuro, Lavabos Rectangulares">72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Rectangular Bowls</span>
+          <span class="product-spec" data-en="72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included" data-es="72&quot; y 82&quot; · Flotante · Lavabo doble · Incluye encimera y 2 lavabos">72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included</span>
+          <span class="product-desc" data-en="Our 72&quot; and 82&quot; floating double vanity in dark wood, shown with a white counter top and two rectangular bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included." data-es="Nuestra vanidad flotante doble de 72&quot; y 82&quot; en color madera oscuro, mostrada con encimera blanca y dos lavabos rectangulares. La de 72&quot; cuesta $1,080 y la de 82&quot; cuesta $1,280. El precio incluye únicamente la vanidad, la encimera y los 2 lavabos (cualquiera de los dos estilos mostrados en esta página) — el espejo y los grifos que aparecen en la foto no están incluidos.">Our 72&quot; and 82&quot; floating double vanity in dark wood, shown with a white counter top and two rectangular bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included.</span>
+          <span class="product-price">From $1,080<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-dbl-dark-round.jpg" alt="72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Round Bowls" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Round Bowls" data-es="Vanidad flotante doble 72&quot; / 82&quot; — Color madera oscuro, Lavabos Redondos">72&quot; / 82&quot; Floating Double Vanity — Dark Wood, Round Bowls</span>
+          <span class="product-spec" data-en="72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included" data-es="72&quot; y 82&quot; · Flotante · Lavabo doble · Incluye encimera y 2 lavabos">72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included</span>
+          <span class="product-desc" data-en="Our 72&quot; and 82&quot; floating double vanity in dark wood, shown with a white counter top and two round bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included." data-es="Nuestra vanidad flotante doble de 72&quot; y 82&quot; en color madera oscuro, mostrada con encimera blanca y dos lavabos redondos. La de 72&quot; cuesta $1,080 y la de 82&quot; cuesta $1,280. El precio incluye únicamente la vanidad, la encimera y los 2 lavabos (cualquiera de los dos estilos mostrados en esta página) — el espejo y los grifos que aparecen en la foto no están incluidos.">Our 72&quot; and 82&quot; floating double vanity in dark wood, shown with a white counter top and two round bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included.</span>
+          <span class="product-price">From $1,080<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-dbl-wood-rect.jpg" alt="72&quot; / 82&quot; Floating Double Vanity — Wood, Rectangular Bowls" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="72&quot; / 82&quot; Floating Double Vanity — Wood, Rectangular Bowls" data-es="Vanidad flotante doble 72&quot; / 82&quot; — Color madera, Lavabos Rectangulares">72&quot; / 82&quot; Floating Double Vanity — Wood, Rectangular Bowls</span>
+          <span class="product-spec" data-en="72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included" data-es="72&quot; y 82&quot; · Flotante · Lavabo doble · Incluye encimera y 2 lavabos">72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included</span>
+          <span class="product-desc" data-en="Our 72&quot; and 82&quot; floating double vanity in light wood, shown with a white counter top and two rectangular bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included." data-es="Nuestra vanidad flotante doble de 72&quot; y 82&quot; en color madera claro, mostrada con encimera blanca y dos lavabos rectangulares. La de 72&quot; cuesta $1,080 y la de 82&quot; cuesta $1,280. El precio incluye únicamente la vanidad, la encimera y los 2 lavabos (cualquiera de los dos estilos mostrados en esta página) — el espejo y los grifos que aparecen en la foto no están incluidos.">Our 72&quot; and 82&quot; floating double vanity in light wood, shown with a white counter top and two rectangular bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included.</span>
+          <span class="product-price">From $1,080<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/vanity-dbl-wood-round.jpg" alt="72&quot; / 82&quot; Floating Double Vanity — Wood, Round Bowls" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="72&quot; / 82&quot; Floating Double Vanity — Wood, Round Bowls" data-es="Vanidad flotante doble 72&quot; / 82&quot; — Color madera, Lavabos Redondos">72&quot; / 82&quot; Floating Double Vanity — Wood, Round Bowls</span>
+          <span class="product-spec" data-en="72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included" data-es="72&quot; y 82&quot; · Flotante · Lavabo doble · Incluye encimera y 2 lavabos">72&quot; and 82&quot; · Floating · Double sink · Counter top and 2 bowls included</span>
+          <span class="product-desc" data-en="Our 72&quot; and 82&quot; floating double vanity in light wood, shown with a white counter top and two round bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included." data-es="Nuestra vanidad flotante doble de 72&quot; y 82&quot; en color madera claro, mostrada con encimera blanca y dos lavabos redondos. La de 72&quot; cuesta $1,080 y la de 82&quot; cuesta $1,280. El precio incluye únicamente la vanidad, la encimera y los 2 lavabos (cualquiera de los dos estilos mostrados en esta página) — el espejo y los grifos que aparecen en la foto no están incluidos.">Our 72&quot; and 82&quot; floating double vanity in light wood, shown with a white counter top and two round bowls. The 72&quot; is $1,080 and the 82&quot; is $1,280. Price includes only the vanity, counter top, and the 2 bowls (either bowl style shown on this page) — the mirror and faucets pictured are not included.</span>
+          <span class="product-price">From $1,080<sup> USD</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-divider reveal" id="sec-cabinets">
+      <span data-en="Cabinets" data-es="Gabinetes">Cabinets</span>
+    </div>
+    <div class="product-grid reveal reveal-stagger">
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/cabinet-white.jpg" alt="Wall Cabinet — White" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Wall Cabinet — White" data-es="Gabinete de pared — Blanco">Wall Cabinet — White</span>
+          <span class="product-spec" data-en="Wall-mounted · Two doors · Interior shelves" data-es="De pared · Dos puertas · Repisas interiores">Wall-mounted · Two doors · Interior shelves</span>
+          <span class="product-desc" data-en="A wall-mounted two-door storage cabinet in a clean white finish, with interior shelves for towels and toiletries. Sold individually." data-es="Gabinete de pared de dos puertas en un acabado blanco, con repisas interiores para toallas y artículos de aseo. Se vende por unidad.">A wall-mounted two-door storage cabinet in a clean white finish, with interior shelves for towels and toiletries. Sold individually.</span>
+          <span class="product-price">$350<sup> USD</sup></span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-photo">
+          <img src="images/cabinet-wood.jpg" alt="Wall Cabinet — Wood" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-name" data-en="Wall Cabinet — Wood" data-es="Gabinete de pared — Color madera">Wall Cabinet — Wood</span>
+          <span class="product-spec" data-en="Wall-mounted · Two doors · Interior shelves" data-es="De pared · Dos puertas · Repisas interiores">Wall-mounted · Two doors · Interior shelves</span>
+          <span class="product-desc" data-en="A wall-mounted two-door storage cabinet in a clean wood-finish finish, with interior shelves for towels and toiletries. Sold individually." data-es="Gabinete de pared de dos puertas en un acabado color madera, con repisas interiores para toallas y artículos de aseo. Se vende por unidad.">A wall-mounted two-door storage cabinet in a clean wood-finish finish, with interior shelves for towels and toiletries. Sold individually.</span>
+          <span class="product-price">$350<sup> USD</sup></span>
         </div>
       </div>
     </div>

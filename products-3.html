@@ -835,6 +835,31 @@ footer a:hover {
 .page-hero h1 em { font-style: italic; color: var(--brass-lt) }
 .page-hero p { max-width: 640px; margin-top: var(--sp-3); color: var(--on-forest); opacity: .85; font-size: 17px; line-height: 1.6 }
 
+
+/* ── Quick-jump chips in the page hero ── */
+.page-hero .wrap { display: flex; flex-direction: column; gap: var(--sp-5) }
+.hero-jump { flex: 0 0 auto }
+.hero-jump-label {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--brass-lt); margin-bottom: 12px;
+}
+.hero-jump-chips { display: flex; flex-wrap: wrap; gap: 10px }
+.hero-jump-chips a {
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+  padding: 10px 18px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--paper); text-decoration: none;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.28);
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.hero-jump-chips a:hover, .hero-jump-chips a:focus-visible { background: var(--brass-lt); border-color: var(--brass-lt); color: var(--forest-dk); transform: translateY(-1px) }
+@media (min-width: 960px) {
+  .page-hero .wrap { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: var(--sp-6) }
+  .page-hero .wrap > div:first-child { flex: 1 1 auto; min-width: 0 }
+  .hero-jump { width: 400px }
+  .hero-jump-chips { display: grid; grid-template-columns: repeat(2, 1fr) }
+}
+.catalog-divider[id] { scroll-margin-top: 130px }
+
 .product-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--sp-4); margin-top: var(--sp-5);
@@ -989,9 +1014,15 @@ footer a:hover {
      ============================================================ -->
 <div class="page-hero">
   <div class="wrap">
+    <div>
     <p class="eyebrow" data-en="Direct importer · Cutler Bay, Miami" data-es="Importador directo · Cutler Bay, Miami">Direct importer · Cutler Bay, Miami</p>
     <h1><span data-en="Our" data-es="Nuestros">Our</span> <em data-en="fixtures &amp; hardware." data-es="grifería y herrajes.">fixtures &amp; hardware.</em></h1>
     <p data-en="Faucets, shower systems, freestanding tub fillers, drains, and finishing hardware for every bathroom." data-es="Grifos, sistemas de ducha, llaves de bañera exentas, desagües y herrajes de acabado para cualquier baño.">Faucets, shower systems, freestanding tub fillers, drains, and finishing hardware for every bathroom.</p>
+    </div>
+    <div class="hero-jump">
+      <p class="hero-jump-label" data-en="Jump to" data-es="Ir a">Jump to</p>
+      <nav class="hero-jump-chips" aria-label="Product sections"><a href="#sec-faucets" data-en="Faucets" data-es="Grifos">Faucets</a><a href="#sec-drains" data-en="Drains" data-es="Desagües">Drains</a><a href="#sec-showers" data-en="Showers" data-es="Duchas">Showers</a><a href="#sec-tubfillers" data-en="Tub Fillers" data-es="Llaves de bañera">Tub Fillers</a><a href="#sec-hanging" data-en="Hanging Sets" data-es="Herrajes">Hanging Sets</a><a href="#sec-mirrors" data-en="Mirrors" data-es="Espejos">Mirrors</a></nav>
+    </div>
   </div>
 </div>
 
@@ -1001,7 +1032,7 @@ footer a:hover {
      ============================================================ -->
 <section id="catalog" style="padding-top:var(--sp-6)">
   <div class="wrap">
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-faucets">
       <span data-en="Faucets" data-es="Grifos">Faucets</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1073,7 +1104,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-drains">
       <span data-en="Shower Drains" data-es="Desagües de ducha">Shower Drains</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1178,7 +1209,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-showers">
       <span data-en="Shower Systems" data-es="Sistemas de Ducha">Shower Systems</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1217,7 +1248,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-tubfillers">
       <span data-en="Freestanding Tub Fillers" data-es="Llaves de Bañera Exentas">Freestanding Tub Fillers</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1289,7 +1320,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-hanging">
       <span data-en="Hanging Sets" data-es="Sets de Herrajes">Hanging Sets</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1328,7 +1359,7 @@ footer a:hover {
       </div>
     </div>
 
-    <div class="catalog-divider reveal">
+    <div class="catalog-divider reveal" id="sec-mirrors">
       <span data-en="Mirrors" data-es="Espejos">Mirrors</span>
     </div>
     <div class="product-grid reveal reveal-stagger">
@@ -1340,6 +1371,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 24&quot;" data-es="Espejo LED — 24&quot;">LED Mirror — 24&quot;</span>
           <span class="product-spec" data-en="24&quot; wide · LED backlit, touch-dimmer controls" data-es="24&quot; de ancho · Luz LED, controles táctiles regulables">24&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 24-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness — a clean, modern fit for a single-sink vanity." data-es="Espejo LED rectangular de 24 pulgadas, con una suave luz perimetral y dos controles táctiles para el brillo — un complemento limpio y moderno para una vanidad de un solo lavabo.">A 24-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness — a clean, modern fit for a single-sink vanity.</span>
+          <span class="product-price">$135<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1350,6 +1382,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 30&quot;" data-es="Espejo LED — 30&quot;">LED Mirror — 30&quot;</span>
           <span class="product-spec" data-en="30&quot; wide · LED backlit, touch-dimmer controls" data-es="30&quot; de ancho · Luz LED, controles táctiles regulables">30&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 30-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, sized to pair with most single-sink vanities." data-es="Espejo LED rectangular de 30 pulgadas, con la misma luz perimetral suave y controles táctiles regulables, en un tamaño que combina con la mayoría de las vanidades de un solo lavabo.">A 30-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, sized to pair with most single-sink vanities.</span>
+          <span class="product-price">$150<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1360,6 +1393,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 36&quot;" data-es="Espejo LED — 36&quot;">LED Mirror — 36&quot;</span>
           <span class="product-spec" data-en="36&quot; wide · LED backlit, touch-dimmer controls" data-es="36&quot; de ancho · Luz LED, controles táctiles regulables">36&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 36-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness, sized for a wider single-sink vanity." data-es="Espejo LED rectangular de 36 pulgadas, con una suave luz perimetral y dos controles táctiles para el brillo, en un tamaño pensado para una vanidad de un solo lavabo más ancha.">A 36-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness, sized for a wider single-sink vanity.</span>
+          <span class="product-price">$174<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1370,6 +1404,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 48&quot;" data-es="Espejo LED — 48&quot;">LED Mirror — 48&quot;</span>
           <span class="product-spec" data-en="48&quot; wide · LED backlit, touch-dimmer controls" data-es="48&quot; de ancho · Luz LED, controles táctiles regulables">48&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 48-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, built for wider vanities and double-sink layouts." data-es="Espejo LED rectangular de 48 pulgadas, con la misma luz perimetral suave y controles táctiles regulables, pensado para vanidades más anchas y configuraciones de doble lavabo.">A 48-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, built for wider vanities and double-sink layouts.</span>
+          <span class="product-price">$200<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1380,6 +1415,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 60&quot;" data-es="Espejo LED — 60&quot;">LED Mirror — 60&quot;</span>
           <span class="product-spec" data-en="60&quot; wide · LED backlit, touch-dimmer controls" data-es="60&quot; de ancho · Luz LED, controles táctiles regulables">60&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 60-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness, sized for our widest double-sink vanities." data-es="Espejo LED rectangular de 60 pulgadas, con una suave luz perimetral y dos controles táctiles para el brillo, en un tamaño pensado para nuestras vanidades de doble lavabo más anchas.">A 60-inch rectangular LED mirror with a soft backlit glow around the frame and two touch-sensor controls for brightness, sized for our widest double-sink vanities.</span>
+          <span class="product-price">$243<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1390,6 +1426,7 @@ footer a:hover {
           <span class="product-name" data-en="LED Mirror — 72&quot;" data-es="Espejo LED — 72&quot;">LED Mirror — 72&quot;</span>
           <span class="product-spec" data-en="72&quot; wide · LED backlit, touch-dimmer controls" data-es="72&quot; de ancho · Luz LED, controles táctiles regulables">72&quot; wide · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 72-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, our largest size for extra-wide double-sink vanities." data-es="Espejo LED rectangular de 72 pulgadas, con la misma luz perimetral suave y controles táctiles regulables, nuestro tamaño más grande para vanidades de doble lavabo extra anchas.">A 72-inch rectangular LED mirror with the same soft backlit glow and touch-sensor dimmer controls, our largest size for extra-wide double-sink vanities.</span>
+          <span class="product-price">$270<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1400,6 +1437,7 @@ footer a:hover {
           <span class="product-name" data-en="Round LED Mirror — 24&quot;" data-es="Espejo LED Redondo — 24&quot;">Round LED Mirror — 24&quot;</span>
           <span class="product-spec" data-en="24&quot; diameter · LED backlit, touch-dimmer controls" data-es="24&quot; de diámetro · Luz LED, controles táctiles regulables">24&quot; diameter · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 24-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — a softer, circular alternative." data-es="Espejo LED redondo de 24 pulgadas, con la misma luz perimetral suave y controles táctiles regulables de nuestros espejos rectangulares — una alternativa circular y más suave.">A 24-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — a softer, circular alternative.</span>
+          <span class="product-price">$135<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1410,6 +1448,7 @@ footer a:hover {
           <span class="product-name" data-en="Round LED Mirror — 30&quot;" data-es="Espejo LED Redondo — 30&quot;">Round LED Mirror — 30&quot;</span>
           <span class="product-spec" data-en="30&quot; diameter · LED backlit, touch-dimmer controls" data-es="30&quot; de diámetro · Luz LED, controles táctiles regulables">30&quot; diameter · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 30-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — a softer, circular alternative." data-es="Espejo LED redondo de 30 pulgadas, con la misma luz perimetral suave y controles táctiles regulables de nuestros espejos rectangulares — una alternativa circular y más suave.">A 30-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — a softer, circular alternative.</span>
+          <span class="product-price">$150<sup> USD</sup></span>
         </div>
       </div>
       <div class="product-card">
@@ -1420,6 +1459,7 @@ footer a:hover {
           <span class="product-name" data-en="Round LED Mirror — 36&quot;" data-es="Espejo LED Redondo — 36&quot;">Round LED Mirror — 36&quot;</span>
           <span class="product-spec" data-en="36&quot; diameter · LED backlit, touch-dimmer controls" data-es="36&quot; de diámetro · Luz LED, controles táctiles regulables">36&quot; diameter · LED backlit, touch-dimmer controls</span>
           <span class="product-desc" data-en="A 36-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — our largest circular size." data-es="Espejo LED redondo de 36 pulgadas, con la misma luz perimetral suave y controles táctiles regulables de nuestros espejos rectangulares — nuestro tamaño circular más grande.">A 36-inch round LED mirror with the same soft backlit glow and touch-sensor dimmer controls as our rectangular mirrors — our largest circular size.</span>
+          <span class="product-price">$174<sup> USD</sup></span>
         </div>
       </div>
     </div>
