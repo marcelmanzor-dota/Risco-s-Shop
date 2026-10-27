@@ -31,7 +31,7 @@ All products, prices, descriptions and photo names live in **three spreadsheet f
 ### The columns in products.csv
 | Column | What to put |
 |---|---|
-| `page` | Which page: `vanities` (Products), `toilets-tubs` (Products 2), `fixtures` (Products 3) |
+| `page` | Which page: `vanities` (Vanities page), `toilets-tubs` (Tubs & Toilets page), `fixtures` (Accessories page) |
 | `section` | Which heading it goes under. Must match an `id` in sections.csv (e.g. `sec-floating-white`) |
 | `name_en` / `name_es` | Product name in English / Spanish |
 | `price` | A number like `345` (the site adds `$` and "USD"). Text also works, e.g. `From $1,080`. Leave empty for no price |
@@ -98,7 +98,7 @@ Todos los productos, precios, descripciones y nombres de fotos están en **tres 
 ### Las columnas de products.csv
 | Columna | Qué poner |
 |---|---|
-| `page` | Página: `vanities` (Productos), `toilets-tubs` (Productos 2), `fixtures` (Productos 3) |
+| `page` | Página: `vanities` (página Vanidades), `toilets-tubs` (página Bañeras e Inodoros), `fixtures` (página Accesorios) |
 | `section` | Bajo qué título va. Debe coincidir con un `id` de sections.csv (p. ej. `sec-floating-white`) |
 | `name_en` / `name_es` | Nombre del producto en inglés / español |
 | `price` | Un número como `345` (el sitio agrega `$` y "USD"). También sirve texto, p. ej. `From $1,080`. Vacío = sin precio |
